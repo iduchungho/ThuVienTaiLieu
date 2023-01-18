@@ -1,10 +1,9 @@
 <?php
     class Database {
-        private $host = 'localhost';
-        private $port = '8080';
-        private $db_name = 'bkfoodcourt';
-        private $username = 'root';
-        private $password = '123456789';
+        private $host = "mysql_db";
+        private $db_name = "bkfoodcourt";
+        private $username = "root";
+        private $password = "root";
 
         private $conn;
 
@@ -13,12 +12,13 @@
 
             try {
                 $this->conn = new PDO(
-                    'mysql:host=' .$this->host . ';dbname='.$this->db_name,
+                    "mysql:host=$this->host;dbname=$this->db_name",
                     $this->username,
                     $this->password
                 );
 
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                // echo "connected to $this->db_name at $this->host successfully";
             }
             catch (PDOException $e) {
                 echo 'Error connecting to Database: '.$e->getMessage();
