@@ -9,6 +9,14 @@ services:
     ports:
       - 8000:80
 
+  composer:
+    restart: "no"
+    image: composer:latest
+    working_dir: /var/www/html
+    command: update
+    volumes:
+      - ./src:/var/www/html/
+
   mysql_db:
     image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
