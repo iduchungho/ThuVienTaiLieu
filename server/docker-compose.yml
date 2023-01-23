@@ -1,6 +1,5 @@
 version: '3.8'
 services:
-
   php-evn:
     container_name: bkfood-php-server
     build: .
