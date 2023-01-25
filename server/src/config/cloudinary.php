@@ -20,4 +20,9 @@ use Cloudinary\Configuration\Configuration;
             );
         }
 
+        // service method
+        public function updateImg(){
+            
+        }
+
     }

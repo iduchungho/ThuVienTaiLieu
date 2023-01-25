@@ -10,3 +10,13 @@ CREATE TABLE food (
     id int,
     PRIMARY KEY (ID)
 );
+
+CREATE TABLE users (
+    username varchar(255) unique NOT NULL,
+    password varchar(255) NOT NULL,
+    id varchar(255),
+    avtUrl varchar(255),
+    role varchar(255),
+    email varchar(255),
+    PRIMARY KEY (id)
+)
