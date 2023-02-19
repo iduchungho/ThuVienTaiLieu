@@ -1,9 +1,9 @@
 <?php
     class Database {
-        private $host = "mysql_db";
-        private $db_name = "bkfoodcourt";
+        private $host = "localhost:3306";
+        private $db_name = "bkfood_cloud";
         private $username = "root";
-        private $password = "root";
+        private $password = "";
 
         private $conn;
 
