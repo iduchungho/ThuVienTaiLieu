@@ -34,11 +34,15 @@ class Customer{
         return $stmt;
     }
 
-    public function getAllCustomer()
+    public function getAll()
     {
         $query = 'SELECT * FROM ' .$this->table;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
+    }
+
+    public function create(){
+        return true;
     }
 }
