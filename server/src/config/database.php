@@ -1,10 +1,9 @@
 <?php
     class Database {
-        private $host = "localhost:3306";
+        private $host = "localhost";
         private $db_name = "bkfood_cloud";
         private $username = "root";
         private $password = "";
-
         private $conn;
 
         public function connect() {

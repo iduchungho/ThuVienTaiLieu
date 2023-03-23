@@ -1,3 +1,7 @@
+CREATE DATABASE bkfood_cloud;
+USE bkfood_cloud;
+
+
 CREATE TABLE `customer` (
                             `customer_id` int(255) NOT NULL,
                             `first_name` varchar(255) NOT NULL,

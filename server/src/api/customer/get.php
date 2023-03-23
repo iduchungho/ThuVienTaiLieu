@@ -1,6 +1,7 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
+    header('Access-Control-Allow-Methods: GET');
 
     include_once '../../config/database.php';
     include_once '../../models/customer.php';
@@ -13,7 +14,7 @@
     $customer = new Customer($db);
 
     // query customer
-    $result = $customer->getAllCustomer();
+    $result = $customer->getAll();
     $num = $result->rowCount();
 
     if($num > 0){
