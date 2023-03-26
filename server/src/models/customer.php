@@ -10,11 +10,8 @@ class Customer{
     public $email_id;
     public $password;
     public $phone_no;
-    public $state;
     public $city;
-    public $landmark;
-    public $pincode;
-
+    public $avatar;
     public $role;
 
     public function __construct($db)

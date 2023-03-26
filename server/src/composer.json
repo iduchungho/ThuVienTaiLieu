@@ -2,6 +2,7 @@
   "require": {
     "cloudinary/cloudinary_php": "^2",
     "ext-pdo": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-mysqli": "*"
   }
 }
