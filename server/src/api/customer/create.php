@@ -1,6 +1,6 @@
 <?php
     header('Access-Control-Allow-Origin: *');
-    header('Content-Type: application/json');
+    header('Content-Type: multipart/form-data');
     header('Access-Control-Allow-Methods: POST');
 
     include_once '../../config/database.php';
@@ -21,8 +21,7 @@
     $customer->email_id = $data->email_id;
     $customer->password = $data->password;
     $customer->phone_no = $data->phone_no;
-    $customer->landmark = $data->landmark;
-    $customer->pincode = $data->pincode;
+    $customer->role = $data->role;
 
     if($customer->create()) {
         echo json_encode(
