@@ -15,14 +15,12 @@ class Customer{
     public $landmark;
     public $pincode;
 
+    public $role;
+
     public function __construct($db)
     {
         $this->conn = $db;
     }
-
-    /**
-     * @return mixed
-     */
     public function getCustomerId($id)
     {
         // create query
@@ -34,11 +32,28 @@ class Customer{
         return $stmt;
     }
 
-    public function getAllCustomer()
+    public function getAll()
     {
         $query = 'SELECT * FROM ' .$this->table;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
     }
+
+    public function create(){
+        return true;
+    }
+
+    public function update(){
+
+    }
+
+    public function delete(){
+
+    }
+
+    public function uploadImage($file){
+
+    }
+
 }

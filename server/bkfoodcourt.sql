@@ -1,30 +1,33 @@
+CREATE DATABASE bkfood_cloud;
+USE bkfood_cloud;
+
+
 CREATE TABLE `customer` (
                             `customer_id` int(255) NOT NULL,
                             `first_name` varchar(255) NOT NULL,
                             `last_name` varchar(255) NOT NULL,
                             `email_id` varchar(255) NOT NULL,
                             `password` varchar(255) NOT NULL,
-                            `phone_no` varchar(10) NOT NULL,
-                            `state` varchar(255) NOT NULL,
-                            `city` varchar(255) NOT NULL,
-                            `landmark` varchar(255) NOT NULL,
-                            `pincode` int(6) NOT NULL
+                            `phone_no` varchar(30) NOT NULL,
+                            `city` varchar(30) NOT NULL,
+                            `role` varchar(30) NOT NULL,
+                            `avatar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`customer_id`, `first_name`, `last_name`, `email_id`, `password`, `phone_no`, `state`, `city`, `landmark`, `pincode`)
-VALUES (1, 'mark', 'berg', 'berg11@gmail.com', '12345', '9111111111', 'karnataka', 'mangalore', 'state bank', 574154),
-       (2, 'winston', 'dsouza', 'winstonds12@gmail.com', '123456', '9764316497', 'karnataka', 'mangalore', 'urva store', 574154),
-       (3, 'Sheldon', 'Sam', 'sam12@gmail.com', '2345', '9888888856', 'karnataka', 'mangalore', 'urva store', 574154),
-       (4, 'kishore', 'kumar', 'kumar45@gmail.com', '12345', '9865326598', 'karnataka', 'Bangalore', 'hsr layout', 50004),
-       (5, 'bob', 'sin', 'bob14@gmail.com', '45698', '9081649731', 'karnataka', 'bangalore', 'bda complex hbr layout', 560102),
-       (6, 'meril', 'dsouza', 'meril11@gmail.com', '123456', '9632895563', 'karnataka', 'bangalore', 'vijayanagar vijaya bank layout', 560040),
-       (7, 'max', 'dsouza', 'max12@gmail.com', '123456', '9741628856', 'karnataka', 'mangalore', 'urva store', 574154),
-       (8, 'maxton', 'mosses', 'mos12@gmail.com', '123', '9741628856', 'karnataka', 'bangalore', 'city centre mall mg road', 574154),
-       (9, 'Feona', 'Melisa', 'melisa@gmail.com', '123', '9101928856', 'karnataka', 'mangalore', 'near state bank circle', 574154);
+-- INSERT INTO `customer` (`customer_id`, `first_name`, `last_name`, `email_id`, `password`, `phone_no`, `state`, `city`, `landmark`, `pincode`)
+-- VALUES (1, 'mark', 'berg', 'berg11@gmail.com', '12345', '9111111111', 'karnataka', 'mangalore', 'state bank', 574154),
+--        (2, 'winston', 'dsouza', 'winstonds12@gmail.com', '123456', '9764316497', 'karnataka', 'mangalore', 'urva store', 574154),
+--        (3, 'Sheldon', 'Sam', 'sam12@gmail.com', '2345', '9888888856', 'karnataka', 'mangalore', 'urva store', 574154),
+--        (4, 'kishore', 'kumar', 'kumar45@gmail.com', '12345', '9865326598', 'karnataka', 'Bangalore', 'hsr layout', 50004),
+--        (5, 'bob', 'sin', 'bob14@gmail.com', '45698', '9081649731', 'karnataka', 'bangalore', 'bda complex hbr layout', 560102),
+--        (6, 'meril', 'dsouza', 'meril11@gmail.com', '123456', '9632895563', 'karnataka', 'bangalore', 'vijayanagar vijaya bank layout', 560040),
+--        (7, 'max', 'dsouza', 'max12@gmail.com', '123456', '9741628856', 'karnataka', 'mangalore', 'urva store', 574154),
+--        (8, 'maxton', 'mosses', 'mos12@gmail.com', '123', '9741628856', 'karnataka', 'bangalore', 'city centre mall mg road', 574154),
+--        (9, 'Feona', 'Melisa', 'melisa@gmail.com', '123', '9101928856', 'karnataka', 'mangalore', 'near state bank circle', 574154);
 
 -- --------------------------------------------------------
 
@@ -185,121 +188,121 @@ VALUES (101, '123456', 'Winston', 'Dsouza', 'ADMIN'),
        (1005, '12345', 'Mahesh', 'Kanth', 'EMPLOYEE'),
        (1009, '1234', 'kiran', 'nath', 'EMPLOYEE');
 
+-- --
+-- -- Triggers `restaurant`
+-- --
+-- DELIMITER $$
+-- CREATE TRIGGER `res_id` BEFORE INSERT ON `restaurant` FOR EACH ROW BEGIN
+--     SET NEW.restaurant_id = (SELECT MAX(restaurant_id) + 4 FROM restaurant);
+-- END
+--     $$
+-- DELIMITER ;
 --
--- Triggers `restaurant`
+-- --
+-- -- Indexes for dumped tables
+-- --
 --
-DELIMITER $$
-CREATE TRIGGER `res_id` BEFORE INSERT ON `restaurant` FOR EACH ROW BEGIN
-    SET NEW.restaurant_id = (SELECT MAX(restaurant_id) + 4 FROM restaurant);
-END
-    $$
-DELIMITER ;
-
+-- --
+-- -- Indexes for table `customer`
+-- --
+-- ALTER TABLE `customer`
+--     ADD PRIMARY KEY (`customer_id`),
+--   ADD UNIQUE KEY `email_id` (`email_id`);
 --
--- Indexes for dumped tables
+-- --
+-- -- Indexes for table `menu`
+-- --
+-- ALTER TABLE `menu`
+--     ADD PRIMARY KEY (`menu_id`);
 --
-
+-- --
+-- -- Indexes for table `orders`
+-- --
+-- ALTER TABLE `orders`
+--     ADD PRIMARY KEY (`order_id`),
+--   ADD KEY `customer_id` (`customer_id`),
+--   ADD KEY `menu_id` (`menu_id`);
 --
--- Indexes for table `customer`
+-- --
+-- -- Indexes for table `payment`
+-- --
+-- ALTER TABLE `payment`
+--     ADD PRIMARY KEY (`id`),
+--   ADD KEY `order_id` (`order_id`);
 --
-ALTER TABLE `customer`
-    ADD PRIMARY KEY (`customer_id`),
-  ADD UNIQUE KEY `email_id` (`email_id`);
-
+-- --
+-- -- Indexes for table `payment_details`
+-- --
+-- ALTER TABLE `payment_details`
+--     ADD PRIMARY KEY (`payment_id`),
+--   ADD KEY `customer_id` (`customer_id`);
 --
--- Indexes for table `menu`
+-- --
+-- -- Indexes for table `restaurant`
+-- --
+-- ALTER TABLE `restaurant`
+--     ADD PRIMARY KEY (`restaurant_id`);
 --
-ALTER TABLE `menu`
-    ADD PRIMARY KEY (`menu_id`);
-
+-- --
+-- -- AUTO_INCREMENT for dumped tables
+-- --
 --
--- Indexes for table `orders`
+-- --
+-- -- AUTO_INCREMENT for table `customer`
+-- --
+-- ALTER TABLE `customer`
+--     MODIFY `customer_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
-ALTER TABLE `orders`
-    ADD PRIMARY KEY (`order_id`),
-  ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `menu_id` (`menu_id`);
-
+-- --
+-- -- AUTO_INCREMENT for table `menu`
+-- --
+-- ALTER TABLE `menu`
+--     MODIFY `menu_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- Indexes for table `payment`
+-- --
+-- -- AUTO_INCREMENT for table `orders`
+-- --
+-- ALTER TABLE `orders`
+--     MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 --
-ALTER TABLE `payment`
-    ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`);
-
+-- --
+-- -- AUTO_INCREMENT for table `payment`
+-- --
+-- ALTER TABLE `payment`
+--     MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 --
--- Indexes for table `payment_details`
+-- --
+-- -- AUTO_INCREMENT for table `payment_details`
+-- --
+-- ALTER TABLE `payment_details`
+--     MODIFY `payment_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
-ALTER TABLE `payment_details`
-    ADD PRIMARY KEY (`payment_id`),
-  ADD KEY `customer_id` (`customer_id`);
-
+-- --
+-- -- AUTO_INCREMENT for table `restaurant`
+-- --
+-- ALTER TABLE `restaurant`
+--     MODIFY `restaurant_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
 --
--- Indexes for table `restaurant`
+-- --
+-- -- Constraints for dumped tables
+-- --
 --
-ALTER TABLE `restaurant`
-    ADD PRIMARY KEY (`restaurant_id`);
-
+-- --
+-- -- Constraints for table `orders`
+-- --
+-- ALTER TABLE `orders`
+--     ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+--   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`);
 --
--- AUTO_INCREMENT for dumped tables
+-- --
+-- -- Constraints for table `payment`
+-- --
+-- ALTER TABLE `payment`
+--     ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 --
-
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-    MODIFY `customer_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `menu`
---
-ALTER TABLE `menu`
-    MODIFY `menu_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-    MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-    MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
-
---
--- AUTO_INCREMENT for table `payment_details`
---
-ALTER TABLE `payment_details`
-    MODIFY `payment_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `restaurant`
---
-ALTER TABLE `restaurant`
-    MODIFY `restaurant_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-    ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`);
-
---
--- Constraints for table `payment`
---
-ALTER TABLE `payment`
-    ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
-
---
--- Constraints for table `payment_details`
---
-ALTER TABLE `payment_details`
-    ADD CONSTRAINT `payment_details_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
-COMMIT;
+-- --
+-- -- Constraints for table `payment_details`
+-- --
+-- ALTER TABLE `payment_details`
+--     ADD CONSTRAINT `payment_details_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
+-- COMMIT;
