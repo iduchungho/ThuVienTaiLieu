@@ -19,9 +19,11 @@
     $customer->first_name = $data->first_name;
     $customer->last_name = $data->last_name;
     $customer->email_id = $data->email_id;
+    $customer->city = $data->city;
     $customer->password = $data->password;
     $customer->phone_no = $data->phone_no;
     $customer->role = $data->role;
+    $customer->avatar = $data->avatar;
 
     if($customer->create()) {
         echo json_encode(
@@ -33,4 +35,5 @@
             array('message' => 'customer not created')
         );
     }
+    $db->close();
 

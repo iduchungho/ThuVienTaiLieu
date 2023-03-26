@@ -15,22 +15,20 @@
 
     // query customer
     $result = $customer->getAll();
-    $num = $result->rowCount();
+    $num = mysqli_num_rows($result);
 
     if($num > 0){
         $customer_array = array();
         $customer_array['data'] = array();
 
-        while($row = $result->fetch(PDO::FETCH_ASSOC)){
-            extract($row);
+        while($row = mysqli_fetch_assoc($result)){
             $customer_item = array(
-                'customer_id' => $customer_id,
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-                'email_id' => $email_id,
-                'phone_no' => $phone_no,
-                'state' => $state,
-                'city' => $city
+                'customer_id' => $row['customer_id'],
+                'first_name' => $row['first_name'],
+                'last_name' => $row['last_name'],
+                'email_id' => $row['email_id'],
+                'phone_no' => $row['phone_no'],
+                'city' => $row['city']
             );
             array_push($customer_array['data'], $customer_item);
         }
