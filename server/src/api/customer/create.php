@@ -1,6 +1,6 @@
 <?php
     header('Access-Control-Allow-Origin: *');
-    header('Content-Type: multipart/form-data');
+    header('Content-Type: application/json');
     header('Access-Control-Allow-Methods: POST');
 
     include_once '../../config/database.php';

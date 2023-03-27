@@ -3,6 +3,8 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 // Use the Configuration class 
+use Cloudinary\Api\Exception\ApiError;
+use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Configuration\Configuration;
 
 // Configure an instance of your Cloudinary cloud
@@ -15,14 +17,24 @@ use Cloudinary\Configuration\Configuration;
 
         public function __construct() {
             Configuration::instance("cloudinary://$this->mykey:$this->mysecret@$this->myCloudName?secure=$this->mySecure");
-            echo json_encode(
-                array("message" => "cloudinary connected successfully")
-            );
+//            echo json_encode(
+//                array("message" => "cloudinary connected successfully")
+//            );
         }
 
         // service method
-        public function updateImg(){
-            
+        /**
+         * @throws ApiError
+         */
+        public function uploadImage($file){
+            $result = (new uploadApi())->upload(
+                $file,
+                [
+                    "resource_type" => "auto",
+                    "folder" => "BTLWeb222HCMUT"
+                ]
+            );
+            return isset($result) ? $result['secure_url'] : 'None';
         }
 
     }
