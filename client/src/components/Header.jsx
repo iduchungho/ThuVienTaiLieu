@@ -42,7 +42,12 @@ const Header = () => {
               <p className="text-xs text-white font-semibold">2</p>
             </div>
           </div>
-          <img src={Avatar} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl" alt="avatar" />
+          <motion.img
+            whileTap={{ scale: 0.6 }}
+            src={Avatar}
+            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl"
+            alt="avatar"
+          />
         </div>
       </div>
 
