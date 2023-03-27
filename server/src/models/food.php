@@ -6,6 +6,7 @@
         // Food properties
         public $title;
         public $price;
+        public $name;
         public $description;
         public $category;
         public $rating;
@@ -16,7 +17,7 @@
         }
 
         // service methods
-        public function get_foods(){
+        public function getAll(){
             // create query
             $query = 'SELECT * from '.$this->table;
 
@@ -28,4 +29,19 @@
 
             return $stmt;
         }
+        public function get($id){
+            $id = $this->mysqli->real_escape_string($id);
+            $query = "SELECT * FROM food WHERE id = $id";
+            $result = $this->mysqli->query($query);
+            if ($result->num_rows === 0) {
+                return null;
+            }
+            $row = $result->fetch_assoc();
+            $this->id = $row['id'];
+            $this->name = $row['name'];
+            $this->description = $row['description'];
+            $this->price = $row['price'];
+            return $this;
+        }
+
     }
