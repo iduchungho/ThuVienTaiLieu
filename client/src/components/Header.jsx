@@ -1,6 +1,7 @@
 import React from 'react';
 import { MdShoppingBasket } from 'react-icons/md';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 import Logo from './img/logo.png';
 import Avatar from './img/avatar.png';
@@ -12,7 +13,7 @@ const Header = () => {
       <div className="hidden md:flex w-full h-full">
         <div className="flex gap-2 items-center">
           <img src={Logo} className="w-8 object-cover" alt="logo" />
-          <p className="text-headingColor text-xl font-bold"> City</p>
+          <p className="text-headingColor text-xl font-semibold"> BK Food</p>
         </div>
 
         <div className="flex items-center gap-8 ml-auto">
@@ -52,7 +53,25 @@ const Header = () => {
       </div>
 
       {/* mobile */}
-      <div className="flex md:hidden w-full h-full p-4"></div>
+      <div className="flex items-center justify-between md:hidden w-full h-full ">
+        <div className="relative flex items-center justify-center">
+          <MdShoppingBasket className="text-textColor text-2xl  cursor-pointer" />
+
+          <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
+            <p className="text-xs text-white font-semibold">2</p>
+          </div>
+        </div>
+        <Link to={'/'} className="flex items-center gap-2">
+          <img src={Logo} className="w-8 object-cover" alt="logo" />
+          <p className="text-headingColor text-xl font-semibold"> BK Food</p>
+        </Link>
+        <motion.img
+          whileTap={{ scale: 0.6 }}
+          src={Avatar}
+          className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl"
+          alt="avatar"
+        />
+      </div>
     </div>
   );
 };
