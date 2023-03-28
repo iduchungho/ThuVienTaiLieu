@@ -15,15 +15,26 @@
     //get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $customer->customer_id = $data->customer_id;
-    $customer->first_name = $data->first_name;
-    $customer->last_name = $data->last_name;
-    $customer->email_id = $data->email_id;
-    $customer->city = $data->city;
-    $customer->password = $data->password;
-    $customer->phone_no = $data->phone_no;
-    $customer->role = $data->role;
-    $customer->avatar = $data->avatar;
+//    $customer->customer_id = $data->customer_id;
+//    $customer->first_name = $data->first_name;
+//    $customer->last_name = $data->last_name;
+//    $customer->email_id = $data->email_id;
+//    $customer->city = $data->city;
+//    $customer->password = $data->password;
+//    $customer->phone_no = $data->phone_no;
+//    $customer->role = $data->role;
+//    $customer->avatar = "None";
+    $customer->setAttribute(
+        $data->customer_id,
+        $data->first_name,
+        $data->last_name,
+        $data->email_id,
+        $data->password,
+        $data->phone_no,
+        $data->city,
+        "none",
+        $data->role
+    );
 
     if($customer->create()) {
         echo json_encode(

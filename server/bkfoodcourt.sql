@@ -1,5 +1,5 @@
-CREATE DATABASE bkfood_cloud;
-USE bkfood_cloud;
+-- CREATE DATABASE bkfood_cloud;
+-- USE bkfood_cloud;
 
 
 CREATE TABLE `customer` (
@@ -38,26 +38,27 @@ CREATE TABLE `customer` (
 CREATE TABLE `menu` (
                         `menu_id` int(255) NOT NULL,
                         `menu_name` varchar(255) NOT NULL,
-                        `price` int(20) NOT NULL
+                        `price` int(20) NOT NULL,
+                        `img` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menu`
 --
 
-INSERT INTO `menu` (`menu_id`, `menu_name`, `price`) VALUES
-                                                         (1, 'American Pizza', 350),
-                                                         (2, 'Veg Pizza', 250),
-                                                         (3, 'Chicken Pizza', 400),
-                                                         (4, 'Pepperroni Pizza', 450),
-                                                         (5, 'Veg Burger', 50),
-                                                         (6, 'Chicken Burger', 80),
-                                                         (7, 'Power Burger', 300),
-                                                         (8, 'Sandwich Burger', 180),
-                                                         (9, 'Gulab Jamun', 200),
-                                                         (10, 'Chocholate Moose', 250),
-                                                         (11, 'Naugat Moose', 300),
-                                                         (12, 'Belgium Waffle', 150);
+INSERT INTO `menu` (`menu_id`, `menu_name`, `price`, `img`) VALUES
+                                                         (1, 'American Pizza', 350, 'None'),
+                                                         (2, 'Veg Pizza', 250, 'None'),
+                                                         (3, 'Chicken Pizza', 400, 'None'),
+                                                         (4, 'Pepperroni Pizza', 450, 'None'),
+                                                         (5, 'Veg Burger', 50, 'None'),
+                                                         (6, 'Chicken Burger', 80, 'None'),
+                                                         (7, 'Power Burger', 300, 'None'),
+                                                         (8, 'Sandwich Burger', 180, 'None'),
+                                                         (9, 'Gulab Jamun', 200, 'None'),
+                                                         (10, 'Chocholate Moose', 250, 'None'),
+                                                         (11, 'Naugat Moose', 300, 'None'),
+                                                         (12, 'Belgium Waffle', 150, 'None');
 
 -- --------------------------------------------------------
 
