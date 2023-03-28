@@ -39,3 +39,4 @@
             array('message' => 'no customer found')
         );
     }
+    $db->close();

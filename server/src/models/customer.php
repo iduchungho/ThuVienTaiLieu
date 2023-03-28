@@ -1,6 +1,6 @@
 <?php
 
-class Customer{
+class Customer {
     private $conn;
     private $table = 'customer';
     // customer properties
@@ -71,16 +71,37 @@ class Customer{
         return $this->conn->query($query);
     }
 
-    public function update(){
+    public function getUserByID($id){
+        $query = 'SELECT * FROM ' .$this->table .' WHERE customer_id=' .$id;
+        return $this->conn->query($query);
+    }
 
+    public function update(){
+        $query =
+            'UPDATE ' .$this->table
+            .' SET first_name=\''     .$this->first_name .'\','
+                .'last_name=\''      .$this->last_name .'\','
+                .'email_id=\''       .$this->email_id .'\','
+                .'password=\''       .$this->password .'\','
+                .'phone_no=\''       .$this->phone_no .'\','
+                .'city=\''           .$this->city .'\','
+                .'role=\''           .$this->role .'\','
+                .'avatar=\''         .$this->avatar .'\''
+            .' WHERE customer_id='  .$this->customer_id .';';
+//        echo $query;
+        return $this->conn->query($query);
     }
 
     public function delete(){
 
     }
 
-    public function uploadImage($file){
-
+    public function uploadImage($url){
+        $query =
+            'UPDATE ' .$this->table
+            .' SET avatar=\''   .$url .'\''
+            .' WHERE customer_id='  .$this->customer_id .';';
+        return $this->conn->query($query);
     }
 
 }
