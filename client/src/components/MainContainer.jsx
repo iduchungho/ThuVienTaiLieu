@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
-import { default as React, useState } from 'react';
+import { default as React, useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import HomeContainer from './HomeContainer';
 import RowContainer from './RowContainer';
 import { fruits } from '../utils/data';
+import MenuContainer from './MenuContainer';
 
 const MainContainer = () => {
   const [scrollValue, setScrollValue] = useState(0);
+
+  useEffect(() => {}, [scrollValue]);
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center">
@@ -37,6 +40,8 @@ const MainContainer = () => {
         </div>
         <RowContainer scrollValue={scrollValue} flag={true} data={fruits} />
       </section>
+
+      <MenuContainer />
     </div>
   );
 };

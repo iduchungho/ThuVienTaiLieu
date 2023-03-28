@@ -10,6 +10,7 @@ import f5 from '../components/img/f5.png';
 import f6 from '../components/img/f6.png';
 import f7 from '../components/img/f7.png';
 import f8 from '../components/img/f8.png';
+import f9 from '../components/img/f9.png';
 
 export const heroData = [
   {
@@ -130,6 +131,20 @@ export const fruits = [
     name: 'Soft Drinks',
     urlParamName: 'drinks',
     price: 120,
-    imageURL: f1,
+    imageURL: f7,
+  },
+  {
+    id: 8,
+    name: 'Soft Drinks',
+    urlParamName: 'drinks',
+    price: 120,
+    imageURL: f8,
+  },
+  {
+    id: 9,
+    name: 'Soft Drinks',
+    urlParamName: 'drinks',
+    price: 120,
+    imageURL: f9,
   },
 ];
