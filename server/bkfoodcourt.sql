@@ -213,8 +213,8 @@ VALUES (101, '123456', 'Winston', 'Dsouza', 'ADMIN'),
 -- --
 -- -- Indexes for table `menu`
 -- --
--- ALTER TABLE `menu`
---     ADD PRIMARY KEY (`menu_id`);
+ALTER TABLE `menu`
+    ADD PRIMARY KEY (`menu_id`);
 --
 -- --
 -- -- Indexes for table `orders`
@@ -257,8 +257,8 @@ VALUES (101, '123456', 'Winston', 'Dsouza', 'ADMIN'),
 -- --
 -- -- AUTO_INCREMENT for table `menu`
 -- --
--- ALTER TABLE `menu`
---     MODIFY `menu_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `menu`
+    MODIFY `menu_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- --
 -- -- AUTO_INCREMENT for table `orders`

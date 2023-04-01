@@ -1,67 +1,78 @@
 <?php
 
-class Menu {
+class Menu
+{
     private $conn;
     private $table = 'menu';
-    public $menu_id ;
+    public $menu_id;
     public $menu_name;
     public $price;
+    public $img;
 
     public function __construct($db)
     {
         $this->conn = $db;
     }
-    public function getMenuId() {
-        return $this->menu_id;
-      }
-    public function get() {
-        $result = $this->conn->query("SELECT * FROM menu");
-        $menu = array();
-        while ($row = $result->fetch_assoc()) {
-            $menu[] = $row;
-          }
-          return $menu;
+    public function create()
+    {
+        $query = "INSERT INTO ". $this->table . "(menu_name,price,img) VALUES (?,?,?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("sss", $this->menu_name, $this->price,$this->img);
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
-    public function get_menu_by_id($id) {
-        $id = $this->conn->real_escape_string($id);
-        $result = $this->conn->query("SELECT * FROM menu WHERE menu_id='$id'");
-        $menu = $result->fetch_assoc();
-        return $menu;
-      }
-    public function create_menu($name,$price) {
-        $menu_name = $this->conn->real_escape_string($name);
-        $price = $this->conn->real_escape_string($price);
-        $result = $this->conn->query("INSERT INTO menu (menu_name, price) VALUES ('$menu_name', '$price')");
-        if ($result) {
-          $id = $this->conn->insert_id;
-          $menu = $this->get_menu_by_id($id);
-          return $menu;
-        } else {
-          return false;
+    public function deleteById()
+    {
+        $query = "DELETE FROM menu WHERE menu_id = ?";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bind_param("i", $this->menu_id);
+
+        if ($stmt->execute()) {
+            return true;
         }
-      }
-      function delete_menu($id) {
-        // Prepare the DELETE statement
-        $stmt = $this->conn->prepare("DELETE FROM menu WHERE menu_id = ?");
-        $stmt->bind_param("i", $id);
-    
-        // Execute the statement and check for errors
-        if (!$stmt->execute()) {
-          http_response_code(500); // Internal Server Error
-          echo json_encode(array("error" => "Failed to delete menu item."));
-          exit;
+        return false;
+
+    }
+    public function getALL(){
+        $query = "SELECT menu_id,menu_name,price,img FROM " . $this->table . " ORDER BY menu_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
+    public function getById(){
+        $query = "SELECT menu_id,menu_name,price,img FROM " . $this->table ." WHERE menu_id = ? LIMIT 0,1";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bind_param("i", $this->menu_id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            $this->menu_name = $row['title'];
+            $this->price = $row['description'];
+            $this->img = $row['img'];
+
+            return true;
         }
-    
-        // Check if a row was affected
-        if ($stmt->affected_rows == 0) {
-          http_response_code(404); // Not Found
-          echo json_encode(array("error" => "Menu item not found."));
-          exit;
+
+        return false;
+    }
+    public function deleteALL(){
+        $query = "DELETE FROM " . $this->table;
+        $stmt = $this->conn->prepare($query);
+        if ($stmt->execute()) {
+            return true;
         }
-    
-        // Return success message
-        http_response_code(200); // OK
-        echo json_encode(array("message" => "Menu item deleted successfully."));
-      }
+        return false;
+        
+    }
 
 }
