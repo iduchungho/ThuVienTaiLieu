@@ -241,8 +241,8 @@ ALTER TABLE `menu`
 -- --
 -- -- Indexes for table `restaurant`
 -- --
--- ALTER TABLE `restaurant`
---     ADD PRIMARY KEY (`restaurant_id`);
+ALTER TABLE `restaurant`
+    ADD PRIMARY KEY (`restaurant_id`);
 --
 -- --
 -- -- AUTO_INCREMENT for dumped tables
@@ -281,8 +281,8 @@ ALTER TABLE `menu`
 -- --
 -- -- AUTO_INCREMENT for table `restaurant`
 -- --
--- ALTER TABLE `restaurant`
---     MODIFY `restaurant_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
+ALTER TABLE `restaurant`
+    MODIFY `restaurant_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
 --
 -- --
 -- -- Constraints for dumped tables
