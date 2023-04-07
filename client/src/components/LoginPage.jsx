@@ -20,14 +20,14 @@ const LoginPage = () => {
               <input
                 type="email"
                 name="email"
-                id=""
+                id="email"
                 placeholder="Email"
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
               <input
                 type="password"
                 name="password"
-                id=""
+                id="password"
                 placeholder="Password"
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
@@ -35,7 +35,7 @@ const LoginPage = () => {
 
             <div className="w-full flex items-center justify-between my-5">
               <div className="w-full flex items-center">
-                <input type="checkbox" name="remember" id="" className="w-4 h-4 mr-2" />
+                <input type="checkbox" name="remember" id="remember" className="w-4 h-4 mr-2" />
                 <p className="text-sm">Remember Me</p>
               </div>
 
