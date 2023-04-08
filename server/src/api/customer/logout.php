@@ -3,8 +3,8 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: PUT');
 
-include_once '../../models/sess.php';
-include_once '../../models/authorization.php';
+include_once '../../libs/sess.php';
+include_once '../../libs/authorization.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
     $param = isset($_GET['id']) ? $_GET['id'] : die();

@@ -6,8 +6,8 @@ header('Access-Control-Allow-Methods: POST');
 
 include_once '../../config/database.php';
 include_once '../../models/customer.php';
-include_once '../../models/authorization.php';
-include_once '../../models/sess.php';
+include_once '../../libs/authorization.php';
+include_once '../../libs/sess.php';
 
 
 $database = new Database();

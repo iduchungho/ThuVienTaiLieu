@@ -5,4 +5,4 @@
     header('Access-Control-Allow-Headers: application/json');
 
     include_once '../../config/database.php';
-    include_once '../../assets/index.php';
+    include_once '../../libs/index.php';
