@@ -5,6 +5,7 @@ import HomeContainer from './HomeContainer';
 import RowContainer from './RowContainer';
 import { fruits } from '../utils/data';
 import MenuContainer from './MenuContainer';
+import Header from './Header.jsx';
 
 const MainContainer = () => {
   const [scrollValue, setScrollValue] = useState(0);
@@ -13,6 +14,7 @@ const MainContainer = () => {
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center">
+      <Header />
       <HomeContainer />
 
       <section className="w-full my-6">
