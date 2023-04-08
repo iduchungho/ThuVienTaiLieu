@@ -78,7 +78,7 @@ class Customer {
         return $this->conn->query($query);
     }
 
-    public function getUserByID($id){
+    public function getCustomerByID($id){
         $query = 'SELECT * FROM ' .$this->table .' WHERE customer_id=' .$id;
         return $this->conn->query($query);
     }

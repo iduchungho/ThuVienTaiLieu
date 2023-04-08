@@ -23,11 +23,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //echo json_encode(Authorization::auth($id));
         // save token to session
         Sess::generateSession($id, Authorization::auth($id));
-        echo json_encode([
-            'status' => 0,
-            'message' => 'OK',
-            'data' => Authorization::auth($id)
-        ]);
+        $stmt = $customer->getCustomerByID($id);
+        if(mysqli_num_rows($stmt)){
+            $row = mysqli_fetch_assoc($stmt);
+            echo json_encode([
+                'status' => 1,
+                'message' => 'OK',
+                'token' => sess::readTokenFromSessionID($id),
+                'data' => [
+                    "customer_id" => $row['customer_id'],
+                    "first_name" => $row['first_name'],
+                    "last_name" => $row['last_name'],
+                    "email_id" => $row['email_id'],
+                    "phone_no" => $row['phone_no'],
+                    "city" => $row['city'],
+                    "avatar" => $row['avatar']
+                ]
+            ]);
+        }
+        else {
+            http_response_code(403);
+            echo json_encode([
+                'status' => 0,
+                'message' => 'Access Denied',
+            ]);
+        }
+
     } else{
         http_response_code(403);
         echo json_encode([

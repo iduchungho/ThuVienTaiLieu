@@ -13,7 +13,7 @@
 
     $param = isset($_GET['id']) ? $_GET['id'] : die();
 
-    $result = $customer->getUserByID($param);
+    $result = $customer->getCustomerByID($param);
     $num = mysqli_num_rows($result);
 
     if($num){
@@ -21,7 +21,8 @@
         $resultJSON['data'] = array();
         $data = array(
             "customer_id" => $row['customer_id'],
-            "first_name" => $row['last_name'],
+            "first_name" => $row['first_name'],
+            "last_name" => $row['last_name'],
             "email_id" => $row['email_id'],
             "password" => $row['password'],
             "phone_no" => $row['phone_no'],
