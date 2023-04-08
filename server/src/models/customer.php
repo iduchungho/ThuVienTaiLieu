@@ -63,11 +63,18 @@ class Customer {
         $role = htmlspecialchars(strip_tags($this->role));
         $avt = htmlspecialchars(strip_tags($this->avatar));
 
+        $hash = password_hash($pass, PASSWORD_BCRYPT);
+        $this->password = $hash;
+
+        $alluser = "SELECT * FROM $this->table";
+        $count = mysqli_num_rows($this->conn->query($alluser));
+        $ctmid = $count + 1;
+
         $query = 'INSERT INTO ' .$this->table
             .'( customer_id, first_name, last_name, email_id, password, phone_no, city, role, avatar)'
             .'VALUES '
             .'(' .$ctmid .',"' .$fn .'","' .$ln .'","' .$email
-            .'","' .$pass .'","' .$pn .'","' .$ct .'","' .$role .'","' .$avt .'");';
+            .'","' .$hash .'","' .$pn .'","' .$ct .'","' .$role .'","' .$avt .'");';
         return $this->conn->query($query);
     }
 
@@ -92,7 +99,9 @@ class Customer {
         return $this->conn->query($query);
     }
 
-    public function delete(){
+    public function delete($id){
+        $query = 'DELETE FROM ' .$this->table .' WHERE id=' .$id .';';
+        return $this->conn->query($query);
 
     }
 
@@ -102,6 +111,23 @@ class Customer {
             .' SET avatar=\''   .$url .'\''
             .' WHERE customer_id='  .$this->customer_id .';';
         return $this->conn->query($query);
+    }
+
+    public function login($email, $password){
+        $query = "SELECT * FROM $this->table WHERE email_id='$email'";
+        $stmt = $this->conn->query($query);
+        if (mysqli_num_rows($stmt) == 0) {
+            return -1;
+        }
+        $stored_hash = mysqli_fetch_assoc($stmt);
+        if (password_verify($password, $stored_hash['password'])) {
+            return $stored_hash['customer_id'];
+        }
+        return -1;
+    }
+
+    public function logout(){
+        return false;
     }
 
 }

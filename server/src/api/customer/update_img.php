@@ -16,8 +16,15 @@
     $param = isset($_GET['id']) ? $_GET['id'] : die();
 
     $customer->customer_id = $param;
+    $secure_url = "";
 
-    $secure_url = $cloud->uploadImage($file);
+    try {
+        $secure_url = $cloud->uploadImage($file);
+    } catch (\Cloudinary\Api\Exception\ApiError $e) {
+        echo json_encode(array(
+           "error" => $e
+        ));
+    }
 //    echo json_encode(
 //        array('message' => '$secure_url')
 //    );
