@@ -227,9 +227,9 @@ ALTER TABLE `menu`
 -- --
 -- -- Indexes for table `payment`
 -- --
--- ALTER TABLE `payment`
---     ADD PRIMARY KEY (`id`),
---   ADD KEY `order_id` (`order_id`);
+ALTER TABLE `payment`
+    ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
 --
 -- --
 -- -- Indexes for table `payment_details`
@@ -269,8 +269,8 @@ ALTER TABLE `menu`
 -- --
 -- -- AUTO_INCREMENT for table `payment`
 -- --
--- ALTER TABLE `payment`
---     MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+ALTER TABLE `payment`
+    MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 --
 -- --
 -- -- AUTO_INCREMENT for table `payment_details`
@@ -298,8 +298,8 @@ ALTER TABLE `restaurant`
 -- --
 -- -- Constraints for table `payment`
 -- --
--- ALTER TABLE `payment`
---     ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+ALTER TABLE `payment`
+    ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 --
 -- --
 -- -- Constraints for table `payment_details`

@@ -11,7 +11,22 @@ include_once '../../models/restaurant.php';
 $database = new Database();
 $db = $database->connect();
 $restaurant = new Restaurant($db);
+// $restaurant->restaurant_id = isset($_GET['restaurant_id']) ? $_GET['restaurant_id'] : die();
+// if ($restaurant->readOne()) {
+//     $restaurant_arr = [
+//         "restaurant_id" => $restaurant->restaurant_id,
+//         "password" => $restaurant->password,
+//         "first_name" => $restaurant->first_name,
+//         "last_name" => $restaurant->last_name,
+//         "designation" => $restaurant->designation
+//     ];
 
+//     http_response_code(200);
+//     echo json_encode($restaurant_arr);
+// } else {
+//     http_response_code(404);
+//     echo json_encode(["message" => "Restaurant not found."]);
+// }
 $restaurant->restaurant_id = intval($_GET["restaurant_id"]);
 if ($_SERVER["REQUEST_METHOD"] == "GET" && !empty($_GET["restaurant_id"])) {
    
