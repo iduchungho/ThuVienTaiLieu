@@ -206,9 +206,9 @@ VALUES (101, '123456', 'Winston', 'Dsouza', 'ADMIN'),
 -- --
 -- -- Indexes for table `customer`
 -- --
--- ALTER TABLE `customer`
---     ADD PRIMARY KEY (`customer_id`),
---   ADD UNIQUE KEY `email_id` (`email_id`);
+ALTER TABLE `customer`
+    ADD PRIMARY KEY (`customer_id`),
+  ADD UNIQUE KEY `email_id` (`email_id`);
 --
 -- --
 -- -- Indexes for table `menu`
@@ -219,24 +219,24 @@ ALTER TABLE `menu`
 -- --
 -- -- Indexes for table `orders`
 -- --
--- ALTER TABLE `orders`
---     ADD PRIMARY KEY (`order_id`),
---   ADD KEY `customer_id` (`customer_id`),
---   ADD KEY `menu_id` (`menu_id`);
+ALTER TABLE `orders`
+    ADD PRIMARY KEY (`order_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `menu_id` (`menu_id`);
 --
 -- --
 -- -- Indexes for table `payment`
 -- --
--- ALTER TABLE `payment`
---     ADD PRIMARY KEY (`id`),
---   ADD KEY `order_id` (`order_id`);
+ALTER TABLE `payment`
+    ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
 --
 -- --
 -- -- Indexes for table `payment_details`
 -- --
--- ALTER TABLE `payment_details`
---     ADD PRIMARY KEY (`payment_id`),
---   ADD KEY `customer_id` (`customer_id`);
+ALTER TABLE `payment_details`
+    ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `customer_id` (`customer_id`);
 --
 -- --
 -- -- Indexes for table `restaurant`
@@ -251,8 +251,8 @@ ALTER TABLE `restaurant`
 -- --
 -- -- AUTO_INCREMENT for table `customer`
 -- --
--- ALTER TABLE `customer`
---     MODIFY `customer_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `customer`
+    MODIFY `customer_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- --
 -- -- AUTO_INCREMENT for table `menu`
@@ -263,20 +263,20 @@ ALTER TABLE `menu`
 -- --
 -- -- AUTO_INCREMENT for table `orders`
 -- --
--- ALTER TABLE `orders`
---     MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+ALTER TABLE `orders`
+    MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 --
 -- --
 -- -- AUTO_INCREMENT for table `payment`
 -- --
--- ALTER TABLE `payment`
---     MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+ALTER TABLE `payment`
+    MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 --
 -- --
 -- -- AUTO_INCREMENT for table `payment_details`
 -- --
--- ALTER TABLE `payment_details`
---     MODIFY `payment_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `payment_details`
+    MODIFY `payment_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- --
 -- -- AUTO_INCREMENT for table `restaurant`
@@ -291,19 +291,19 @@ ALTER TABLE `restaurant`
 -- --
 -- -- Constraints for table `orders`
 -- --
--- ALTER TABLE `orders`
---     ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
---   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`);
+ALTER TABLE `orders`
+    ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`);
 --
 -- --
 -- -- Constraints for table `payment`
 -- --
--- ALTER TABLE `payment`
---     ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+ALTER TABLE `payment`
+    ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 --
 -- --
 -- -- Constraints for table `payment_details`
 -- --
--- ALTER TABLE `payment_details`
---     ADD CONSTRAINT `payment_details_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
--- COMMIT;
+ALTER TABLE `payment_details`
+    ADD CONSTRAINT `payment_details_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
+COMMIT;

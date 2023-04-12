@@ -56,8 +56,8 @@ class Menu
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
-            $this->menu_name = $row['title'];
-            $this->price = $row['description'];
+            $this->menu_name = $row['menu_name'];
+            $this->price = $row['price'];
             $this->img = $row['img'];
 
             return true;
@@ -73,6 +73,19 @@ class Menu
         }
         return false;
         
+    }
+    public function update() {
+        $query = "UPDATE " . $this->table . " SET menu_name = ?, price = ?, img = ? WHERE menu_id = ?";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bind_param("sssi", $this->menu_name, $this->price, $this->img, $this->menu_id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
     }
 
 }
