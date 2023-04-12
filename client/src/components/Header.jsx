@@ -1,12 +1,29 @@
-import React from 'react';
 import { MdShoppingBasket } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
+import { useState } from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import Logo from './img/logo.png';
 import Avatar from './img/avatar.png';
+import Register from './Auth/components/Register';
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary">
       {/* destop and tablet */}
@@ -48,7 +65,13 @@ const Header = () => {
             src={Avatar}
             className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl"
             alt="avatar"
+            onClick={handleClickOpen}
           />
+          <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
+            <DialogContent>
+              <Register />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
