@@ -4,7 +4,6 @@ import Checkbox from '@mui/material/Checkbox';
 import { default as Container, default as Copyright } from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
@@ -115,13 +114,6 @@ function RegisterForm(props) {
                   <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                     Sign Up
                   </Button>
-                  <Grid container>
-                    <Grid item>
-                      <Link href="#" variant="body2">
-                        {'You have an account? Sign In'}
-                      </Link>
-                    </Grid>
-                  </Grid>
                 </Form>
               )}
             </Formik>

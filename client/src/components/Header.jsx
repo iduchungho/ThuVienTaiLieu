@@ -13,9 +13,17 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Logo from './img/logo.png';
 import Avatar from './img/avatar.png';
 import Register from './Auth/components/Register';
+import Login from './Auth/components/Login/index';
+import Grid from '@mui/material/Grid';
 
 const Header = () => {
+  const MODE = {
+    LOGIN: 'login',
+    REGISTER: 'register',
+  };
+
   const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState(MODE.LOGIN);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -69,7 +77,28 @@ const Header = () => {
           />
           <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
             <DialogContent>
-              <Register />
+              {mode === MODE.REGISTER && (
+                <>
+                  <Register />
+                  <Grid className=" text-center" item>
+                    <Grid item>
+                      <Link href="#" variant="body2" onClick={() => setMode(MODE.LOGIN)}>
+                        {'You have an account? Sign In'}
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+              {mode === MODE.LOGIN && (
+                <>
+                  <Login />
+                  <Grid className=" text-center" item>
+                    <Link href="#" variant="body2" onClick={() => setMode(MODE.REGISTER)}>
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
+                </>
+              )}
             </DialogContent>
           </Dialog>
         </div>
