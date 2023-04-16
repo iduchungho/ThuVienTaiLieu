@@ -5,6 +5,8 @@
 
     include_once '../../models/customer.php';
     include_once '../../config/database.php';
+    include_once '../../libs/sess.php';
+    include_once '../../libs/authorization.php';
 
     // init database
     $database = new Database();
@@ -24,6 +26,18 @@
     $customer->phone_no = $data->phone_no;
     $customer->role = $data->role;
     $customer->avatar = $data->avatar;
+
+    sess::start($customer->customer_id);
+    $valid = Authorization::validation($customer->customer_id);
+    sess::shutdown();
+
+    if (!$valid){
+        echo json_encode([
+            'message' => 'require user',
+            'success' => false
+        ]);
+        return;
+    }
 
 
     if($customer->update()) {

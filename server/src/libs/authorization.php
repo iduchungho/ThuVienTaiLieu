@@ -5,7 +5,7 @@ use Firebase\JWT\Key;
 class Authorization{
     private static $key = 'congchualunglinhlunglinhxinhlunglinh';
 
-    public static function auth($id){
+    public static function auth($id, $role){
         try {
             $issueDate = time();
             $expDate = time() * 3600; // 1 hour
@@ -14,7 +14,8 @@ class Authorization{
                 'aud' => 'http://localhost',
                 'iat' => $issueDate,
                 'exp' => $expDate,
-                'user_id' => $id
+                'user_id' => $id,
+                'role' => $role
             ];
             $jwtGeneratedToken = JWT::encode($payload, self::$key, 'HS256');
             return [
@@ -37,6 +38,25 @@ class Authorization{
                 $id = $decode->user_id == $id;
                 if (($time < 0) && $id){
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static function validationAdmin($id){
+        $token = sess::readTokenFromSessionID($id);
+        if($token){
+            $decode = JWT::decode($token, new Key(self::$key, 'HS256'));
+            if (isset($decode->exp) && isset($decode->user_id)){
+                $exp = time();
+                $time = $exp - $decode->exp;
+                $id = $decode->user_id == $id;
+                $role = $decode->role;
+                if (($time < 0) && $id){
+                    if($role == "admin")
+                        return true;
+                    return false;
                 }
             }
         }

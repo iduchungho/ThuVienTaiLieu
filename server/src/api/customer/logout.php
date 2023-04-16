@@ -16,8 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
 
     if (!$valid){
         echo json_encode([
-            'message' => 'require user'
+            'message' => 'require user',
+            'success' => false
         ]);
+        return;
     }
     else if ($token != null){
         echo json_encode([

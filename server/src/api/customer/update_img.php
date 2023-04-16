@@ -7,6 +7,9 @@
     include_once '../../config/database.php';
     include_once '../../config/cloudinary.php';
 
+    include_once '../../libs/sess.php';
+    include_once '../../libs/authorization.php';
+
     $cloud = new Cloud();
     $database = new Database();
     $db = $database->connect();
@@ -14,6 +17,18 @@
 
     $file = isset($_FILES['img']) ? $_FILES['img']['tmp_name'] : die();
     $param = isset($_GET['id']) ? $_GET['id'] : die();
+
+    sess::start($param);
+    $valid = Authorization::validation($param);
+    sess::shutdown();
+
+    if (!$valid){
+        echo json_encode([
+            'message' => 'require user',
+            'success' => false
+        ]);
+        return;
+    }
 
     $customer->customer_id = $param;
     $secure_url = "";

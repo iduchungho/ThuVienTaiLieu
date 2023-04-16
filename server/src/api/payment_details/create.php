@@ -7,7 +7,12 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../../config/database.php';
 include_once '../../models/payment_details.php';
-
+include_once '../../libs/auth.php';
+include_once '../../libs/sess.php';
+include_once '../../libs/authorization.php';
+if(!auth::valid()){
+    return;
+}
 $data = json_decode(file_get_contents("php://input"));
 if (!isset($data->payment_id) ||!isset($data->customer_id) || !isset($data->card_number) || !isset($data->card_holder_name) || !isset($data->cvv) || !isset($data->exp_month) || !isset($data->exp_year) || !isset($data->time_stamp)) {
     http_response_code(400);

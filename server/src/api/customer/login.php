@@ -19,10 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $data->email;
     $password = $data->password;
     $id = $customer->login($email, $password);
+    $result = $customer->getCustomerByID($id);
+    $row = mysqli_fetch_assoc($result);
+
     if ($id != -1){
         //echo json_encode(Authorization::auth($id));
         // save token to session
-        Sess::generateSession($id, Authorization::auth($id));
+        Sess::generateSession($id, Authorization::auth($id, $row['role']));
         $stmt = $customer->getCustomerByID($id);
         if(mysqli_num_rows($stmt)){
             $row = mysqli_fetch_assoc($stmt);
