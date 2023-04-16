@@ -7,7 +7,12 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../../config/database.php';
 include_once '../../models/orders.php';
-
+include_once '../../libs/auth.php';
+include_once '../../libs/sess.php';
+include_once '../../libs/authorization.php';
+if(!auth::valid()){
+    return;
+}
 if (!isset($_GET['order_id'])) {
     http_response_code(400);
     echo json_encode(array("message" => "order_id is required."));

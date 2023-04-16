@@ -75,6 +75,17 @@ CREATE TABLE `orders` (
                           `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE news (
+                      id INT NOT NULL AUTO_INCREMENT,
+                      title VARCHAR(255) NOT NULL,
+                      content TEXT NOT NULL,
+                      author VARCHAR(255) NOT NULL,
+                      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                      updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                      PRIMARY KEY (id)
+);
+
 --
 -- Dumping data for table `orders`
 --
