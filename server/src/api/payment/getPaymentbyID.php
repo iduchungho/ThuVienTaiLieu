@@ -4,6 +4,12 @@ header("Content-Type: application/json; charset=UTF-8");
 
 include_once '../../config/database.php';
 include_once '../../models/payment.php';
+include_once '../../libs/auth.php';
+include_once '../../libs/sess.php';
+include_once '../../libs/authorization.php';
+if(!auth::valid()){
+    return;
+}
 $database = new Database();
 $db = $database->connect();
 $payment = new Payment($db);

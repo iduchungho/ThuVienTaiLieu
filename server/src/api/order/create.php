@@ -8,6 +8,13 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../../config/database.php';
 include_once '../../models/orders.php';
 
+include_once '../../libs/auth.php';
+include_once '../../libs/sess.php';
+include_once '../../libs/authorization.php';
+if(!auth::valid()){
+    return;
+}
+
 $data = json_decode(file_get_contents("php://input"));
 if (!isset($data->order_id) ||!isset($data->customer_id) || !isset($data->menu_id) || !isset($data->quantity) || !isset($data->order_status) || !isset($data->time_stamp)) {
     http_response_code(400);
