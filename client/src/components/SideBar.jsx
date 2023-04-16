@@ -11,9 +11,9 @@ import Logo from './img/logo.png';
 const SideBar = () => {
   const [open, setOpen] = useState(false);
   const Menus = [
-    {title: "Acounts", page: <PersonOutlineIcon/>, src: '/client'},
-    {title: "Orders", page: <AssignmentIcon/>, src: '/order'},
-    {title: "Items", page: <FastfoodIcon/>, src: '/item'}
+    {title: "Acounts", page: <PersonOutlineIcon/>, src: '/dashboard/client'},
+    {title: "Orders", page: <AssignmentIcon/>, src: '/dashboard/order'},
+    {title: "Items", page: <FastfoodIcon/>, src: '/dashboard/item'}
   ]
   return (
     <div className={`${open ? " w-60" : "w-20"} duration-300 h-screen p-5 pt-4 bg-orange-600 text-white shadow-lg`}>
