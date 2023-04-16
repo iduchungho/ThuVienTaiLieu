@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainContainer from './MainContainer.jsx';
 import Header from './Header';
-import Product from './Product';
+import Product from './Product/Product.jsx';
 
 const Home = () => {
   return (
