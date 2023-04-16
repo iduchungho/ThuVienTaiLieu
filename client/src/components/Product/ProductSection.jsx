@@ -24,10 +24,11 @@ const ProductSection = () => {
           <h1 className="text-3xl font-bold">Nike Invincible 3</h1>
         </div>
         <p className="text-gray-700">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum eos in reprehenderit necessitatibus
-          dignissimos molestiae nulla facilis perferendis deleniti voluptas velit voluptatem, praesentium repellat, quis
-          eaque quaerat veritatis, adipisci mollitia ipsa error? Itaque qui dignissimos eos labore ducimus quisquam,
-          officia, eaque reprehenderit asperiores nam eius tempore ab libero quae aspernatur!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam tempore, sed dolorem iusto non odio quidem
+          eaque iure, officiis est laborum. Aspernatur recusandae at saepe praesentium quo sit ipsam odio, libero illum
+          nam nemo soluta, blanditiis a possimus animi minus provident iste quisquam, cum voluptatum distinctio
+          consequatur deleniti. Soluta nobis voluptate obcaecati ex excepturi harum saepe labore alias necessitatibus
+          tenetur.
         </p>
         <h6 className="text-2xl font-semibold">$ 199.00</h6>
         <div className="flex flex-row items-center gap-12">
