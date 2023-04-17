@@ -6,7 +6,7 @@ import DashboardClient from './components/DashboardClient';
 import DashboardItem from './components/DashboardItem';
 import DashboardOrder from './components/DashboardOrder';
 import Home from './components/Home';
-import Product from './components/Product';
+import Product from './components/Product/Product';
 
 function App() {
   return (
