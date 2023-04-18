@@ -13,9 +13,9 @@ const ProductSection = () => {
 
   const [amount, setAmount] = useState(1);
   return (
-    <div className="flex flex-col justify-between bg-sectionBg px-32 py-14 lg:flex-row gap-16 lg:items-center">
+    <div className="flex flex-col justify-between mb-16 bg-sectionBg px-32 py-14 lg:flex-row gap-16 lg:items-center">
       <div className="flex flex-col gap-6 lg:w-2/4">
-        <img src={activeImg} alt="" className="w-full h-full aspect-square object-contain rounded-xl" />
+        <img src={activeImg} alt="" className=" w-fit h-full aspect-square object-cover rounded-xl" />
       </div>
       {/* ABOUT */}
       <div className="flex flex-col gap-4 lg:w-2/4">

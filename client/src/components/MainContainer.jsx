@@ -6,6 +6,7 @@ import RowContainer from './RowContainer';
 import { fruits } from '../utils/data';
 import MenuContainer from './MenuContainer';
 import Header from './Header.jsx';
+import Footer from './Footer';
 
 const MainContainer = () => {
   const [scrollValue, setScrollValue] = useState(0);
