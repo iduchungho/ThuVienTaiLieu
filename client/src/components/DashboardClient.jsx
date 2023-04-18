@@ -8,6 +8,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid } from '@mui/x-data-grid';
 import {GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
 import EditIcon from '@mui/icons-material/Edit';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -50,6 +53,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+// const deleteUser =  () =>{
+//     console.log(id);
+// }
+// const onClickEdit = () => {
+//   console.log(id);
+// }
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'firstName', headerName: 'First name', width: 130 },
@@ -63,20 +72,37 @@ const columns = [
   {
     field: 'email',
     headerName: 'Email',
-    // description: 'This column has a value getter and is not sortable.',
-    // sortable: false,
     width: 200,
   },
   { field: 'phone', headerName: 'Phone Number', width: 130 },  
   {
-    field: 'actions',
-    type: 'actions',
-    width: 100,
-    getActions: () => [
-      <GridActionsCellItem icon={<EditIcon />} label="Edit" />,
-      <GridActionsCellItem icon={<DeleteIcon />} label="Delete" />,
-    ],
-  },
+    field: "actions",
+    headerName: "",
+    width: 120,
+    sortable: false,
+    disableColumnMenu: true,
+    renderCell: (params) => {
+        return (
+          <Box
+            sx={{
+              backgroundColor: "whitesmoke",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <IconButton onClick={() => console.log(params.id)}>
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={() => console.log(params.id)}>
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        );
+      }
+    }
 ];
 
 const rows = [
@@ -111,6 +137,7 @@ const DashboardClient = () => {
           />
           </Search>
         </Toolbar>
+
         <div style={{ height: 400, width: '105%' }}>
           <DataGrid
             rows={rows}
