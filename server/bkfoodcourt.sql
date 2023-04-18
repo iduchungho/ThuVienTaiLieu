@@ -302,19 +302,19 @@ ALTER TABLE `restaurant`
 -- --
 -- -- Constraints for table `orders`
 -- --
-ALTER TABLE `orders`
-    ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`);
+-- ALTER TABLE `orders`
+--     ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+--   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`);
 --
 -- --
 -- -- Constraints for table `payment`
 -- --
-ALTER TABLE `payment`
-    ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
---
+-- ALTER TABLE `payment`
+--     ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 -- --
--- -- Constraints for table `payment_details`
--- --
-ALTER TABLE `payment_details`
-    ADD CONSTRAINT `payment_details_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
-COMMIT;
+-- -- --
+-- -- -- Constraints for table `payment_details`
+-- -- --
+-- ALTER TABLE `payment_details`
+--     ADD CONSTRAINT `payment_details_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
+-- COMMIT;
