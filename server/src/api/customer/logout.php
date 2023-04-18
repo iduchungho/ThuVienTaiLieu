@@ -1,12 +1,12 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: PUT');
+header('Access-Control-Allow-Methods: GET');
 
 include_once '../../libs/sess.php';
 include_once '../../libs/authorization.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
+if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     $param = isset($_GET['id']) ? $_GET['id'] : die();
 
     sess::start($param);
