@@ -7,6 +7,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
+import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import f1 from '../components/img/f1.png';
 import f2 from '../components/img/f2.png';
@@ -15,6 +16,7 @@ import f4 from '../components/img/f4.png';
 import f5 from '../components/img/f5.png';
 import f6 from '../components/img/f6.png';
 import f7 from '../components/img/f7.png';
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -62,14 +64,33 @@ const columns = [
   { field: 'menu_name', headerName: 'Menu Name', width: 100 },
   { field: 'price', headerName: 'Price', width: 100 , type: 'number'},
   {
-    field: 'actions',
-    type: 'actions',
-    width: 100,
-    getActions: () => [
-      <GridActionsCellItem icon={<EditIcon />} label="Edit" />,
-      <GridActionsCellItem icon={<DeleteIcon />} label="Delete" />,
-    ],
-  },
+    field: "actions",
+    headerName: "",
+    width: 120,
+    sortable: false,
+    disableColumnMenu: true,
+    renderCell: (params) => {
+        return (
+          <Box
+            sx={{
+              backgroundColor: "whitesmoke",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <IconButton onClick={() => console.log(params.id)}>
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={() => console.log(params.id)}>
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        );
+      }
+    }
 ];
 
 const rows = [

@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid } from '@mui/x-data-grid';
 import {GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
 import EditIcon from '@mui/icons-material/Edit';
-
+import IconButton from '@mui/material/IconButton';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -65,14 +65,33 @@ const columns = [
   },
   { field: 'time_stamp', headerName: 'Time Stamp', width: 130 },  
   {
-    field: 'actions',
-    type: 'actions',
-    width: 100,
-    getActions: () => [
-      <GridActionsCellItem icon={<EditIcon />} label="Edit" />,
-      <GridActionsCellItem icon={<DeleteIcon />} label="Delete" />,
-    ],
-  },
+    field: "actions",
+    headerName: "",
+    width: 120,
+    sortable: false,
+    disableColumnMenu: true,
+    renderCell: (params) => {
+        return (
+          <Box
+            sx={{
+              backgroundColor: "whitesmoke",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <IconButton onClick={() => console.log(params.id)}>
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={() => console.log(params.id)}>
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        );
+      }
+    }
 ];
 
 const rows = [
