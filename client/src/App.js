@@ -7,13 +7,20 @@ import DashboardItem from './components/DashboardItem';
 import DashboardOrder from './components/DashboardOrder';
 import Home from './components/Home';
 import Product from './components/Product/Product';
+import CheckoutForm from './components/CheckoutForm';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    const fetchMenu = {};
+  }, []);
+
   return (
     <AnimatePresence>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/checkout" element={<CheckoutForm />} />
         <Route path="/dashboard//*" element={<Dashboard />}>
           <Route path="client" element={<DashboardClient />} />
           <Route path="item" element={<DashboardItem />} />

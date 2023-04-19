@@ -58,7 +58,7 @@ const Header = () => {
               About Us
             </li>
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
-              Service
+              News
             </li>
           </motion.ul>
 
