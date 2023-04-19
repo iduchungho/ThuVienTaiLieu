@@ -2,8 +2,11 @@ import React from 'react';
 
 const CheckoutForm = () => {
   return (
-    <div class="leading-loose">
-      <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
+    <div class="leading-loose flex justify-center items-center pt-10">
+      <form class="max-w-xl p-10 bg-white rounded shadow-xl">
+        <h1 className="text-3xl text-center font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          Check Out
+        </h1>
         <p class="text-gray-800 font-medium">Customer information</p>
         <div class="">
           <label class="block text-sm text-gray-00" for="cus_name">
