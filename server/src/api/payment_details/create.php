@@ -32,11 +32,30 @@ $payment_details->exp_month = $data->exp_month;
 $payment_details->exp_year = $data->exp_year;
 $payment_details->time_stamp = $data->time_stamp;
 
-if ($payment_details->create()) {
+try{
+    $payment_details->create();
     http_response_code(201);
-    echo json_encode(array("message" => "payment_details was created."));
-} else {
-    http_response_code(503);
-    echo json_encode(array("message" => "Unable to create payment_details."));
+    echo json_encode([
+        "message" => "payment_details was created.",
+        "success" => true
+    ]);
+    $db->close();
 }
+catch (Exception $e){
+    http_response_code(503);
+    echo json_encode([
+        "message" => "Unable to create payment_details.",
+        "error" => $e->getMessage(),
+        "success" => false
+    ]);
+    $db->close();
+}
+
+//if ($payment_details->create()) {
+//    http_response_code(201);
+//    echo json_encode(array("message" => "payment_details was created."));
+//} else {
+//    http_response_code(503);
+//    echo json_encode(array("message" => "Unable to create payment_details."));
+//}
 ?>

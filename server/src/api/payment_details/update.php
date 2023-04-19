@@ -29,13 +29,31 @@ if (!empty($data->payment_id) && !empty($data->customer_id) && !empty($data->car
     $paymentDetails->exp_year = $data->exp_year;
     $paymentDetails->time_stamp = $data->time_stamp;
 
-    if ($paymentDetails->updateByPaymentId()) {
-        http_response_code(200);
-        echo json_encode(array("message" => "Payment details were updated."));
-    } else {
-        http_response_code(503);
-        echo json_encode(array("message" => "Unable to update payment details."));
+    try{
+        $paymentDetails->updateByPaymentId();
+        http_response_code(201);
+        echo json_encode([
+            "message" => "Payment details were updated.",
+            "success" => true
+        ]);
+        $db->close();
     }
+    catch (Exception $e){
+        http_response_code(503);
+        echo json_encode([
+            "message" => "Unable to update payment details.",
+            "error" => $e->getMessage(),
+            "success" => false
+        ]);
+        $db->close();
+    }
+//    if ($paymentDetails->updateByPaymentId()) {
+//        http_response_code(200);
+//        echo json_encode(array("message" => "Payment details were updated."));
+//    } else {
+//        http_response_code(503);
+//        echo json_encode(array("message" => "Unable to update payment details."));
+//    }
 } else {
     http_response_code(400);
     echo json_encode(array("message" => "Unable to update payment details. Data is incomplete."));

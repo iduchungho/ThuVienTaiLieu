@@ -29,7 +29,7 @@
 
     sess::start($customer->customer_id);
     $valid = Authorization::validation($customer->customer_id);
-    sess::shutdown();
+//    sess::shutdown();
 
     if (!$valid){
         echo json_encode([
@@ -39,16 +39,31 @@
         return;
     }
 
-
-    if($customer->update()) {
-        echo json_encode(
-            array('message' => 'customer updated')
-        );
+    try {
+        $customer->update();
+        echo json_encode([
+            'message' => 'customer updated',
+            'success' => true
+        ]);
+        $db->close();
     }
-    else{
-        echo json_encode(
-            array('message' => 'customer not update')
-        );
+    catch (Exception $e){
+        echo json_encode([
+            'message' => 'customer not update',
+            'error' => $e->getMessage(),
+            'success' => true
+        ]);
+        $db->close();
     }
-    $db->close();
+//    if($customer->update()) {
+//        echo json_encode(
+//            array('message' => 'customer updated')
+//        );
+//    }
+//    else{
+//        echo json_encode(
+//            array('message' => 'customer not update')
+//        );
+//    }
+//    $db->close();
 

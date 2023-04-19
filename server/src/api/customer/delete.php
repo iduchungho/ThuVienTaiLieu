@@ -15,7 +15,7 @@
 
     sess::start($param);
     $valid = Authorization::validation($param);
-    sess::shutdown();
+//    sess::shutdown();
 
     if (!$valid){
         echo json_encode([

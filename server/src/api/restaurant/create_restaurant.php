@@ -26,13 +26,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $restaurant->last_name = $data->last_name;
         $restaurant->designation = $data->designation;
 
-        if ($restaurant->create()) {
+        try{
+            $restaurant->create();
             http_response_code(201);
-            echo json_encode(["message" => "Restaurant created successfully."]);
-        } else {
-            http_response_code(503);
-            echo json_encode(["message" => "Unable to create restaurant."]);
+            echo json_encode([
+                "message" => "Restaurant created successfully.",
+                "success" => true
+            ]);
+            $db->close();
         }
+        catch (Exception $e){
+            http_response_code(503);
+            echo json_encode([
+                "message" => "Unable to create restaurant.",
+                "error" => $e->getMessage(),
+                "success" => false
+            ]);
+            $db->close();
+        }
+//        if ($restaurant->create()) {
+//            http_response_code(201);
+//            echo json_encode(["message" => "Restaurant created successfully."]);
+//        } else {
+//            http_response_code(503);
+//            echo json_encode(["message" => "Unable to create restaurant."]);
+//        }
     } else {
         http_response_code(400);
         echo json_encode(["message" => "Incomplete data."]);
