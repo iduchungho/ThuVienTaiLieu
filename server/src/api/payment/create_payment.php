@@ -10,7 +10,7 @@ include_once '../../models/payment.php';
 include_once '../../libs/auth.php';
 include_once '../../libs/sess.php';
 include_once '../../libs/authorization.php';
-if(!auth::valid()){
+if (!auth::valid()) {
     return;
 }
 $database = new Database();
@@ -31,8 +31,8 @@ if (!empty($data->order_id) && !empty($data->payment_type) && !empty($data->paym
         http_response_code(503);
         echo json_encode(array("message" => "Unable to create payment."));
     }
-    } else {
-        http_response_code(400);
-        echo json_encode(array("message" => "Unable to create payment. Data is incomplete."));
-    }
+} else {
+    http_response_code(400);
+    echo json_encode(array("message" => "Unable to create payment. Data is incomplete."));
+}
 ?>
