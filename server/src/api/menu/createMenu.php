@@ -18,13 +18,32 @@ if (!empty($data->menu_name) && !empty($data->price)) {
   $menu->menu_name = $data->menu_name;
   $menu->price = $data->price;
   $menu->img = $data->img;
-  if ($menu->create()) {
-    http_response_code(201);
-    echo json_encode(array("message" => "Menu item was created."));
-  } else {
-    http_response_code(503);
-    echo json_encode(array("message" => "Unable to create menu item."));
+
+  try {
+      $menu->create();
+      http_response_code(201);
+      echo json_encode([
+          "message" => "Menu item was created.",
+          "success" => true
+      ]);
+      $db->close();
   }
+  catch (Exception $e){
+      http_response_code(503);
+      echo json_encode([
+          "message" => "Unable to create menu item.",
+          "error" => $e->getMessage(),
+          "success" => false
+      ]);
+      $db->close();
+  }
+//  if ($menu->create()) {
+//    http_response_code(201);
+//    echo json_encode(array("message" => "Menu item was created."));
+//  } else {
+//    http_response_code(503);
+//    echo json_encode(array("message" => "Unable to create menu item."));
+//  }
 
 } else {
   http_response_code(400);

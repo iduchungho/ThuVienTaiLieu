@@ -33,13 +33,31 @@ if (
     $restaurant->last_name = $data->last_name;
     $restaurant->designation = $data->designation;
 
-    if ($restaurant->update()) {
-        http_response_code(200);
-        echo json_encode(["message" => "Restaurant was updated."]);
-    } else {
-        http_response_code(503);
-        echo json_encode(["message" => "Unable to update restaurant."]);
+    try{
+        $restaurant->update();
+        http_response_code(201);
+        echo json_encode([
+            "message" => "Restaurant was updated.",
+            "success" => true
+        ]);
+        $db->close();
     }
+    catch (Exception $e){
+        http_response_code(503);
+        echo json_encode([
+            "message" => "Unable to update restaurant.",
+            "error" => $e->getMessage(),
+            "success" => false
+        ]);
+        $db->close();
+    }
+//    if ($restaurant->update()) {
+//        http_response_code(200);
+//        echo json_encode(["message" => "Restaurant was updated."]);
+//    } else {
+//        http_response_code(503);
+//        echo json_encode(["message" => "Unable to update restaurant."]);
+//    }
 } else {
     http_response_code(400);
     echo json_encode(["message" => "Unable to update restaurant. Data is incomplete."]);
