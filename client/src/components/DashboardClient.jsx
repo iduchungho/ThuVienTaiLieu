@@ -11,6 +11,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import EditClient from './EditClient';
+import AccountForm from './AccountForm';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,76 +60,93 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-// const deleteUser =  () =>{
-//     console.log(id);
-// }
-// const onClickEdit = () => {
-//   console.log(id);
-// }
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 90,
-  },
-  {
-    field: 'email',
-    headerName: 'Email',
-    width: 200,
-  },
-  { field: 'phone', headerName: 'Phone Number', width: 130 },  
-  {
-    field: "actions",
-    headerName: "",
-    width: 120,
-    sortable: false,
-    disableColumnMenu: true,
-    renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              backgroundColor: "whitesmoke",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <IconButton onClick={() => console.log(params.id)}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={() => console.log(params.id)}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        );
-      }
-    }
-];
+
+
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 , email: 'Jon@gmail.com', phone: '0123456789'},
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 , email: 'Cersei@gmail.com', phone: '0123456789'},
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 , email: 'Jaime@gmail.com', phone: '0123456789'},
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 , email: 'Arya@gmail.com', phone: '0123456789'},
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null , email: 'Daenerys@gmail.com', phone: '0123456789'},
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 , email: 'Melisandre@gmail.com', phone: '0123456789'},
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 , email: 'Ferrara@gmail.com', phone: '0123456789'},
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 , email: 'Rossini@gmail.com', phone: '0123456789'},
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 , email: 'Harvey@gmail.com', phone: '0123456789'},
+  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 , email: 'Jon@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
+  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 , email: 'Cersei@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
+  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 , email: 'Jaime@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
+  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 , email: 'Arya@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
+  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null , email: 'Daenerys@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
+  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 , email: 'Melisandre@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
+  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 , email: 'Ferrara@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
+  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 , email: 'Rossini@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
+  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 , email: 'Harvey@gmail.com', phone: '0123456789',city: 'Ho Chi Minh City'},
 ];
 
+let currentIdRemove = -1 ;
 
 const DashboardClient = () => {
+  const [remove, setRemove] = useState(false);
+  const [data, setData] = useState(rows);
+  const [openPopup, setOpenPopup] = useState(false);
+
+  const ReturnCurrentPage = () => {
+    setRemove(false);
+  };
+
+  const DeleteAccount = () => {
+    setRemove(false);
+    const updatedata = data.filter((row) => row.id !== currentIdRemove);
+    setData(updatedata);
+  }
+
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'firstName', headerName: 'First name', width: 130 },
+    { field: 'lastName', headerName: 'Last name', width: 130 },
+    {
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 50,
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 200,
+    },
+    { field: 'phone', headerName: 'Phone Number', width: 130 },  
+    { field: 'city', headerName: 'City', width: 130 },
+    {
+      field: "actions",
+      headerName: "",
+      width: 120,
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => {
+          return (
+            <Box
+              sx={{
+                backgroundColor: "whitesmoke",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <IconButton onClick={() => setOpenPopup(true)}>
+                <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => {
+                setRemove(true);
+                currentIdRemove = params.id;
+                }
+              }>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          );
+        }
+      }
+  ];
+
   return (
     <div className='h-screen'>
       <h1 className="text-xl font-bold tracking-wide text-headingColor">
-        Acounts
+        Customers
       </h1>
       <Box sx={{ flexGrow: 1 }}>
         <div className='inline-block'>
@@ -140,7 +164,7 @@ const DashboardClient = () => {
 
         <div style={{ height: 400, width: '105%' }}>
           <DataGrid
-            rows={rows}
+            rows={data}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
@@ -154,6 +178,35 @@ const DashboardClient = () => {
           </div>
         </div>
       </Box>
+
+      <EditClient
+      openPopup = {openPopup}
+      setOpenPopup = {setOpenPopup}
+      >
+          <AccountForm/>
+      </EditClient>
+
+      <Dialog
+        open={remove}
+        onClose={ReturnCurrentPage}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"REMOVE ACCOUNT"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Do you want to remove this account?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={ReturnCurrentPage}>No</Button>
+          <Button onClick={DeleteAccount} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   )
 }
