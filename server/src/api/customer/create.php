@@ -36,15 +36,31 @@
         $data->role
     );
 
-    if($customer->create()) {
-        echo json_encode(
-            array('message' => 'customer created')
-        );
+    try {
+        $ok = $customer->create();
+        echo json_encode([
+            'message' => 'customer created',
+            'success' => true
+        ]);
+        $db->close();
     }
-    else{
-        echo json_encode(
-            array('message' => 'customer not created')
-        );
+    catch (Exception $e){
+        echo json_encode([
+            'message' => 'email already exist',
+            'success' => false
+        ]);
+        $db->close();
     }
-    $db->close();
+
+//    if($customer->create()) {
+//        echo json_encode(
+//            array('message' => 'customer created')
+//        );
+//    }
+//    else{
+//        echo json_encode(
+//            array('message' => 'customer not created')
+//        );
+//    }
+//    $db->close();
 

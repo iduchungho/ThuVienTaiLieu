@@ -5,7 +5,7 @@ class auth
         $param = isset($_GET['id']) ? $_GET['id'] : die();
         sess::start($param);
         $valid = Authorization::validation($param);
-        sess::shutdown();
+//        sess::shutdown();
 
         if (!$valid){
             echo json_encode([
@@ -21,7 +21,7 @@ class auth
         $param = isset($_GET['id']) ? $_GET['id'] : die();
         sess::start($param);
         $valid = Authorization::validationAdmin($param);
-        sess::shutdown();
+//        sess::shutdown();
 
         if (!$valid){
             echo json_encode([

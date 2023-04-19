@@ -26,13 +26,13 @@ if (!empty($data->order_id) && !empty($data->payment_type) && !empty($data->paym
 
     if ($payment->create()) {
         http_response_code(201);
-echo json_encode(array("message" => "Payment was created."));
-} else {
-http_response_code(503);
-echo json_encode(array("message" => "Unable to create payment."));
-}
-} else {
-http_response_code(400);
-echo json_encode(array("message" => "Unable to create payment. Data is incomplete."));
-}
+        echo json_encode(array("message" => "Payment was created."));
+    } else {
+        http_response_code(503);
+        echo json_encode(array("message" => "Unable to create payment."));
+    }
+    } else {
+        http_response_code(400);
+        echo json_encode(array("message" => "Unable to create payment. Data is incomplete."));
+    }
 ?>
