@@ -4,28 +4,7 @@ export const url = "http://localhost:80/bkfood-court/server/src/api"
 
 export const Register = async (input) => {
     try {
-        const {
-            customer_id,
-            first_name,
-            last_name,
-            email_id,
-            password,
-            phone_no,
-            role,
-            avatar,
-            city
-        } = input;
-        const {data} = await axios.post(`${url}/customer/create.php`,{
-            "customer_id" : customer_id,
-            "first_name" : first_name,
-            "last_name" : last_name,
-            "email_id" : email_id,
-            "password" : password,
-            "phone_no" : phone_no,
-            "role" : role,
-            "avatar" : avatar,
-            "city" : city
-        })
+        const {data} = await axios.post(`${url}/customer/create.php`, input)
         return data;
     }
     catch(err){
