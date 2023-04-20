@@ -87,5 +87,12 @@ class Menu
 
         return false;
     }
+    public function uploadImage($url){
+        $query =
+            'UPDATE ' .$this->table
+            .' SET img=\''   .$url .'\''
+            .' WHERE menu_id='  .$this->menu_id .';';
+        return $this->conn->query($query);
+    }
 
 }
