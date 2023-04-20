@@ -16,7 +16,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import EditClient from './EditClient';
+import EditForm from './EditForm';
 import AccountForm from './AccountForm';
 
 const Search = styled('div')(({ theme }) => ({
@@ -179,12 +179,13 @@ const DashboardClient = () => {
         </div>
       </Box>
 
-      <EditClient
+      <EditForm
       openPopup = {openPopup}
       setOpenPopup = {setOpenPopup}
+      title = {"EDIT ACCOUNT'S INFORMATION"}
       >
           <AccountForm/>
-      </EditClient>
+      </EditForm>
 
       <Dialog
         open={remove}

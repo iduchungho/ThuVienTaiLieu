@@ -8,14 +8,16 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid } from '@mui/x-data-grid';
 import {GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
 import EditIcon from '@mui/icons-material/Edit';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useState } from 'react';
-import Button from '@mui/material/Button';
+import EditForm from './EditForm';
+import PaymentForm from './PaymentForm';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,45 +62,48 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
+
 const rows = [
-  { id: 1, customer_id: '13232', menu_id: '353', quantity: 1 , oder_status: 'Pending', time_stamp: '15/4/2023'},
-  { id: 2, customer_id: '32133', menu_id: '598', quantity: 1 , oder_status: 'Complete', time_stamp: '15/4/2023'},
-  { id: 3, customer_id: '53123', menu_id: '976', quantity: 1 , oder_status: 'Cancel', time_stamp: '15/4/2023'},
-  { id: 4, customer_id: '12324', menu_id: '332', quantity: 1 , oder_status: 'Pending', time_stamp: '15/4/2023'},
-  { id: 5, customer_id: '23442', menu_id: '314', quantity: 1 , oder_status: 'Pending', time_stamp: '15/4/2023'},
-  { id: 6, customer_id: '11231', menu_id: '533', quantity: 1 , oder_status: 'Pending', time_stamp: '15/4/2023'},
-  { id: 7, customer_id: '13232', menu_id: '683', quantity: 1 , oder_status: 'Pending', time_stamp: '15/4/2023'},
+  { id: 1, order_id: '231', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
+  { id: 2, order_id: '534', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
+  { id: 3, order_id: '342', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
+  { id: 4, order_id: '786', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
+  { id: 5, order_id: '458', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
+  { id: 6, order_id: '543', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
+  { id: 7, order_id: '253', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
 ];
 
 let currentIdRemove = -1 ;
 
-const DashboardClient = () => {
-
+const DashboardPayment = () => {
   const [remove, setRemove] = useState(false);
   const [data, setData] = useState(rows);
-  
+  const [openPopup, setOpenPopup] = useState(false);
 
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
 
-  const DeleteCurrentId = () => {
+  const DeleteAccount = () => {
     setRemove(false);
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
   }
 
   const columns = [
-    { field: 'id', headerName: 'Order ID', width: 100 },
-    { field: 'customer_id', headerName: 'Customer ID', width: 100 },
-    { field: 'menu_id', headerName: 'Menu ID', width: 100 },
-    { field: 'quantity', headerName: 'Quantity', type: 'number', width: 90 },
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'order_id', headerName: 'Order Id', width: 130 },
+    { field: 'payment_type', headerName: 'Payment Type', width: 130 },
     {
-      field: 'oder_status',
-      headerName: 'Status',
+      field: 'payment_status',
+      headerName: 'Payment Status',
+      width: 130,
+    },
+    {
+      field: 'time_stamp',
+      headerName: 'Time Stamp',
       width: 200,
     },
-    { field: 'time_stamp', headerName: 'Time Stamp', width: 130 },  
     {
       field: "actions",
       headerName: "",
@@ -117,13 +122,14 @@ const DashboardClient = () => {
                 alignItems: "center"
               }}
             >
-              <IconButton onClick={() => console.log(params.id)}>
+              <IconButton onClick={() => setOpenPopup(true)}>
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => {
-                  setRemove(true);
-                  currentIdRemove = params.id;
-                  }}>
+                setRemove(true);
+                currentIdRemove = params.id;
+                }
+              }>
                 <DeleteIcon />
               </IconButton>
             </Box>
@@ -135,7 +141,7 @@ const DashboardClient = () => {
   return (
     <div className='h-screen'>
       <h1 className="text-xl font-bold tracking-wide text-headingColor">
-        Orders
+        Payment
       </h1>
       <Box sx={{ flexGrow: 1 }}>
         <div className='inline-block'>
@@ -149,7 +155,7 @@ const DashboardClient = () => {
             inputProps={{ 'aria-label': 'search' }}
           />
           </Search>
-        </Toolbar>
+          </Toolbar>
         <div style={{ height: 400, width: '105%' }}>
           <DataGrid
             rows={data}
@@ -164,8 +170,17 @@ const DashboardClient = () => {
             }}
             />
           </div>
+          
         </div>
       </Box>
+      
+      <EditForm
+      openPopup = {openPopup}
+      setOpenPopup = {setOpenPopup}
+      title = {"EDIT PAYMENT'S INFORMATION"}
+      >
+          <PaymentForm/>
+      </EditForm>
 
       <Dialog
         open={remove}
@@ -174,23 +189,22 @@ const DashboardClient = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"REMOVE ORDER"}
+          {"REMOVE ACCOUNT"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Do you want to remove this order?
+            Do you want to remove this account?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={ReturnCurrentPage}>No</Button>
-          <Button onClick={DeleteCurrentId} autoFocus>
+          <Button onClick={DeleteAccount} autoFocus>
             Yes
           </Button>
         </DialogActions>
       </Dialog>
-
     </div>
   )
 }
 
-export default DashboardClient
+export default DashboardPayment

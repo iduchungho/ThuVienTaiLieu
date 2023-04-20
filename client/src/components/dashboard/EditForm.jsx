@@ -13,7 +13,7 @@ export default function EditClient(props){
         onClose={()=>setOpenPopup(false)}   
         >
             <DialogTitle>
-                <div>EDIT CUSTOMER'S INFORMATION</div>
+                <div>{title}</div>
             </DialogTitle>
             <DialogContent>
                 {children}

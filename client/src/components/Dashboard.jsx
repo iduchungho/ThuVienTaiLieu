@@ -1,9 +1,10 @@
 import React from 'react'
 import { Routes, Route, Router} from 'react-router-dom';
 import SideBar from './SideBar';
-import DashboardClient from './DashboardClient';
-import DashboardItem from './DashboardItem';
-import DashboardOrder from './DashboardOrder';
+import DashboardClient from './dashboard/DashboardClient';
+import DashboardItem from './dashboard/DashboardItem';
+import DashboardOrder from './dashboard/DashboardOrder';
+import DashboardPayment from './dashboard/DashboardPayment';
 const Dashboard = () => {
   return (
     <div className="w-screen h-auto flex flex-row bg-primary">
@@ -13,6 +14,7 @@ const Dashboard = () => {
                 <Route path='/client' element={<DashboardClient/>}/>
                 <Route path='/item' element={<DashboardItem/>}/>
                 <Route path='/order' element={<DashboardOrder/>}/>
+                <Route path='/payment' element={<DashboardPayment/>}/>
             </Routes>
         </main>
   </div>

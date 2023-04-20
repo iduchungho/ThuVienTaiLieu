@@ -16,14 +16,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import ItemForm from './ItemForm';
+import EditForm from './EditForm';
 
-import f1 from '../components/img/f1.png';
-import f2 from '../components/img/f2.png';
-import f3 from '../components/img/f3.png';
-import f4 from '../components/img/f4.png';
-import f5 from '../components/img/f5.png';
-import f6 from '../components/img/f6.png';
-import f7 from '../components/img/f7.png';
+import f1 from '../img/f1.png';
+import f2 from '../img/f2.png';
+import f3 from '../img/f3.png';
+import f4 from '../img/f4.png';
+import f5 from '../img/f5.png';
+import f6 from '../img/f6.png';
+import f7 from '../img/f7.png';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -84,7 +86,7 @@ const DashboardClient = () => {
 
   const [remove, setRemove] = useState(false);
   const [data, setData] = useState(rows);
-  
+  const [openPopup, setOpenPopup] = useState(false);
 
   const ReturnCurrentPage = () => {
     setRemove(false);
@@ -120,7 +122,7 @@ const DashboardClient = () => {
                 alignItems: "center"
               }}
             >
-              <IconButton onClick={() => console.log(params.id)}>
+              <IconButton onClick={() => setOpenPopup(true)}>
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => {
@@ -170,6 +172,15 @@ const DashboardClient = () => {
           </div>
         </div>
       </Box>
+
+      <EditForm
+      openPopup = {openPopup}
+      setOpenPopup = {setOpenPopup}
+      title = {"EDIT ITEM'S INFORMATION"}
+      >
+          <ItemForm/>
+      </EditForm>
+
       <Dialog
         open={remove}
         onClose={ReturnCurrentPage}
