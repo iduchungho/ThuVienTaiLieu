@@ -56,6 +56,9 @@ const OrderForm = () => {
             label="Time Stamp"
             id="time_stamp"
             type="date"
+            InputLabelProps={{
+                shrink: true,
+              }}
             />
         </div>
         <div className='flex gap-4 justify-end'>
