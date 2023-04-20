@@ -12,14 +12,16 @@ import Typography from '@mui/material/Typography';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import React from 'react';
 import { Signin } from '../../../../utils/customer';
+
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,
 };
 
 function LoginForm(props) {
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -33,7 +35,13 @@ function LoginForm(props) {
       password : values.password
     }
     const data =  await Signin(JSON.stringify(input))
-      console.log(data);
+    if (data.status === 1){
+      localStorage.setItem('customer_id', data.data)
+      window.location.reload(false)
+    }
+    else {
+      alert("email or password incorrect")
+    }
   };
 
   const initialValues = {

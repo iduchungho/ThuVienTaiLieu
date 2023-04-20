@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ]);
         }
         else {
-            http_response_code(403);
+            http_response_code(200);
             echo json_encode([
                 'status' => 0,
                 'message' => 'Access Denied',
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
     } else{
-        http_response_code(403);
+        http_response_code(200);
         echo json_encode([
             'status' => 0,
             'message' => 'Access Denied',
