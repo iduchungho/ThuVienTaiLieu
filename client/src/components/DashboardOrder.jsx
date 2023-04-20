@@ -9,6 +9,13 @@ import { DataGrid } from '@mui/x-data-grid';
 import {GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,48 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const columns = [
-  { field: 'id', headerName: 'Order ID', width: 100 },
-  { field: 'customer_id', headerName: 'Customer ID', width: 100 },
-  { field: 'menu_id', headerName: 'Menu ID', width: 100 },
-  { field: 'quantity', headerName: 'Quantity', type: 'number', width: 90 },
-  {
-    field: 'oder_status',
-    headerName: 'Status',
-    // description: 'This column has a value getter and is not sortable.',
-    // sortable: false,
-    width: 200,
-  },
-  { field: 'time_stamp', headerName: 'Time Stamp', width: 130 },  
-  {
-    field: "actions",
-    headerName: "",
-    width: 120,
-    sortable: false,
-    disableColumnMenu: true,
-    renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              backgroundColor: "whitesmoke",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <IconButton onClick={() => console.log(params.id)}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={() => console.log(params.id)}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        );
-      }
-    }
-];
+
 
 const rows = [
   { id: 1, customer_id: '13232', menu_id: '353', quantity: 1 , oder_status: 'Pending', time_stamp: '15/4/2023'},
@@ -104,8 +70,68 @@ const rows = [
   { id: 7, customer_id: '13232', menu_id: '683', quantity: 1 , oder_status: 'Pending', time_stamp: '15/4/2023'},
 ];
 
+let currentIdRemove = -1 ;
 
 const DashboardClient = () => {
+
+  const [remove, setRemove] = useState(false);
+  const [data, setData] = useState(rows);
+  
+
+  const ReturnCurrentPage = () => {
+    setRemove(false);
+  };
+
+  const DeleteCurrentId = () => {
+    setRemove(false);
+    const updatedata = data.filter((row) => row.id !== currentIdRemove);
+    setData(updatedata);
+  }
+
+  const columns = [
+    { field: 'id', headerName: 'Order ID', width: 100 },
+    { field: 'customer_id', headerName: 'Customer ID', width: 100 },
+    { field: 'menu_id', headerName: 'Menu ID', width: 100 },
+    { field: 'quantity', headerName: 'Quantity', type: 'number', width: 90 },
+    {
+      field: 'oder_status',
+      headerName: 'Status',
+      width: 200,
+    },
+    { field: 'time_stamp', headerName: 'Time Stamp', width: 130 },  
+    {
+      field: "actions",
+      headerName: "",
+      width: 120,
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => {
+          return (
+            <Box
+              sx={{
+                backgroundColor: "whitesmoke",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <IconButton onClick={() => console.log(params.id)}>
+                <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => {
+                  setRemove(true);
+                  currentIdRemove = params.id;
+                  }}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          );
+        }
+      }
+  ];
+
   return (
     <div className='h-screen'>
       <h1 className="text-xl font-bold tracking-wide text-headingColor">
@@ -126,7 +152,7 @@ const DashboardClient = () => {
         </Toolbar>
         <div style={{ height: 400, width: '105%' }}>
           <DataGrid
-            rows={rows}
+            rows={data}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
@@ -140,6 +166,29 @@ const DashboardClient = () => {
           </div>
         </div>
       </Box>
+
+      <Dialog
+        open={remove}
+        onClose={ReturnCurrentPage}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"REMOVE ORDER"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Do you want to remove this order?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={ReturnCurrentPage}>No</Button>
+          <Button onClick={DeleteCurrentId} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
     </div>
   )
 }
