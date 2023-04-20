@@ -13,6 +13,7 @@ import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import { Signin } from '../../../../utils/customer';
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -26,8 +27,13 @@ function LoginForm(props) {
       },
     },
   });
-  const handleSubmit = (values, props) => {
-    console.log(values);
+  const handleSubmit = async (values, props) => {
+    const input = {
+      email : values.email,
+      password : values.password
+    }
+    const data =  await Signin(JSON.stringify(input))
+      console.log(data);
   };
 
   const initialValues = {

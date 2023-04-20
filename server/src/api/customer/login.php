@@ -1,14 +1,12 @@
 <?php
-
-header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
-
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization");
 include_once '../../config/database.php';
 include_once '../../models/customer.php';
 include_once '../../libs/authorization.php';
 include_once '../../libs/sess.php';
-
 
 $database = new Database();
 $db = $database->connect();
