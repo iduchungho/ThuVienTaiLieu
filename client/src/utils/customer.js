@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const url = "http://localhost/bkfood-court/server/src/api"
+export const url = "http://localhost:80/bkfood-court/server/src/api"
 
 export const Register = async (input) => {
     try {
@@ -15,7 +15,7 @@ export const Register = async (input) => {
             avatar,
             city
         } = input;
-        const {data} = await axios.post(`${url}/api/customer/create.php`,{
+        const {data} = await axios.post(`${url}/customer/create.php`,{
             "customer_id" : customer_id,
             "first_name" : first_name,
             "last_name" : last_name,
@@ -46,7 +46,7 @@ export const UpdateCustomer = async (input) => {
             avatar,
             city
         } = input;
-        const { data } = await axios.put(`${url}/api/customer/update.php`, {
+        const { data } = await axios.put(`${url}/customer/update.php`, {
             "customer_id": customer_id,
             "first_name": first_name,
             "last_name": last_name,
@@ -66,7 +66,7 @@ export const UpdateCustomer = async (input) => {
 
 export const DeleteCustomers = async (id) => {
     try {
-        const {data} = await axios.delete(`${url}/api/customer/delete.php?id=${id}`)
+        const {data} = await axios.delete(`${url}/customer/delete.php?id=${id}`)
         return data
     }
     catch (err) {
@@ -76,7 +76,7 @@ export const DeleteCustomers = async (id) => {
 
 export const UpdateCustomerAvt = async (id, file) => {
     try {
-        const { data } = await axios.post(`${url}/api/customer/update_img.php?id=${id}`, file)
+        const { data } = await axios.post(`${url}/customer/update_img.php?id=${id}`, file)
         return data
     }
     catch (err) {
@@ -86,7 +86,7 @@ export const UpdateCustomerAvt = async (id, file) => {
 
 export const GetAllCustomers = async (id) => {
     try{
-        const { data } = await axios.get(`${url}/api/customer/get.php?id=${id}`)
+        const { data } = await axios.get(`${url}/customer/get.php?id=${id}`)
         return data    
     }
     catch(err){
@@ -96,7 +96,7 @@ export const GetAllCustomers = async (id) => {
 
 export const Logout = async (id) => {
     try {
-        const {data} = await axios.get(`${url}/api/customer/logout.php?id=${id}`)
+        const {data} = await axios.get(`${url}/customer/logout.php?id=${id}`)
         return data
     }
     catch (err) {
@@ -106,7 +106,7 @@ export const Logout = async (id) => {
 
 export const GetCustomerByID = async (id) => {
     try {
-        const { data } = await axios.get(`${url}/api/customer/get_by_id.php?id=${id}`)
+        const { data } = await axios.get(`${url}/customer/get_by_id.php?id=${id}`)
         return data
     }
     catch (err) {
@@ -114,12 +114,12 @@ export const GetCustomerByID = async (id) => {
     }
 }
 
-export const Login = async (input) => {
+export const Signin = async (input) => {
     try {
-        const { data } = await axios.get(`${url}/api/customer/get_by_id.php?id=${id}`, input)
+        const { data } = await axios.post(`${url}/customer/login.php`, input)
         return data
     }
     catch (err) {
-        return false
+        return err
     }
 }

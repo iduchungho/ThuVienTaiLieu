@@ -3,7 +3,7 @@ import { url } from "./customer";
 
 export const CreateMenu = async (input, id) => {
     try {
-        const {data} = await axios.post(`${url}/api/menu/createMenu.php?id=${id}`, input)
+        const {data} = await axios.post(`${url}/menu/createMenu.php?id=${id}`, input)
         return data;
     }
     catch(err){
@@ -13,7 +13,7 @@ export const CreateMenu = async (input, id) => {
 
 export const DeleteAll = async (id) => {
     try {
-        const {data} = await axios.delete(`${url}/api/menu/deleteAll.php?id=${id}`)
+        const {data} = await axios.delete(`${url}/menu/deleteAll.php?id=${id}`)
         return data
     }
     catch(err){
@@ -23,7 +23,7 @@ export const DeleteAll = async (id) => {
 
 export const DeleteMenuById = async (id, menu_id) => {
     try {
-        const {data} = await axios.delete(`${url}/api/menu/deleteById.php?id=${id}&menu_id=${menu_id}`)
+        const {data} = await axios.delete(`${url}/menu/deleteById.php?id=${id}&menu_id=${menu_id}`)
         return data
     }
     catch(err){
@@ -33,7 +33,7 @@ export const DeleteMenuById = async (id, menu_id) => {
 
 export const GetMenu = async () => {
     try {
-        const {data} = await axios.get(`${url}/api/menu/getMenu.php`)
+        const {data} = await axios.get(`${url}/menu/getMenu.php`)
         return data
     }
     catch(err){
@@ -43,7 +43,7 @@ export const GetMenu = async () => {
 
 export const GetMenuById = async (id) => {
     try{
-        const {data} = await axios.get(`${url}/api/menu/getMenuById.php?menu_id=${id}`)
+        const {data} = await axios.get(`${url}/menu/getMenuById.php?menu_id=${id}`)
         return data
     }
     catch(err){
@@ -53,7 +53,7 @@ export const GetMenuById = async (id) => {
 
 export const UpdateMenu = async (input) => {
     try {
-        const { data } = await axios.put(`${url}/api/menu/updateMenu.php`, input)
+        const { data } = await axios.put(`${url}/menu/updateMenu.php`, input)
         return data
     }
     catch (err) {

@@ -9,6 +9,14 @@ import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import { useState } from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+
 import f1 from '../components/img/f1.png';
 import f2 from '../components/img/f2.png';
 import f3 from '../components/img/f3.png';
@@ -16,6 +24,7 @@ import f4 from '../components/img/f4.png';
 import f5 from '../components/img/f5.png';
 import f6 from '../components/img/f6.png';
 import f7 from '../components/img/f7.png';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,40 +67,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const columns = [
-  { field: 'id', headerName: 'Menu ID', width: 100 },
-  { field: 'image', headerName: 'Image', width: 100, renderCell: (params) => <img width="100" alt={params.value} src={params.value}/>},
-  { field: 'menu_name', headerName: 'Menu Name', width: 100 },
-  { field: 'price', headerName: 'Price', width: 100 , type: 'number'},
-  {
-    field: "actions",
-    headerName: "",
-    width: 120,
-    sortable: false,
-    disableColumnMenu: true,
-    renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              backgroundColor: "whitesmoke",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <IconButton onClick={() => console.log(params.id)}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={() => console.log(params.id)}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        );
-      }
-    }
-];
 
 const rows = [
   { id: 1, image: f1, menu_name: 'Chicken', price: 120},
@@ -103,8 +78,63 @@ const rows = [
   { id: 7, image: f7, menu_name: 'Soft Drinks', price: 120},
 ];
 
+let currentIdRemove = -1 ;
 
 const DashboardClient = () => {
+
+  const [remove, setRemove] = useState(false);
+  const [data, setData] = useState(rows);
+  
+
+  const ReturnCurrentPage = () => {
+    setRemove(false);
+  };
+
+  const DeleteCurrentId = () => {
+    setRemove(false);
+    console.log(currentIdRemove)
+    const updatedata = data.filter((row) => row.id !== currentIdRemove);
+    setData(updatedata);
+  }
+
+  const columns = [
+    { field: 'id', headerName: 'Menu ID', width: 100 },
+    { field: 'image', headerName: 'Image', width: 100, renderCell: (params) => <img width="100" alt={params.value} src={params.value}/>},
+    { field: 'menu_name', headerName: 'Menu Name', width: 100 },
+    { field: 'price', headerName: 'Price', width: 100 , type: 'number'},
+    {
+      field: "actions",
+      headerName: "",
+      width: 120,
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => {
+          return (
+            <Box
+              sx={{
+                backgroundColor: "whitesmoke",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <IconButton onClick={() => console.log(params.id)}>
+                <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => {
+                setRemove(true);
+                currentIdRemove = params.id;
+                }}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          );
+        }
+      }
+  ];
+
   return (
     <div className='h-screen'>
       <h1 className="text-xl font-bold tracking-wide text-headingColor">
@@ -125,7 +155,7 @@ const DashboardClient = () => {
         </Toolbar>
         <div style={{ height: 500, width: '105%' }}>
           <DataGrid
-            rows={rows}
+            rows={data}
             rowHeight={75}
             columns={columns}
             pageSize={5}
@@ -140,6 +170,27 @@ const DashboardClient = () => {
           </div>
         </div>
       </Box>
+      <Dialog
+        open={remove}
+        onClose={ReturnCurrentPage}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"REMOVE ITEM"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Do you want to remove this item?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={ReturnCurrentPage}>No</Button>
+          <Button onClick={DeleteCurrentId} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   )
 }
