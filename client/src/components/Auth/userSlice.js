@@ -4,7 +4,7 @@ import { Register } from '../../utils/customer';
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    current: JSON.parse(localStorage.getItem('user')),
+    current: JSON.parse(localStorage.getItem('user')) || {},
     settings: {},
   },
   reducers: {
