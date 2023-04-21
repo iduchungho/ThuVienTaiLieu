@@ -1,6 +1,9 @@
 {
   "require": {
     "cloudinary/cloudinary_php": "^2",
+    "ext-pdo": "*",
+    "ext-json": "*",
+    "ext-mysqli": "*",
     "firebase/php-jwt": "^6.4"
   }
 }
