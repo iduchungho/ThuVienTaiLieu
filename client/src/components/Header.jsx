@@ -178,6 +178,11 @@ const Header = () => {
         <MenuItem>
           <Link to={'/profile'}>My Profile</Link>
         </MenuItem>
+        {loggedInUser.role === 'admin' && (
+          <MenuItem>
+            <Link to={'/dashboard'}>Dashboard</Link>
+          </MenuItem>
+        )}
         <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
       </Menu>
     </div>
