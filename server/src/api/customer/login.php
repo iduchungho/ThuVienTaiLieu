@@ -38,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     "email_id" => $row['email_id'],
                     "phone_no" => $row['phone_no'],
                     "city" => $row['city'],
-                    "avatar" => $row['avatar']
+                    "avatar" => $row['avatar'],
+                    "role" => $row['role']
                 ]
             ]);
         }
