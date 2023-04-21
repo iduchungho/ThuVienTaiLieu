@@ -14,14 +14,14 @@ import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Signin } from '../../../../utils/customer';
-
+import { useSnackbar } from 'notistack';
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,
+  closeDialog: PropTypes.func,
 };
 
 function LoginForm(props) {
-
   const theme = createTheme({
     palette: {
       primary: {
@@ -29,18 +29,23 @@ function LoginForm(props) {
       },
     },
   });
+
+  const { enqueueSnackbar } = useSnackbar();
+
   const handleSubmit = async (values, props) => {
     const input = {
-      email : values.email,
-      password : values.password
-    }
-    const data =  await Signin(JSON.stringify(input))
-    if (data.status === 1){
-      localStorage.setItem('customer_id', data.data)
-      window.location.reload(false)
-    }
-    else {
-      alert("email or password incorrect")
+      email: values.email,
+      password: values.password,
+    };
+    const data = await Signin(JSON.stringify(input));
+    if (data.status === 1) {
+      localStorage.setItem('user', JSON.stringify(data.data));
+      enqueueSnackbar('Login Successfully', { variant: 'success' });
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 2000);
+    } else {
+      enqueueSnackbar('Email or Password Incorrect', { variant: 'error' });
     }
   };
 

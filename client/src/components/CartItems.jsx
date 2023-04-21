@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { BiMinus, BiPlus } from 'react-icons/bi';
 import { motion } from 'framer-motion';
-import { useStateValue } from '../context/StateProvider';
-import { actionType } from '../context/reducer';
 let items = [];
 
 const CartItem = ({ item, setFlag, flag }) => {
-  const [{ cartItems }, dispatch] = useStateValue();
   const [qty, setQty] = useState(item.qty);
+  const cartItems = 0;
 
   const cartDispatch = () => {
     localStorage.setItem('cartItems', JSON.stringify(items));
-    dispatch({
-      type: actionType.SET_CARTITEMS,
-      cartItems: items,
-    });
   };
 
   const updateQty = (action, id) => {

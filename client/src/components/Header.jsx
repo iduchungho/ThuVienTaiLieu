@@ -6,10 +6,15 @@ import * as React from 'react';
 import { useState } from 'react';
 import { MdShoppingBasket } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import Login from './Auth/components/Login/index';
-import Register from './Auth/components/Register';
+import LoginForm from './Auth/components/LoginForm/index';
+import RegisterForm from './Auth/components/RegisterForm/index';
 import Avatar from './img/avatar.png';
 import Logo from './img/logo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { logout } from './Auth/userSlice';
 
 const Header = () => {
   const MODE = {
@@ -17,8 +22,14 @@ const Header = () => {
     REGISTER: 'register',
   };
 
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((state) => state.user.current);
+  const isLoggedIn = !!loggedInUser.customer_id;
+
+  const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
+  const [showCart, setShowCart] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,15 +39,35 @@ const Header = () => {
     setOpen(false);
   };
 
-  const showCart = () => {};
+  const handleOpenCart = () => {
+    setShowCart(true);
+  };
+
+  const handleCloseCart = () => {
+    setShowCart(false);
+  };
+
+  const handleOpenMenu = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogoutClick = () => {
+    const action = logout();
+    dispatch(action);
+  };
+
   return (
     <div className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary">
       {/* destop and tablet */}
       <div className="hidden md:flex w-full h-full">
-        <div className="flex gap-2 items-center">
+        <Link to="/" className="flex gap-2 items-center">
           <img src={Logo} className="w-8 object-cover" alt="logo" />
           <p className="text-headingColor text-xl font-semibold"> BK Food</p>
-        </div>
+        </Link>
 
         <div className="flex items-center gap-8 ml-auto">
           <motion.ul
@@ -65,39 +96,49 @@ const Header = () => {
               <p className="text-xs text-white font-semibold">2</p>
             </div>
           </div>
-          <motion.img
-            whileTap={{ scale: 0.6 }}
-            src={Avatar}
-            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl"
-            alt="avatar"
-            onClick={handleClickOpen}
-          />
-          <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-            <DialogContent>
-              {mode === MODE.REGISTER && (
-                <>
-                  <Register />
-                  <Grid className=" text-center" item>
-                    <Grid item>
-                      <Link href="#" variant="body2" onClick={() => setMode(MODE.LOGIN)}>
-                        {'You have an account? Sign In'}
-                      </Link>
-                    </Grid>
-                  </Grid>
-                </>
-              )}
-              {mode === MODE.LOGIN && (
-                <>
-                  <Login />
-                  <Grid className=" text-center" item>
-                    <Link href="#" variant="body2" onClick={() => setMode(MODE.REGISTER)}>
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </>
-              )}
-            </DialogContent>
-          </Dialog>
+
+          {!isLoggedIn && (
+            <div>
+              <Button onClick={handleClickOpen} color="inherit">
+                Login
+              </Button>
+              <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
+                <DialogContent>
+                  {mode === MODE.REGISTER && (
+                    <>
+                      <RegisterForm />
+                      <Grid className=" text-center" item>
+                        <Grid item>
+                          <Link href="#" variant="body2" onClick={() => setMode(MODE.LOGIN)}>
+                            {'You have an account? Sign In'}
+                          </Link>
+                        </Grid>
+                      </Grid>
+                    </>
+                  )}
+                  {mode === MODE.LOGIN && (
+                    <>
+                      <LoginForm />
+                      <Grid className=" text-center" item>
+                        <Link href="#" variant="body2" onClick={() => setMode(MODE.REGISTER)}>
+                          {"Don't have an account? Sign Up"}
+                        </Link>
+                      </Grid>
+                    </>
+                  )}
+                </DialogContent>
+              </Dialog>
+            </div>
+          )}
+          {isLoggedIn && (
+            <motion.img
+              whileTap={{ scale: 0.6 }}
+              src={Avatar}
+              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl"
+              alt="avatar"
+              onClick={handleOpenMenu}
+            />
+          )}
         </div>
       </div>
 
@@ -121,6 +162,24 @@ const Header = () => {
           alt="avatar"
         />
       </div>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleCloseMenu}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+      >
+        <MenuItem>
+          <Link to={'/profile'}>My Profile</Link>
+        </MenuItem>
+        <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+      </Menu>
     </div>
   );
 };

@@ -1,8 +1,12 @@
-import myReducer from './../context/reducers/index';
+import userReducer from '../components/Auth/userSlice';
 const { configureStore } = require('@reduxjs/toolkit');
 
+const rootReducer = {
+  user: userReducer,
+};
+
 const store = configureStore({
-  reducer: myReducer,
+  reducer: rootReducer,
 });
 
 export default store;

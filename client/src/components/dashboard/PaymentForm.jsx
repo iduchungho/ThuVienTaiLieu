@@ -50,7 +50,10 @@ const PaymentForm = () => {
             sx={{m: 3}}
             label="Time Stamp"
             id="time_stamp"
-            type="date"
+            type="datetime-local"
+            InputLabelProps={{
+                shrink: true,
+              }}
             />
         </div>
         <div className='flex gap-4 justify-end'>
