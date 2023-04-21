@@ -10,10 +10,11 @@ import LoginForm from './Auth/components/LoginForm/index';
 import RegisterForm from './Auth/components/RegisterForm/index';
 import Avatar from './img/avatar.png';
 import Logo from './img/logo.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { logout } from './Auth/userSlice';
 
 const Header = () => {
   const MODE = {
@@ -21,6 +22,7 @@ const Header = () => {
     REGISTER: 'register',
   };
 
+  const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggedInUser.customer_id;
 
@@ -51,6 +53,11 @@ const Header = () => {
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogoutClick = () => {
+    const action = logout();
+    dispatch(action);
   };
 
   return (
@@ -171,7 +178,7 @@ const Header = () => {
         <MenuItem>
           <Link to={'/profile'}>My Profile</Link>
         </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+        <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
       </Menu>
     </div>
   );

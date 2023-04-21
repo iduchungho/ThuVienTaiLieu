@@ -7,8 +7,14 @@ const userSlice = createSlice({
     current: JSON.parse(localStorage.getItem('user')),
     settings: {},
   },
-  reducer: {},
+  reducers: {
+    logout(state) {
+      localStorage.removeItem('user');
+      state.current = {};
+    },
+  },
 });
 
-const { reducer } = userSlice;
+const { reducer, actions } = userSlice;
+export const { logout } = actions;
 export default reducer;
