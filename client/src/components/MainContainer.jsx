@@ -7,6 +7,7 @@ import { fruits } from '../utils/data';
 import MenuContainer from './MenuContainer';
 import Header from './Header.jsx';
 import Footer from './Footer';
+import CartContainer from './CartContainer';
 
 const MainContainer = () => {
   const [scrollValue, setScrollValue] = useState(0);
@@ -45,6 +46,7 @@ const MainContainer = () => {
       </section>
 
       <MenuContainer />
+      {/* <CartContainer /> */}
     </div>
   );
 };

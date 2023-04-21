@@ -12,9 +12,12 @@ import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import { Register } from '../../../../utils/customer';
+import { useSnackbar } from 'notistack';
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func,
+  closeDialog: PropTypes.func,
 };
 
 function RegisterForm(props) {
@@ -25,8 +28,31 @@ function RegisterForm(props) {
       },
     },
   });
-  const handleSubmit = (values, props) => {
-    console.log(values);
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleSubmit = async (values, props) => {
+    const input = {
+      customer_id: 1,
+      first_name: values.name,
+      last_name: values.name,
+      email_id: values.email,
+      password: values.password,
+      phone_no: '0812734123',
+      city: 'HCM',
+      role: 'member',
+      avatar: 'none',
+    };
+    const data = await Register(JSON.stringify(input));
+    console.log(data);
+    if (data.success === true) {
+      enqueueSnackbar('Register Successfully Please Login', { variant: 'success' });
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 2000);
+    } else {
+      enqueueSnackbar('Register Unsuccessfully', { variant: 'error' });
+    }
   };
 
   const initialValues = {

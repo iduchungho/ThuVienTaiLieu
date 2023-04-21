@@ -9,6 +9,7 @@ import DashboardOrder from './components/dashboard/DashboardOrder';
 import Home from './components/Home';
 import Product from './components/Product/Product';
 import DashboardPayment from './components/dashboard/DashboardPayment';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard//*" element={<Dashboard />}>
           <Route path="client" element={<DashboardClient />} />
           <Route path="item" element={<DashboardItem />} />

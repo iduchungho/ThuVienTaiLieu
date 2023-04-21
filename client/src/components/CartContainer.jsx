@@ -3,37 +3,18 @@ import { MdOutlineKeyboardBackspace } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 
 import { motion } from 'framer-motion';
-import { useStateValue } from '../context/StateProvider';
-import { actionType } from '../context/reducer';
-import EmptyCart from '../img/emptyCart.svg';
-import CartItem from './CartItem';
+import EmptyCart from '../components/img/emptyCart.svg';
+import CartItem from './CartItems';
 
 const CartContainer = () => {
-  const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
   const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
 
-  const showCart = () => {
-    dispatch({
-      type: actionType.SET_CART_SHOW,
-      cartShow: !cartShow,
-    });
-  };
-
-  useEffect(() => {
-    let totalPrice = cartItems.reduce(function (accumulator, item) {
-      return accumulator + item.qty * item.price;
-    }, 0);
-    setTot(totalPrice);
-    console.log(tot);
-  }, [tot, flag]);
+  const showCart = () => {};
+  const cartItems = 0;
+  const user = 'admin';
 
   const clearCart = () => {
-    dispatch({
-      type: actionType.SET_CARTITEMS,
-      cartItems: [],
-    });
-
     localStorage.setItem('cartItems', JSON.stringify([]));
   };
 
