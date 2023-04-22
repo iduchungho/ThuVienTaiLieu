@@ -19,15 +19,16 @@ const ProfileSection = () => {
   const updatePassword = (e) => {
     setNewPassword(e);
   };
-  const uploadImage = (e) => {
+  const uploadImage = (e) => {{
     const imageFile = e.target.files[0];
     setImageFile(URL.createObjectURL(imageFile));
-  };
+  }};
+
 
   const deleteImage = async () => {
     setImageFile('none');
     const customer_id = user.customer_id;
-    const data1 = await UpdateCustomerAvt(JSON.stringify({ customer_id, imageFile }));
+    // const data1 = await UpdateCustomerAvt(JSON.stringify({ customer_id, imageFile }));
     const user1 = JSON.parse(localStorage.getItem('user'));
     user1.avatar = 'none';
     localStorage.setItem('user', JSON.stringify(user));
@@ -48,8 +49,11 @@ const ProfileSection = () => {
       password,
       role: 'customer',
     };
-    const data1 = await UpdateCustomerAvt(JSON.stringify({ customer_id, imageFile }));
-    const data = await UpdateCustomer(JSON.stringify(input));
+    const img = new FormData();
+    img.append('img', imageFile.files[0])
+    const data1 = await UpdateCustomerAvt(customer_id, img);
+    // const data = await UpdateCustomer(JSON.stringify(input));
+    console.log(customer_id)
     console.log(data1);
   };
 
@@ -127,7 +131,7 @@ const ProfileSection = () => {
                 type="file"
                 accept="image/*"
                 className="hidden"
-                onChange={(e) => uploadImage(e)}
+                onChange={(e) => {setImageFile(()=>({files: e.target.files, img:URL.createObjectURL(e.target.files[0])}))}}
               />
             </label>
           </div>
