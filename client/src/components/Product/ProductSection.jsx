@@ -11,13 +11,14 @@ function ProductSection(props) {
   const [images, setImages] = useState({
     img1,
   });
+  const [data, setData] = useState({});
 
   const id = props.id;
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await GetMenuById(JSON.stringify(props.id));
-      console.log(data);
+      const data = await GetMenuById(id);
+      setData(data);
     };
     fetchData();
   }, []);
@@ -36,9 +37,9 @@ function ProductSection(props) {
       </div>
       {/* ABOUT */}
       <div className="flex flex-col gap-4 lg:w-2/4">
-        <div>
-          <span className=" text-cartNumBg font-semibold">Special Fruits</span>
-          <h1 className=" text-5xl mt-2 font-bold">Strawberry</h1>
+        <div className="mt-5">
+          <span className=" text-cartNumBg text-2xl font-semibold">Special Fruits</span>
+          <h1 className=" text-5xl mt-2 font-bold">{data.menu_name}</h1>
         </div>
         <p className="text-gray-700">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam tempore, sed dolorem iusto non odio quidem
@@ -47,7 +48,7 @@ function ProductSection(props) {
           consequatur deleniti. Soluta nobis voluptate obcaecati ex excepturi harum saepe labore alias necessitatibus
           tenetur.
         </p>
-        <h6 className="text-2xl font-semibold">$ 199.00</h6>
+        <h6 className="text-2xl font-semibold">$ {data.price}</h6>
         <div className="flex flex-row items-center gap-12">
           <div className="flex flex-row items-center">
             <button

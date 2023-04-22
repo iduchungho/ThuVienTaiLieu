@@ -77,7 +77,7 @@ const Header = () => {
             className="flex items-center gap-24 "
           >
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
-              Home
+              <Link to={'/'}>Home</Link>
             </li>
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
               Menu
