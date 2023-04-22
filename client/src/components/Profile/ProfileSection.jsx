@@ -19,10 +19,11 @@ const ProfileSection = () => {
   const updatePassword = (e) => {
     setNewPassword(e);
   };
-  const uploadImage = (e) => {
+  const uploadImage = (e) => {{
     const imageFile = e.target.files[0];
     setImageFile(URL.createObjectURL(imageFile));
-  };
+  }};
+
   const saveChanges = async () => {
     const first_name = displayName;
     const last_name = displayName;
@@ -39,7 +40,9 @@ const ProfileSection = () => {
       password,
       role: 'customer',
     };
-    const data1 = await UpdateCustomerAvt(JSON.stringify({ customer_id, imageFile }));
+    const img = new FormData();
+    img.append('img', imageFile.files[0])
+    const data1 = await UpdateCustomerAvt(customer_id, img);
     const data = await UpdateCustomer(JSON.stringify(input));
     console.log(data1);
   };
@@ -109,7 +112,7 @@ const ProfileSection = () => {
                 type="file"
                 accept="image/*"
                 className="hidden"
-                onChange={(e) => uploadImage(e)}
+                onChange={(e) => {setImageFile(()=>({files: e.target.files, img:URL.createObjectURL(e.target.files[0])}))}}
               />
             </label>
           </div>
