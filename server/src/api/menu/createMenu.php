@@ -1,17 +1,37 @@
 <?php
 include_once '../../config/database.php';
 include_once '../../models/menu.php';
+include_once '../../config/cloudinary.php';
 
+$cloud = new Cloud();
 // init database
 $database = new Database();
 $db = $database->connect();
 
 $menu = new Menu($db);
-$data = json_decode(file_get_contents("php://input"));
-if (!empty($data->menu_name) && !empty($data->price)) {
-  $menu->menu_name = $data->menu_name;
-  $menu->price = $data->price;
-  $menu->img = $data->img;
+// $data = json_decode(file_get_contents("php://input"));
+$img = isset($_FILES['img']) ? $_FILES['img']['tmp_name'] : null;
+$menu_name = isset($_POST['menu_name']) ? $_POST['menu_name'] : null;
+$price = isset($_POST['price']) ? $_POST['price'] : null;
+
+// echo json_encode($menu_name);
+// return;
+
+if ($menu_name && $price && $img) {
+
+  try {
+      $secure_url = $cloud->uploadImage($img);
+  } catch (\Cloudinary\Api\Exception\ApiError $e) {
+      echo json_encode(
+          array(
+              "error" => $e
+          )
+      );
+  }
+
+  $menu->menu_name = $menu_name;
+  $menu->price = $price;
+  $menu->img = $secure_url;
 
   try {
       $menu->create();
