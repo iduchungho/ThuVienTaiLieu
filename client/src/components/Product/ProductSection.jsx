@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import img1 from '../img/f1.png';
+import { GetMenuById } from './../../utils/menu';
 
 ProductSection.propTypes = {
   id: PropTypes.string,
@@ -11,7 +12,15 @@ function ProductSection(props) {
     img1,
   });
 
-  console.log(props.id);
+  const id = props.id;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await GetMenuById(JSON.stringify(props.id));
+      console.log(data);
+    };
+    fetchData();
+  }, []);
 
   const [activeImg, setActiveImage] = useState(images.img1);
 

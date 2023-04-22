@@ -10,7 +10,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await GetMenu();
-      console.log(data)
+      console.log(data);
     };
     fetchData();
   }, []);

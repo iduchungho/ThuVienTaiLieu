@@ -1,5 +1,5 @@
 import { BiUser } from 'react-icons/bi';
-import { MdEmail, MdOutlineDataSaverOn, MdPassword, MdCloudUpload } from 'react-icons/md';
+import { MdEmail, MdOutlineDataSaverOn, MdPassword, MdCloudUpload, MdDeleteOutline } from 'react-icons/md';
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -24,6 +24,15 @@ const ProfileSection = () => {
     setImageFile(URL.createObjectURL(imageFile));
   }};
 
+
+  const deleteImage = async () => {
+    setImageFile('none');
+    const customer_id = user.customer_id;
+    // const data1 = await UpdateCustomerAvt(JSON.stringify({ customer_id, imageFile }));
+    const user1 = JSON.parse(localStorage.getItem('user'));
+    user1.avatar = 'none';
+    localStorage.setItem('user', JSON.stringify(user));
+  };
   const saveChanges = async () => {
     const first_name = displayName;
     const last_name = displayName;
@@ -43,7 +52,8 @@ const ProfileSection = () => {
     const img = new FormData();
     img.append('img', imageFile.files[0])
     const data1 = await UpdateCustomerAvt(customer_id, img);
-    const data = await UpdateCustomer(JSON.stringify(input));
+    // const data = await UpdateCustomer(JSON.stringify(input));
+    console.log(customer_id)
     console.log(data1);
   };
 
@@ -91,6 +101,15 @@ const ProfileSection = () => {
         {imageFile !== 'none' && imageFile !== {} && (
           <div className="relative h-full">
             <img src={imageFile} alt="Img Uploaded" className=" w-300 h-full object-cover" />
+            <motion.button
+              whileTap={{ scale: 1.1 }}
+              whileHover={{ scale: 1.2 }}
+              title="Remove Photo"
+              className="absolute bottom-3 right-3 rounded-full p-2 md:p-5 bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md duration-500 transition-all ease-in-out"
+              onClick={() => deleteImage()}
+            >
+              <MdDeleteOutline className="text-white" />
+            </motion.button>
           </div>
         )}
         {imageFile === 'none' && (
