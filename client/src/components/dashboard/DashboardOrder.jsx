@@ -18,6 +18,9 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import OrderForm from './OrderForm';
 import EditForm from './EditForm';
+import { useEffect } from 'react';
+import {GetAllOrder} from '../../utils/order';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -73,20 +76,48 @@ const rows = [
   { id: 7, customer_id: '13232', menu_id: '683', quantity: 1 , oder_status: 'Pending', time_stamp: '15/4/2023'},
 ];
 
+
 let currentIdRemove = -1 ;
 
 const DashboardClient = () => {
 
+  // console.log(rows);
+  
   const [remove, setRemove] = useState(false);
-  const [data, setData] = useState(rows);
+  const [data, setData] = useState("");
+  // const [data, setData] = useState(rows);
   const [openPopup, setOpenPopup] = useState(false);
 
+  // const data = await Signin(JSON.stringify(input));
+  
+  useEffect(() => {
+    async function fetchData() {
+    const data2 = await GetAllOrder(3);
+    const updatedata = data2.map((row)=>{
+      row['id'] = row['order_id'];
+      delete row['order_id'];
+    // console.log(data);
+      return row;
+    });
+    setData(data2);
+    // console.log(data2);
+  }
+  fetchData();
+  }) 
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
-
+  const ChangeId = () =>{
+    const updatedata = data.map((row)=>{
+      row['id'] = row['order_id'];
+      delete row['order_id'];
+      return row;
+    });
+    setData(updatedata);
+  }
   const DeleteCurrentId = () => {
     setRemove(false);
+  
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
   }
