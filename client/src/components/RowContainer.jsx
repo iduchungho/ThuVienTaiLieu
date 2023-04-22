@@ -2,10 +2,18 @@ import { motion } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
 import { MdShoppingBasket } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { GetMenu } from '../utils/menu';
 import NotFound from './img/NotFound.svg';
 
 const RowContainer = ({ flag, data, scrollValue }) => {
   const rowContainer = useRef();
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await GetMenu();
+      console.log(data)
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     rowContainer.current.scrollLeft += scrollValue;
@@ -21,7 +29,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
       {data && data.length > 0 ? (
         data.map((item) => (
           <Link
-            to={'/product'}
+            to={`/product/${item.id}`}
             key={item?.id}
             className="w-275 h-[175px] min-w-[275px] md:w-300 md:min-w-[300px] cursor-pointer  bg-cardOverlay rounded-lg py-2 px-4  my-12 backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-evenly relative"
           >
