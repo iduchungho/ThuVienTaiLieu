@@ -1,10 +1,17 @@
+import { PropTypes } from 'prop-types';
 import React, { useState } from 'react';
 import img1 from '../img/f1.png';
 
-const ProductSection = () => {
+ProductSection.propTypes = {
+  id: PropTypes.string,
+};
+
+function ProductSection(props) {
   const [images, setImages] = useState({
     img1,
   });
+
+  console.log(props.id);
 
   const [activeImg, setActiveImage] = useState(images.img1);
 
@@ -58,6 +65,6 @@ const ProductSection = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ProductSection;
