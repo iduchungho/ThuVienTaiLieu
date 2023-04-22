@@ -161,6 +161,7 @@ const DashboardClient = () => {
             rows={data}
             rowHeight={75}
             columns={columns}
+            getRowHeight={() => 'auto'}
             pageSize={5}
             rowsPerPageOptions={[5]}
             checkboxSelection

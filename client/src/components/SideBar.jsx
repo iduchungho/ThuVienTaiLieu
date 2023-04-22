@@ -14,6 +14,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import FeedIcon from '@mui/icons-material/Feed';
 // import Link from 'react-router-dom';
 // import CloseIcon from '@mui/icons-material/Close';
 
@@ -38,6 +39,7 @@ const SideBar = () => {
     {title: "Orders", page: <AssignmentIcon/>, src: '/dashboard/order'},
     {title: "Items", page: <FastfoodIcon/>, src: '/dashboard/item'},
     {title: "Payments", page: <CreditCardIcon/>, src: '/dashboard/payment'},
+    {title: "News", page: <FeedIcon/>, src: '/dashboard/news'}
   ]
 
   return (

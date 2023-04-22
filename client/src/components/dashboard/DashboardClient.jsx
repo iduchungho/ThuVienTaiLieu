@@ -166,6 +166,7 @@ const DashboardClient = () => {
           <DataGrid
             rows={data}
             columns={columns}
+            getRowHeight={() => 'auto'}
             pageSize={5}
             rowsPerPageOptions={[5]}
             checkboxSelection

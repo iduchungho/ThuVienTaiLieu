@@ -6,18 +6,27 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid } from '@mui/x-data-grid';
-import {GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
+import { GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
+import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 import EditForm from './EditForm';
-import PaymentForm from './PaymentForm';
+
+import f1 from '../img/f1.png';
+import f2 from '../img/f2.png';
+import f3 from '../img/f3.png';
+import f4 from '../img/f4.png';
+import f5 from '../img/f5.png';
+import f6 from '../img/f6.png';
+import f7 from '../img/f7.png';
+import NewsForm from './NewsForm';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -61,49 +70,41 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
-
 const rows = [
-  { id: 1, order_id: '231', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
-  { id: 2, order_id: '534', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
-  { id: 3, order_id: '342', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
-  { id: 4, order_id: '786', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
-  { id: 5, order_id: '458', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
-  { id: 6, order_id: '543', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
-  { id: 7, order_id: '253', payment_type: 'By Credit', payment_status: "Complete" , time_stamp: '20:52:15 20/4/2023'},
+  { id: 1, title: "First new", content: 'This is a demo for news', author: "huy", created_at: '20:52:15 20/4/2023', updated_at: '20:52:15 20/4/2023'},
+  { id: 2, title: "First new", content: 'This is a demo for news', author: "huy", created_at: '20:52:15 20/4/2023', updated_at: '20:52:15 20/4/2023'},
+  { id: 3, title: "First new", content: 'This is a demo for news', author: "huy", created_at: '20:52:15 20/4/2023', updated_at: '20:52:15 20/4/2023'},
+  { id: 4, title: "First new", content: 'This is a demo for news', author: "huy", created_at: '20:52:15 20/4/2023', updated_at: '20:52:15 20/4/2023'},
+  { id: 5, title: "First new", content: 'This is a demo for news', author: "huy", created_at: '20:52:15 20/4/2023', updated_at: '20:52:15 20/4/2023'},
+  { id: 6, title: "First new", content: 'This is a demo for news', author: "huy", created_at: '20:52:15 20/4/2023', updated_at: '20:52:15 20/4/2023'},
 ];
 
 let currentIdRemove = -1 ;
 
-const DashboardPayment = () => {
+const DashboardClient = () => {
+
   const [remove, setRemove] = useState(false);
   const [data, setData] = useState(rows);
   const [openPopup, setOpenPopup] = useState(false);
-
+  const [openAdd, setOpenAdd] = useState(false);
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
 
-  const DeleteAccount = () => {
+  const DeleteCurrentId = () => {
     setRemove(false);
+    console.log(currentIdRemove)
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
   }
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'order_id', headerName: 'Order Id', width: 130 },
-    { field: 'payment_type', headerName: 'Payment Type', width: 130 },
-    {
-      field: 'payment_status',
-      headerName: 'Payment Status',
-      width: 130,
-    },
-    {
-      field: 'time_stamp',
-      headerName: 'Time Stamp',
-      width: 200,
-    },
+    { field: 'id', headerName: 'Menu ID', width: 100 },
+    { field: 'title', headerName: 'Title', width: 100},
+    { field: 'content', headerName: 'Content', width: 300 },
+    { field: 'author', headerName: 'Authod', width: 100 },
+    { field: 'created_at', headerName: 'Created At', width: 150 },
+    { field: 'updated_at', headerName: 'Updated At', width: 150 },
     {
       field: "actions",
       headerName: "",
@@ -128,8 +129,7 @@ const DashboardPayment = () => {
               <IconButton onClick={() => {
                 setRemove(true);
                 currentIdRemove = params.id;
-                }
-              }>
+                }}>
                 <DeleteIcon />
               </IconButton>
             </Box>
@@ -141,7 +141,7 @@ const DashboardPayment = () => {
   return (
     <div className='h-screen'>
       <h1 className="text-xl font-bold tracking-wide text-headingColor">
-        Payment
+        News
       </h1>
       <Box sx={{ flexGrow: 1 }}>
         <div className='inline-block'>
@@ -155,10 +155,12 @@ const DashboardPayment = () => {
             inputProps={{ 'aria-label': 'search' }}
           />
           </Search>
-          </Toolbar>
-        <div style={{ height: 400, width: '105%' }}>
+          <Button variant="contained" onClick={() => setOpenAdd(true)}>Add news</Button>
+        </Toolbar>
+        <div style={{ height: 500, width: '105%' }}>
           <DataGrid
             rows={data}
+            rowHeight={75}
             columns={columns}
             getRowHeight={() => 'auto'}
             pageSize={5}
@@ -171,18 +173,24 @@ const DashboardPayment = () => {
             }}
             />
           </div>
-          
         </div>
       </Box>
       
       <EditForm
-      openPopup = {openPopup}
-      setOpenPopup = {setOpenPopup}
-      title = {"EDIT PAYMENT'S INFORMATION"}
+      openPopup = {openAdd}
+      setOpenPopup = {setOpenAdd}
+      title = {"ADD NEWS"}
       >
-          <PaymentForm/>
+          <NewsForm/>
       </EditForm>
 
+      <EditForm
+      openPopup = {openPopup}
+      setOpenPopup = {setOpenPopup}
+      title = {"EDIT ITEM'S INFORMATION"}
+      >
+          <NewsForm/>
+      </EditForm>
       <Dialog
         open={remove}
         onClose={ReturnCurrentPage}
@@ -190,16 +198,16 @@ const DashboardPayment = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"REMOVE ACCOUNT"}
+          {"REMOVE ITEM"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Do you want to remove this account?
+            Do you want to remove this item?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={ReturnCurrentPage}>No</Button>
-          <Button onClick={DeleteAccount} autoFocus>
+          <Button onClick={DeleteCurrentId} autoFocus>
             Yes
           </Button>
         </DialogActions>
@@ -208,4 +216,4 @@ const DashboardPayment = () => {
   )
 }
 
-export default DashboardPayment
+export default DashboardClient

@@ -5,6 +5,7 @@ import DashboardClient from './dashboard/DashboardClient';
 import DashboardItem from './dashboard/DashboardItem';
 import DashboardOrder from './dashboard/DashboardOrder';
 import DashboardPayment from './dashboard/DashboardPayment';
+import DashboardNews from './dashboard/DashboardNews';
 const Dashboard = () => {
   return (
     <div className="w-screen h-auto flex flex-row bg-primary">
@@ -15,6 +16,7 @@ const Dashboard = () => {
                 <Route path='/item' element={<DashboardItem/>}/>
                 <Route path='/order' element={<DashboardOrder/>}/>
                 <Route path='/payment' element={<DashboardPayment/>}/>
+                <Route path='/news' element={<DashboardNews/>}/>
             </Routes>
         </main>
   </div>

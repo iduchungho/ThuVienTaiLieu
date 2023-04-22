@@ -11,6 +11,7 @@ import Home from './components/Home';
 import Product from './components/Product/Product';
 import Profile from './components/Profile/Profile';
 import CartFeature from './components/Cart/CartFeature';
+import DashboardNews from './components/dashboard/DashboardNews';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="item" element={<DashboardItem />} />
             <Route path="order" element={<DashboardOrder />} />
             <Route path="payment" element={<DashboardPayment />} />
+            <Route path="news" element={<DashboardNews/>} />
           </Route>
         </Routes>
       </AnimatePresence>
