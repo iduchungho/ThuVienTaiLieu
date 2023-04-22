@@ -6,7 +6,7 @@ import Header from './Header.jsx';
 import HomeContainer from './HomeContainer';
 import MenuContainer from './MenuContainer';
 import RowContainer from './RowContainer';
-import CartContainer from './CartContainer';
+import CartContainer from './Cart/CartContainer';
 import { useSelector } from 'react-redux';
 
 const MainContainer = () => {

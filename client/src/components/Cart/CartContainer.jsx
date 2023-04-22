@@ -3,10 +3,10 @@ import { MdOutlineKeyboardBackspace } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 
 import { motion } from 'framer-motion';
-import EmptyCart from '../components/img/emptyCart.svg';
+import EmptyCart from '../../components/img/emptyCart.svg';
 import CartItem from './CartItems';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideMiniCart } from './Cart/CartSlice';
+import { hideMiniCart } from './CartSlice';
 
 const CartContainer = () => {
   const dispatch = useDispatch();

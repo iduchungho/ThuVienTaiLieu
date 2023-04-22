@@ -17,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { logout } from './Auth/userSlice';
 import { HashLink } from 'react-router-hash-link';
 import { showMiniCart } from './Cart/CartSlice';
+import { cartItemCountSelector } from './Cart/selector';
 
 const Header = () => {
   const MODE = {
@@ -29,6 +30,7 @@ const Header = () => {
   const isLoggedIn = !!loggedInUser.customer_id;
   const OpenCart = useSelector((state) => state.cart.showMiniCart);
   const isOpenCart = !!OpenCart;
+  const cartItemCount = useSelector(cartItemCountSelector);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
@@ -98,9 +100,11 @@ const Header = () => {
 
           <div onClick={handleOpenCart} className="relative flex items-center justify-center">
             <MdShoppingBasket className="text-textColor text-2xl cursor-pointer ml-8" />
-            <div className=" absolute -top-1 -right-3 w-4 h-4 rounded-full bg-cartNumBg flex items-center justify-center">
-              <p className="text-xs text-white font-semibold">2</p>
-            </div>
+            {!!cartItemCount && (
+              <div className=" absolute -top-1 -right-3 w-4 h-4 rounded-full bg-cartNumBg flex items-center justify-center">
+                <p className="text-xs text-white font-semibold">{cartItemCount}</p>
+              </div>
+            )}
           </div>
 
           {!isLoggedIn && (

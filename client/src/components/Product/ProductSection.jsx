@@ -2,6 +2,8 @@ import { PropTypes } from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import img1 from '../img/f1.png';
 import { GetMenuById } from './../../utils/menu';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../Cart/CartSlice';
 
 ProductSection.propTypes = {
   id: PropTypes.string,
@@ -12,6 +14,7 @@ function ProductSection(props) {
     img1,
   });
   const [data, setData] = useState({});
+  const dispatch = useDispatch();
 
   const id = props.id;
 
@@ -26,7 +29,12 @@ function ProductSection(props) {
   const [activeImg, setActiveImage] = useState(images.img1);
 
   const handleAddToCart = () => {
-    console.log(amount);
+    const action = addToCart({
+      id,
+      quantity: amount,
+    });
+    console.log(action);
+    dispatch(action);
   };
 
   const [amount, setAmount] = useState(1);

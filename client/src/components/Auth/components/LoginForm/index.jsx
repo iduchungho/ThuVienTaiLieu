@@ -37,6 +37,7 @@ function LoginForm(props) {
       email: values.email,
       password: values.password,
     };
+    console.log(input);
     const data = await Signin(JSON.stringify(input));
     if (data.status === 1) {
       localStorage.setItem('user', JSON.stringify(data.data));
