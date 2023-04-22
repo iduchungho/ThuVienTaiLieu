@@ -8,8 +8,9 @@ import NotFound from './img/NotFound.svg';
 const RowContainer = ({ flag, data, scrollValue }) => {
   const rowContainer = useRef();
   useEffect(() => {
-    const fetchData = () => {
-      const data = GetMenu();
+    const fetchData = async () => {
+      const data = await GetMenu();
+      console.log(data);
     };
     fetchData();
   }, []);
