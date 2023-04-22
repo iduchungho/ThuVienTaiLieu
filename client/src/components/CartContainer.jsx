@@ -5,12 +5,19 @@ import { RiRefreshFill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import EmptyCart from '../components/img/emptyCart.svg';
 import CartItem from './CartItems';
+import { useDispatch, useSelector } from 'react-redux';
+import { hideMiniCart } from './Cart/CartSlice';
 
 const CartContainer = () => {
+  const dispatch = useDispatch();
   const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
+  const OpenCart = useSelector((state) => state.cart.showMiniCart);
+  const isOpenCart = !!OpenCart;
 
-  const showCart = () => {};
+  const hideCart = () => {
+    dispatch(hideMiniCart());
+  };
   const cartItems = 0;
   const user = 'admin';
 
@@ -26,7 +33,7 @@ const CartContainer = () => {
       className="fixed top-0 right-0 w-full md:w-375 h-screen bg-white drop-shadow-md flex flex-col z-[101]"
     >
       <div className="w-full flex items-center justify-between p-4 cursor-pointer">
-        <motion.div whileTap={{ scale: 0.75 }} onClick={showCart}>
+        <motion.div whileTap={{ scale: 0.75 }} onClick={hideCart}>
           <MdOutlineKeyboardBackspace className="text-textColor text-3xl" />
         </motion.div>
         <p className="text-textColor text-lg font-semibold">Cart</p>

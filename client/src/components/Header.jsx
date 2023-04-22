@@ -15,6 +15,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { logout } from './Auth/userSlice';
+import { HashLink } from 'react-router-hash-link';
+import { showMiniCart } from './Cart/CartSlice';
 
 const Header = () => {
   const MODE = {
@@ -25,6 +27,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggedInUser.customer_id;
+  const OpenCart = useSelector((state) => state.cart.showMiniCart);
+  const isOpenCart = !!OpenCart;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
@@ -40,7 +44,7 @@ const Header = () => {
   };
 
   const handleOpenCart = () => {
-    setShowCart(true);
+    dispatch(showMiniCart());
   };
 
   const handleCloseCart = () => {
@@ -77,10 +81,12 @@ const Header = () => {
             className="flex items-center gap-24 "
           >
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
-              Home
+              <Link to={'/'}>Home</Link>
             </li>
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
-              Menu
+              <HashLink smooth to={'/#menu'}>
+                Menu
+              </HashLink>
             </li>
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
               About Us
@@ -90,7 +96,7 @@ const Header = () => {
             </li>
           </motion.ul>
 
-          <div className="relative flex items-center justify-center">
+          <div onClick={handleOpenCart} className="relative flex items-center justify-center">
             <MdShoppingBasket className="text-textColor text-2xl cursor-pointer ml-8" />
             <div className=" absolute -top-1 -right-3 w-4 h-4 rounded-full bg-cartNumBg flex items-center justify-center">
               <p className="text-xs text-white font-semibold">2</p>
