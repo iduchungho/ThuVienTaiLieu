@@ -87,7 +87,7 @@ const DashboardClient = () => {
   const [remove, setRemove] = useState(false);
   const [data, setData] = useState(rows);
   const [openPopup, setOpenPopup] = useState(false);
-
+  const [openAdd, setOpenAdd] = useState(false);
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
@@ -154,6 +154,7 @@ const DashboardClient = () => {
             inputProps={{ 'aria-label': 'search' }}
           />
           </Search>
+          <Button variant="contained" onClick={() => setOpenAdd(true)}>Add new item</Button>
         </Toolbar>
         <div style={{ height: 500, width: '105%' }}>
           <DataGrid
@@ -172,6 +173,14 @@ const DashboardClient = () => {
           </div>
         </div>
       </Box>
+      
+      <EditForm
+      openPopup = {openAdd}
+      setOpenPopup = {setOpenAdd}
+      title = {"ADD ITEM"}
+      >
+          <ItemForm/>
+      </EditForm>
 
       <EditForm
       openPopup = {openPopup}
@@ -180,7 +189,6 @@ const DashboardClient = () => {
       >
           <ItemForm/>
       </EditForm>
-
       <Dialog
         open={remove}
         onClose={ReturnCurrentPage}
