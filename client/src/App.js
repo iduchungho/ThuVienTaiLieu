@@ -10,6 +10,7 @@ import DashboardPayment from './components/dashboard/DashboardPayment';
 import Home from './components/Home';
 import Product from './components/Product/Product';
 import Profile from './components/Profile/Profile';
+import CartFeature from './components/Cart/CartFeature';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/product/:id" element={<Product />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/cart" element={<CartFeature />} />
           <Route path="/dashboard/*" element={<Dashboard />}>
             <Route path="client" element={<DashboardClient />} />
             <Route path="item" element={<DashboardItem />} />

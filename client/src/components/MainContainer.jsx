@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion';
-import { default as React, useState, useEffect } from 'react';
+import { default as React, useEffect, useState } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import HomeContainer from './HomeContainer';
-import RowContainer from './RowContainer';
 import { fruits } from '../utils/data';
-import MenuContainer from './MenuContainer';
 import Header from './Header.jsx';
-import Footer from './Footer';
+import HomeContainer from './HomeContainer';
+import MenuContainer from './MenuContainer';
+import RowContainer from './RowContainer';
 import CartContainer from './CartContainer';
+import { useSelector } from 'react-redux';
 
 const MainContainer = () => {
   const [scrollValue, setScrollValue] = useState(0);
+  const OpenCart = useSelector((state) => state.cart.showMiniCart);
+  const isOpenCart = !!OpenCart;
 
   useEffect(() => {}, [scrollValue]);
 
@@ -46,7 +48,7 @@ const MainContainer = () => {
       </section>
 
       <MenuContainer />
-      {/* <CartContainer /> */}
+      {isOpenCart && <CartContainer />}
     </div>
   );
 };
