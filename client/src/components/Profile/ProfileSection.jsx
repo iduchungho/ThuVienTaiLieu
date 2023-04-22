@@ -19,15 +19,14 @@ const ProfileSection = () => {
   const updatePassword = (e) => {
     setNewPassword(e);
   };
-  const uploadImage = (e) => {{
+  const uploadImage = (e) => {
     const imageFile = e.target.files[0];
     setImageFile(URL.createObjectURL(imageFile));
-  }};
-
+  };
+  console.log(imageFile);
 
   const deleteImage = async () => {
     setImageFile('none');
-    const customer_id = user.customer_id;
     // const data1 = await UpdateCustomerAvt(JSON.stringify({ customer_id, imageFile }));
     const user1 = JSON.parse(localStorage.getItem('user'));
     user1.avatar = 'none';
@@ -50,10 +49,10 @@ const ProfileSection = () => {
       role: 'customer',
     };
     const img = new FormData();
-    img.append('img', imageFile.files[0])
+    img.append('img', imageFile.files[0]);
     const data1 = await UpdateCustomerAvt(customer_id, img);
     // const data = await UpdateCustomer(JSON.stringify(input));
-    console.log(customer_id)
+    console.log(customer_id);
     console.log(data1);
   };
 
@@ -100,7 +99,7 @@ const ProfileSection = () => {
         </div>
         {imageFile !== 'none' && imageFile !== {} && (
           <div className="relative h-full">
-            <img src={imageFile} alt="Img Uploaded" className=" w-300 h-full object-cover" />
+            <img src={imageFile.img} alt="Img Uploaded" className=" w-300 h-full object-cover" />
             <motion.button
               whileTap={{ scale: 1.1 }}
               whileHover={{ scale: 1.2 }}
@@ -131,7 +130,9 @@ const ProfileSection = () => {
                 type="file"
                 accept="image/*"
                 className="hidden"
-                onChange={(e) => {setImageFile(()=>({files: e.target.files, img:URL.createObjectURL(e.target.files[0])}))}}
+                onChange={(e) => {
+                  setImageFile(() => ({ files: e.target.files, img: URL.createObjectURL(e.target.files[0]) }));
+                }}
               />
             </label>
           </div>
