@@ -4,7 +4,7 @@ import { redirect } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { UpdateCustomer, UpdateCustomerAvt } from '../../utils/customer';
+import { GetCustomerByID, UpdateCustomer, UpdateCustomerAvt } from '../../utils/customer';
 import { useSnackbar } from 'notistack';
 
 const ProfileSection = () => {
@@ -58,7 +58,14 @@ const ProfileSection = () => {
     console.log(data1);
     if (data.success === true && data1.message === 'images updated') {
       enqueueSnackbar('Update Success', { variant: 'success' });
-      redirect('/*');
+      const data2 = await GetCustomerByID(customer_id);
+      console.log(data2.data[0].avatar);
+      // const avatar = data2[0].avatar;
+      // const newUser = {
+      //   ...user,
+      //   avatar,
+      // };
+      // localStorage.setItem('user', newUser);
     }
   };
 
