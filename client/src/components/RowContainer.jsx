@@ -10,11 +10,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await GetMenu();
-<<<<<<< HEAD
       console.log(data);
-=======
-      console.log(data)
->>>>>>> 593a89cd3d53581704b6eded15cd3393cb3daa7c
     };
     fetchData();
   }, []);
