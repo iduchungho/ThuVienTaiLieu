@@ -25,7 +25,7 @@ const MainContainer = () => {
             Our fresh & healthy fruits
           </p>
 
-          <div className="hidden md:flex gap-3 items-center">
+          <div id="menu" className="hidden md:flex gap-3 items-center">
             <motion.div
               whileTap={{ scale: 0.75 }}
               className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 cursor-pointer  hover:shadow-lg flex items-center justify-center"

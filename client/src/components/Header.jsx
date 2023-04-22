@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { logout } from './Auth/userSlice';
+import { HashLink } from 'react-router-hash-link';
 
 const Header = () => {
   const MODE = {
@@ -80,7 +81,9 @@ const Header = () => {
               <Link to={'/'}>Home</Link>
             </li>
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
-              Menu
+              <HashLink smooth to={'/#menu'}>
+                Menu
+              </HashLink>
             </li>
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
               About Us
