@@ -143,8 +143,8 @@ const Header = () => {
           {isLoggedIn && (
             <motion.img
               whileTap={{ scale: 0.6 }}
-              src={Avatar}
-              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl"
+              src={loggedInUser.avatar !== 'none' ? loggedInUser.avatar : Avatar}
+              className="w-10 min-w-[40px] h-10 border-0 rounded-full min-h-[40px] drop-shadow-xl"
               alt="avatar"
               onClick={handleOpenMenu}
             />

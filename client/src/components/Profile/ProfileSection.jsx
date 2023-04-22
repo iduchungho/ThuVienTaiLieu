@@ -1,10 +1,11 @@
 import { BiUser } from 'react-icons/bi';
 import { MdEmail, MdOutlineDataSaverOn, MdPassword, MdCloudUpload, MdDeleteOutline } from 'react-icons/md';
-
+import { redirect } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { UpdateCustomer, UpdateCustomerAvt } from '../../utils/customer';
+import { useSnackbar } from 'notistack';
 
 const ProfileSection = () => {
   const user = useSelector((state) => state.user.current);
@@ -12,6 +13,7 @@ const ProfileSection = () => {
   const [email, setEmail] = useState(user.email_id);
   const [newPassword, setNewPassword] = useState('');
   const [imageFile, setImageFile] = useState(user.avatar);
+  console.log(imageFile);
 
   const updateEmail = (e) => {
     setEmail(e);
@@ -23,7 +25,7 @@ const ProfileSection = () => {
     const imageFile = e.target.files[0];
     setImageFile(URL.createObjectURL(imageFile));
   };
-  console.log(imageFile);
+  const { enqueueSnackbar } = useSnackbar();
 
   const deleteImage = async () => {
     setImageFile('none');
@@ -51,9 +53,13 @@ const ProfileSection = () => {
     const img = new FormData();
     img.append('img', imageFile.files[0]);
     const data1 = await UpdateCustomerAvt(customer_id, img);
-    // const data = await UpdateCustomer(JSON.stringify(input));
-    console.log(customer_id);
+    const data = await UpdateCustomer(JSON.stringify(input));
+    console.log(data);
     console.log(data1);
+    if (data.success === true && data1.message === 'images updated') {
+      enqueueSnackbar('Update Success', { variant: 'success' });
+      redirect('/*');
+    }
   };
 
   return (
@@ -99,7 +105,7 @@ const ProfileSection = () => {
         </div>
         {imageFile !== 'none' && imageFile !== {} && (
           <div className="relative h-full">
-            <img src={imageFile.img} alt="Img Uploaded" className=" w-300 h-full object-cover" />
+            <img src={imageFile.img || imageFile} alt="Img Uploaded" className=" w-300 h-full object-cover" />
             <motion.button
               whileTap={{ scale: 1.1 }}
               whileHover={{ scale: 1.2 }}

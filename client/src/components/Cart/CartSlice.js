@@ -20,6 +20,7 @@ const cartSlice = createSlice({
         state.cartItems[index].quantity += newItem.quantity;
       } else {
         state.cartItems.push(newItem);
+        localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
       }
     },
     setQuantity(state, action) {
