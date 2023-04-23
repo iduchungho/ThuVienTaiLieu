@@ -1,6 +1,6 @@
 import { BiUser } from 'react-icons/bi';
 import { MdEmail, MdOutlineDataSaverOn, MdPassword, MdCloudUpload, MdDeleteOutline } from 'react-icons/md';
-import { redirect } from 'react-router-dom';
+import { json, redirect } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ const ProfileSection = () => {
   const [email, setEmail] = useState(user.email_id);
   const [newPassword, setNewPassword] = useState('');
   const [imageFile, setImageFile] = useState(user.avatar);
-  console.log(imageFile);
+  // console.log(imageFile);
 
   const updateEmail = (e) => {
     setEmail(e);
@@ -52,20 +52,21 @@ const ProfileSection = () => {
     };
     const img = new FormData();
     img.append('img', imageFile.files[0]);
-    const data1 = await UpdateCustomerAvt(customer_id, img);
     const data = await UpdateCustomer(JSON.stringify(input));
-    console.log(data);
+    const data1 = await UpdateCustomerAvt(customer_id, img);
+    // console.log(data);
     console.log(data1);
     if (data.success === true && data1.message === 'images updated') {
       enqueueSnackbar('Update Success', { variant: 'success' });
       const data2 = await GetCustomerByID(customer_id);
       console.log(data2.data[0].avatar);
-      // const avatar = data2[0].avatar;
-      // const newUser = {
-      //   ...user,
-      //   avatar,
-      // };
-      // localStorage.setItem('user', newUser);
+      const avatar = data2.data[0].avatar;
+      const newUser = {
+        ...user,
+        avatar,
+      };
+      localStorage.setItem('user', JSON.stringify(newUser));
+      window.location.reload(false);
     }
   };
 
