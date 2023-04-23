@@ -6,12 +6,24 @@ import { clearCart, hideMiniCart } from '../components/Cart/CartSlice';
 
 const CheckoutForm = () => {
   const cartTotal = useSelector((state) => state.cart.cartTotal);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const loggedInUser = useSelector((state) => state.user.current);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const id = loggedInUser.customer_id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const input = {
+      order_id: '1',
+      customer_id: id,
+      menu_id: cartItems[0].id,
+      quantity: cartItems[0].quantity,
+      oder_status: 'CONFIRMED',
+      time_stamp: Date.now(),
+    };
+
     enqueueSnackbar('Order Successfully, We will call you in a minute!', { variant: 'success' });
     setTimeout(() => {
       navigate('/');
