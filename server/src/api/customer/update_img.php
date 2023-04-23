@@ -45,12 +45,14 @@
 //    );
 
     if($customer->uploadImage($secure_url)) {
-        echo json_encode(
-            array('message' => 'images updated')
-        );
+        echo json_encode([
+            'message' => 'images updated',
+            'success' => true
+        ]);
     } else {
-        echo json_encode(
-            array('message' => 'customer not update')
-        );
+        echo json_encode([
+            'message' => 'images can not update',
+            'success' => false
+        ]);
     }
     $db->close();
