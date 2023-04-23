@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid } from '@mui/x-data-grid';
 import {GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
 import EditIcon from '@mui/icons-material/Edit';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
@@ -92,6 +92,22 @@ const DashboardClient = () => {
     setData(updatedata);
   }
 
+  // useEffect(() => {
+  //   async function fetchData() {
+  //   const data2 = await GetAllCustomers(3);
+  //   const updatedata = data2.map((row)=>{
+  //     row['id'] = row['order_id'];
+  //     delete row['role'];
+  //     delete row['avatar']
+  //   // console.log(data);
+  //     return row;
+  //   });
+  //   setData(data2);
+  //   // console.log(data2);
+  // }
+  // // fetchData();
+  // }) 
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'firstName', headerName: 'First name', width: 130 },
@@ -146,7 +162,7 @@ const DashboardClient = () => {
   return (
     <div className='h-screen'>
       <h1 className="text-xl font-bold tracking-wide text-headingColor">
-        Customers
+        Admins
       </h1>
       <Box sx={{ flexGrow: 1 }}>
         <div className='inline-block'>

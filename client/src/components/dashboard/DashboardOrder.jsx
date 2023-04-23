@@ -107,14 +107,7 @@ const DashboardClient = () => {
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
-  const ChangeId = () =>{
-    const updatedata = data.map((row)=>{
-      row['id'] = row['order_id'];
-      delete row['order_id'];
-      return row;
-    });
-    setData(updatedata);
-  }
+
   const DeleteCurrentId = () => {
     setRemove(false);
   

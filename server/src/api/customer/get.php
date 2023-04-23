@@ -28,7 +28,8 @@
                 'last_name' => $row['last_name'],
                 'email_id' => $row['email_id'],
                 'phone_no' => $row['phone_no'],
-                'city' => $row['city']
+                'city' => $row['city'],
+                'role' => $row['role']
             );
             array_push($customer_array['data'], $customer_item);
         }

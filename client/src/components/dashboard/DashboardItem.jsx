@@ -9,7 +9,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem , GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid-pro';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -18,6 +18,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import ItemForm from './ItemForm';
 import EditForm from './EditForm';
+import { GetMenu, DeleteMenuById } from '../../utils/menu';
+
 
 import f1 from '../img/f1.png';
 import f2 from '../img/f2.png';
@@ -85,7 +87,7 @@ let currentIdRemove = -1 ;
 const DashboardClient = () => {
 
   const [remove, setRemove] = useState(false);
-  const [data, setData] = useState(rows);
+  const [data, setData] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
   const ReturnCurrentPage = () => {
@@ -93,15 +95,33 @@ const DashboardClient = () => {
   };
 
   const DeleteCurrentId = () => {
+    //Delete in current page
     setRemove(false);
     console.log(currentIdRemove)
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
+    // send delete request
   }
+
+  useEffect(() => {
+    async function fetchData() {
+    const data2 = await GetMenu();
+    // console.log(data2)
+    data2.records.map((row)=>{
+      row['id'] = row['menu_id'];
+      delete row['menu_id'];
+      // console.log(row);
+    return row
+    });
+    setData(data2.records);
+    // console.log(data2);
+  }
+  fetchData();
+  },[data]) 
 
   const columns = [
     { field: 'id', headerName: 'Menu ID', width: 100 },
-    { field: 'image', headerName: 'Image', width: 100, renderCell: (params) => <img width="100" alt={params.value} src={params.value}/>},
+    { field: 'img', headerName: 'Image', width: 100, renderCell: (params) => <img width="100" alt={params.value} src={params.value}/>},
     { field: 'menu_name', headerName: 'Menu Name', width: 100 },
     { field: 'price', headerName: 'Price', width: 100 , type: 'number'},
     {
