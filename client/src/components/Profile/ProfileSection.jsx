@@ -23,7 +23,7 @@ const ProfileSection = () => {
   };
   const uploadImage = (e) => {
     const imageFile = e.target.files[0];
-    setImageFile(URL.createObjectURL(imageFile));
+    setImageFile(URL.createObjectURL(imageFile) || 'none');
   };
   const { enqueueSnackbar } = useSnackbar();
 
