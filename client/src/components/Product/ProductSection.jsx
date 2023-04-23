@@ -32,8 +32,10 @@ function ProductSection(props) {
     const action = addToCart({
       id,
       quantity: amount,
+      price: data.price,
+      img: data.img,
+      title: data.menu_name,
     });
-    console.log(action);
     dispatch(action);
   };
 

@@ -3,26 +3,35 @@ import { MdOutlineKeyboardBackspace } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 
 import { motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
 import EmptyCart from '../../components/img/emptyCart.svg';
 import CartItem from './CartItems';
-import { useDispatch, useSelector } from 'react-redux';
-import { hideMiniCart } from './CartSlice';
+import { clearCart, hideMiniCart, setCartTotal } from './CartSlice';
+import { Link } from 'react-router-dom';
 
 const CartContainer = () => {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
+  const user = useSelector((state) => state.user.current);
   const OpenCart = useSelector((state) => state.cart.showMiniCart);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartTotal = useSelector((state) => state.cart.cartTotal);
   const isOpenCart = !!OpenCart;
+
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    setTotal(cartItems.reduce((total, item) => total + item.price * item.quantity, 0));
+    dispatch(setCartTotal(total));
+  }, [cartItems, total]);
 
   const hideCart = () => {
     dispatch(hideMiniCart());
   };
-  const cartItems = 0;
-  const user = 'admin';
 
-  const clearCart = () => {
-    localStorage.setItem('cartItems', JSON.stringify([]));
+  const clearCartItem = () => {
+    dispatch(clearCart());
   };
 
   return (
@@ -41,7 +50,7 @@ const CartContainer = () => {
         <motion.p
           whileTap={{ scale: 0.75 }}
           className="flex items-center gap-2 p-1 px-2 my-2 bg-gray-100 rounded-md hover:shadow-md  cursor-pointer text-textColor text-base"
-          onClick={clearCart}
+          onClick={clearCartItem}
         >
           Clear <RiRefreshFill />
         </motion.p>
@@ -62,7 +71,7 @@ const CartContainer = () => {
           <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Sub Total</p>
-              <p className="text-gray-400 text-lg">$ {tot}</p>
+              <p className="text-gray-400 text-lg">$ {cartTotal}</p>
             </div>
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Delivery</p>
@@ -73,7 +82,7 @@ const CartContainer = () => {
 
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-200 text-xl font-semibold">Total</p>
-              <p className="text-gray-200 text-xl font-semibold">${tot + 2.5}</p>
+              <p className="text-gray-200 text-xl font-semibold">${cartTotal + 2.5}</p>
             </div>
 
             {user ? (
@@ -82,7 +91,7 @@ const CartContainer = () => {
                 type="button"
                 className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
               >
-                Check Out
+                <Link to={'/checkout'}>Check Out</Link>
               </motion.button>
             ) : (
               <motion.button
