@@ -35,7 +35,7 @@ const SideBar = () => {
   };
 
   const Menus = [
-    {title: "Customers", page: <PersonOutlineIcon/>, src: '/dashboard/client'},
+    {title: "Admins", page: <PersonOutlineIcon/>, src: '/dashboard/client'},
     {title: "Orders", page: <AssignmentIcon/>, src: '/dashboard/order'},
     {title: "Items", page: <FastfoodIcon/>, src: '/dashboard/item'},
     {title: "Payments", page: <CreditCardIcon/>, src: '/dashboard/payment'},
