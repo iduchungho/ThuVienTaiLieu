@@ -8,6 +8,7 @@ import EmptyCart from '../../components/img/emptyCart.svg';
 import CartItem from './CartItems';
 import { clearCart, hideMiniCart, setCartTotal } from './CartSlice';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 const CartContainer = () => {
   const dispatch = useDispatch();
@@ -88,7 +89,7 @@ const CartContainer = () => {
               type="button"
               className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
             >
-              <Link to={'/checkout'}>Check Out</Link>
+              <HashLink to={'/checkout'}>Check Out</HashLink>
             </motion.button>
           </div>
         </div>

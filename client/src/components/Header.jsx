@@ -18,6 +18,7 @@ import { logout } from './Auth/userSlice';
 import { HashLink } from 'react-router-hash-link';
 import { showMiniCart } from './Cart/CartSlice';
 import { cartItemCountSelector } from './Cart/selector';
+import { Logout } from '../utils/customer';
 
 const Header = () => {
   const MODE = {
@@ -36,6 +37,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
   const [showCart, setShowCart] = useState(false);
+  const id = loggedInUser.id;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -64,6 +66,8 @@ const Header = () => {
   const handleLogoutClick = () => {
     const action = logout();
     dispatch(action);
+    const data = Logout(id);
+    console.log(data);
   };
 
   return (
