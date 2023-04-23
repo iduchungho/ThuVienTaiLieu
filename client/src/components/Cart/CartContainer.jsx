@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import EmptyCart from '../../components/img/emptyCart.svg';
 import CartItem from './CartItems';
 import { clearCart, hideMiniCart, setCartTotal } from './CartSlice';
-import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import { useNavigate } from 'react-router-dom';
 
 const CartContainer = () => {
   const dispatch = useDispatch();
@@ -19,6 +18,7 @@ const CartContainer = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const isOpenCart = !!OpenCart;
+  const navigate = useNavigate();
 
   const [total, setTotal] = useState(0);
 
@@ -33,6 +33,10 @@ const CartContainer = () => {
 
   const clearCartItem = () => {
     dispatch(clearCart());
+  };
+
+  const handleCheckOut = () => {
+    navigate('/checkout');
   };
 
   return (
@@ -89,7 +93,7 @@ const CartContainer = () => {
               type="button"
               className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
             >
-              <HashLink to={'/checkout'}>Check Out</HashLink>
+              <div onClick={handleCheckOut}>Check Out</div>
             </motion.button>
           </div>
         </div>
