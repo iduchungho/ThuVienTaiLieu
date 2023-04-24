@@ -4,7 +4,7 @@ import { json, redirect } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { GetCustomerByID, UpdateCustomer, UpdateCustomerAvt } from '../../utils/customer';
+import { GetCustomerByID, UpdateCustomer, UpdateCustomerAvt, UpdatePass } from '../../utils/customer';
 import { useSnackbar } from 'notistack';
 
 const ProfileSection = () => {
@@ -47,7 +47,7 @@ const ProfileSection = () => {
       first_name,
       last_name,
       email_id,
-      password,
+      // password,
       role: 'customer',
     };
     const img = new FormData();
@@ -55,18 +55,26 @@ const ProfileSection = () => {
     const data = await UpdateCustomer(JSON.stringify(input));
     const data1 = await UpdateCustomerAvt(customer_id, img);
     // console.log(data);
-    console.log(data1);
+    // console.log(data1);
+    if (password !== ''){
+      const input = {
+        customer_id : customer_id,
+        password : password,
+      }
+      const res = await UpdatePass(JSON.stringify(input))
+      console.log(res)
+    } 
     if (data.success === true && data1.message === 'images updated') {
       enqueueSnackbar('Update Success', { variant: 'success' });
       const data2 = await GetCustomerByID(customer_id);
-      console.log(data2.data[0].avatar);
+      // console.log(data2.data[0].avatar);
       const avatar = data2.data[0].avatar;
       const newUser = {
         ...user,
         avatar,
       };
       localStorage.setItem('user', JSON.stringify(newUser));
-      window.location.reload(false);
+      // window.location.reload(false);
     }
   };
 

@@ -18,6 +18,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import EditForm from './EditForm';
 import AccountForm from './AccountForm';
+import { GetAllCustomers, DeleteCustomers } from '../../utils/customer';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -79,51 +80,55 @@ let currentIdRemove = -1 ;
 
 const DashboardClient = () => {
   const [remove, setRemove] = useState(false);
-  const [data, setData] = useState(rows);
+  const [data, setData] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
+  const [id, setId] = useState(-1)
 
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
 
-  const DeleteAccount = () => {
+  const DeleteAccount = async () => {
     setRemove(false);
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
+    const res = await DeleteCustomers(currentIdRemove)
+    console.log(res)
   }
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //   const data2 = await GetAllCustomers(3);
-  //   const updatedata = data2.map((row)=>{
-  //     row['id'] = row['order_id'];
-  //     delete row['role'];
-  //     delete row['avatar']
-  //   // console.log(data);
-  //     return row;
-  //   });
-  //   setData(data2);
-  //   // console.log(data2);
-  // }
-  // // fetchData();
-  // }) 
+  useEffect(() => {
+    async function fetchData() {
+    const data2 = await GetAllCustomers(1);
+    console.log(data2);
+    const updatedata = data2.data.map((row)=>{
+      row['id'] = row['customer_id'];
+      // delete row['role'];
+      delete row['avatar']
+      delete row['customer_id'];
+      return row;
+    });
+    setData(data2.data);
+    console.log(data2);
+  }
+  fetchData();
+  },[]) 
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
+    { field: 'first_name', headerName: 'First name', width: 130 },
+    { field: 'last_name', headerName: 'Last name', width: 130 },
+    // {
+    //   field: 'age',
+    //   headerName: 'Age',
+    //   type: 'number',
+    //   width: 50,
+    // },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 50,
-    },
-    {
-      field: 'email',
+      field: 'email_id',
       headerName: 'Email',
       width: 200,
     },
-    { field: 'phone', headerName: 'Phone Number', width: 130 },  
+    { field: 'phone_no', headerName: 'Phone Number', width: 130 },  
     { field: 'city', headerName: 'City', width: 130 },
     {
       field: "actions",
@@ -143,7 +148,10 @@ const DashboardClient = () => {
                 alignItems: "center"
               }}
             >
-              <IconButton onClick={() => setOpenPopup(true)}>
+              <IconButton onClick={() => {
+                setId(params.id)
+                setOpenPopup(true)
+              }}>
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => {
@@ -201,7 +209,7 @@ const DashboardClient = () => {
       setOpenPopup = {setOpenPopup}
       title = {"EDIT ACCOUNT'S INFORMATION"}
       >
-          <AccountForm/>
+          <AccountForm id={id}/>
       </EditForm>
 
       <Dialog
