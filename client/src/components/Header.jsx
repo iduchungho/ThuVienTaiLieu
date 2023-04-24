@@ -37,7 +37,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
   const [showCart, setShowCart] = useState(false);
-  const id = loggedInUser.id;
+  const id = loggedInUser.customer_id;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,11 +63,11 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = async () => {
     const action = logout();
-    dispatch(action);
-    const data = Logout(id);
+    const data = await Logout(id);
     console.log(data);
+    dispatch(action);
   };
 
   return (
