@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearCart, hideMiniCart } from '../components/Cart/CartSlice';
+import { CreateOrder } from '../utils/order';
 
 const CheckoutForm = () => {
   const cartTotal = useSelector((state) => state.cart.cartTotal);
@@ -23,13 +24,15 @@ const CheckoutForm = () => {
       oder_status: 'CONFIRMED',
       time_stamp: Date.now(),
     };
+    const order = CreateOrder(id, JSON.stringify(input));
+    console.log(order);
 
-    enqueueSnackbar('Order Successfully, We will call you in a minute!', { variant: 'success' });
-    setTimeout(() => {
-      navigate('/');
-    }, 2500);
-    dispatch(clearCart());
-    dispatch(hideMiniCart());
+    // enqueueSnackbar('Order Successfully, We will call you in a minute!', { variant: 'success' });
+    // setTimeout(() => {
+    //   navigate('/');
+    // }, 2500);
+    // dispatch(clearCart());
+    // dispatch(hideMiniCart());
   };
 
   return (
@@ -40,9 +43,7 @@ const CheckoutForm = () => {
         </h1>
         <p className="text-gray-800 font-medium">Customer information</p>
         <div className="">
-          <label className="block text-sm text-gray-00">
-            Name
-          </label>
+          <label className="block text-sm text-gray-00">Name</label>
           <input
             className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
             id="cus_name"
@@ -54,9 +55,7 @@ const CheckoutForm = () => {
           ></input>
         </div>
         <div className="mt-2">
-          <label className="block text-sm text-gray-600">
-            Email
-          </label>
+          <label className="block text-sm text-gray-600">Email</label>
           <input
             className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
             id="cus_email"
@@ -68,9 +67,7 @@ const CheckoutForm = () => {
           ></input>
         </div>
         <div className="mt-2">
-          <label className=" block text-sm text-gray-600" >
-            Address
-          </label>
+          <label className=" block text-sm text-gray-600">Address</label>
           <input
             className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
             id="cus_email"
@@ -82,9 +79,7 @@ const CheckoutForm = () => {
           ></input>
         </div>
         <div className="mt-2">
-          <label className="hidden text-sm block text-gray-600" >
-            City
-          </label>
+          <label className="hidden text-sm block text-gray-600">City</label>
           <input
             className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
             id="city"
@@ -96,9 +91,7 @@ const CheckoutForm = () => {
           ></input>
         </div>
         <div className="inline-block mt-2 w-1/2 pr-1">
-          <label className="hidden block text-sm text-gray-600" >
-            Country
-          </label>
+          <label className="hidden block text-sm text-gray-600">Country</label>
           <input
             className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
             id="cus_email"
@@ -110,9 +103,7 @@ const CheckoutForm = () => {
           ></input>
         </div>
         <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
-          <label className="hidden block text-sm text-gray-600" >
-            Zip
-          </label>
+          <label className="hidden block text-sm text-gray-600">Zip</label>
           <input
             className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
             id="cus_email"
@@ -125,9 +116,7 @@ const CheckoutForm = () => {
         </div>
         <p className="mt-4 text-gray-800 font-medium">Payment information</p>
         <div className="">
-          <label className="block text-sm text-gray-600" >
-            Card
-          </label>
+          <label className="block text-sm text-gray-600">Card</label>
           <input
             className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
             id="cus_name"
