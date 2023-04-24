@@ -18,7 +18,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import EditForm from './EditForm';
 import PaymentForm from './PaymentForm';
-import { GetAll_payment } from '../../utils/payment';
+import { DeletePaymentByID, GetAll_payment } from '../../utils/payment';
 import { useSelector } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
@@ -87,10 +87,12 @@ const DashboardPayment = () => {
     setRemove(false);
   };
 
-  const DeleteAccount = () => {
+  const DeleteAccount = async () => {
     setRemove(false);
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
+    const res = await DeletePaymentByID(user.customer_id, currentIdRemove)
+    console.log(res);
   }
 
   const get_payment = async (id) =>{

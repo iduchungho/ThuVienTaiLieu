@@ -19,7 +19,7 @@ import Button from '@mui/material/Button';
 import OrderForm from './OrderForm';
 import EditForm from './EditForm';
 import { useEffect } from 'react';
-import {GetAllOrder} from '../../utils/order';
+import {DeleteOrderById, GetAllOrder} from '../../utils/order';
 import { useSelector } from 'react-redux';
 
 
@@ -89,6 +89,7 @@ const DashboardClient = () => {
   // const [data, setData] = useState(rows);
   const [openPopup, setOpenPopup] = useState(false);
   const user = useSelector((state) => state.user.current)
+  const [pack, setPack] = useState({})
   // const data = await Signin(JSON.stringify(input));
   
   useEffect(() => {
@@ -109,11 +110,12 @@ const DashboardClient = () => {
     setRemove(false);
   };
 
-  const DeleteCurrentId = () => {
+  const DeleteCurrentId = async () => {
     setRemove(false);
-  
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
+    const res = await DeleteOrderById(user.customer_id, currentIdRemove)
+    console.log(res)
   }
 
   const columns = [
@@ -145,7 +147,10 @@ const DashboardClient = () => {
                 alignItems: "center"
               }}
             >
-              <IconButton onClick={() => setOpenPopup(true)}>
+              <IconButton onClick={() => {
+                setPack(params.row)
+                setOpenPopup(true)
+                }}>
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => {
@@ -201,7 +206,7 @@ const DashboardClient = () => {
       setOpenPopup = {setOpenPopup}
       title = {"EDIT ORDER'S INFORMATION"}
       >
-          <OrderForm/>
+          <OrderForm id={pack}/>
       </EditForm>
 
       <Dialog

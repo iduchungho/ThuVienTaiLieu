@@ -51,9 +51,9 @@ export const GetOrderByID = async (id, order_id) => {
     }
 }
 
-export const UpdateOrder = async (id) => {
+export const UpdateOrder = async (id, input) => {
     try {
-        const { data } = await axios.get(`${url}/order/update.php?id=${id}`)
+        const { data } = await axios.post(`${url}/order/update.php?id=${id}`, input)
         return data
     }
     catch (err){

@@ -91,34 +91,38 @@ const DashboardClient = () => {
   const [data, setData] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
-   const [id, setId] = useState(-1)
+  const [id, setId] = useState(-1)
+  const [idrm, setIdrm] = useState(-1);
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
 
-  const DeleteCurrentId = () => {
+  const DeleteCurrentId = async () => {
     //Delete in current page
     setRemove(false);
     console.log(currentIdRemove)
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
     // send delete request
+    console.log(idrm)
+    const res = await DeleteMenuById(idrm)
+    console.log(res)
   }
 
   useEffect(() => {
     async function fetchData() {
-    const data2 = await GetMenu();
-    // console.log(data2)
-    data2.records.map((row)=>{
-      row['id'] = row['menu_id'];
-      delete row['menu_id'];
-      // console.log(row);
-    return row
-    });
-    setData(data2.records);
-    // console.log(data2);
-  }
-  fetchData();
+      const data2 = await GetMenu();
+      // console.log(data2)
+      data2.records.map((row)=>{
+        row['id'] = row['menu_id'];
+        delete row['menu_id'];
+        // console.log(row);
+      return row
+      });
+      setData(data2.records);
+      // console.log(data2);
+    }
+    fetchData();
   },[]) 
 
   const columns = [
@@ -153,6 +157,7 @@ const DashboardClient = () => {
               <IconButton onClick={() => {
                 setRemove(true);
                 currentIdRemove = params.id;
+                setIdrm(params.id)
                 }}>
                 <DeleteIcon />
               </IconButton>
