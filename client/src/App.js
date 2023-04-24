@@ -13,6 +13,7 @@ import DashboardOrder from './components/dashboard/DashboardOrder';
 import DashboardPayment from './components/dashboard/DashboardPayment';
 import News from './components/News/News';
 import About from './components/AboutUs/About';
+import NewsPage from './components/News/NewsPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/news" element={<News />} />
+          <Route path="/news/:id" element={<NewsPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/dashboard/*" element={<Dashboard />}>
             <Route path="client" element={<DashboardClient />} />
