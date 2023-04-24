@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { UpdateMenu } from '../../utils/menu';
+import { UpdateMenu, UpdateImgMenu } from '../../utils/menu';
 const ItemForm = ({id}) => {
     const [img, setImg] = useState({})
     const [name, setName] = useState("")
@@ -23,9 +23,10 @@ const ItemForm = ({id}) => {
         }
         console.log(JSON.stringify(input))
         const res = await UpdateMenu(JSON.stringify(input))
-        console.log(res)
-        const imgres = await 
-        // console.log(img)
+        // console.log(res)
+        const imgres = await UpdateImgMenu(id, image)
+        console.log(imgres)
+        window.location.reload(false)
         // console.log(name)
         // console.log(price)
     }
