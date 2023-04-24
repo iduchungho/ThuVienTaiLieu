@@ -1,13 +1,13 @@
 import axios from "axios";
 import { url } from "./customer";
 
-export const CreateMenu = async (input, id) => {
+export const CreateMenu = async (input) => {
     try {
-        const {data} = await axios.post(`${url}/menu/createMenu.php?id=${id}`, input)
+        const {data} = await axios.post(`${url}/menu/createMenu.php`, input)
         return data;
     }
     catch(err){
-        return false
+        return err
     }
 }
 
@@ -21,9 +21,9 @@ export const DeleteAll = async (id) => {
     }
 }
 
-export const DeleteMenuById = async (id, menu_id) => {
+export const DeleteMenuById = async (menu_id) => {
     try {
-        const {data} = await axios.delete(`${url}/menu/deleteById.php?id=${id}&menu_id=${menu_id}`)
+        const {data} = await axios.delete(`${url}/menu/deleteMenubyID.php?menu_id=${menu_id}`)
         return data
     }
     catch(err){

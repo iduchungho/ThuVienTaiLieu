@@ -44,9 +44,9 @@ class Payment {
         return false;
     }
     public function updateById() {
-        $query = "UPDATE " . $this->table . " SET order_id = ?, payment_type = ?, payment_status = ?, time_stamp = ? WHERE id = ?";
+        $query = "UPDATE " . $this->table . " SET payment_type = ?, payment_status = ?, time_stamp = ? WHERE id = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("issis", $this->order_id, $this->payment_type, $this->payment_status, $this->time_stamp, $this->id);
+        $stmt->bind_param("ssss" , $this->payment_type, $this->payment_status, $this->time_stamp, $this->id);
 
         if ($stmt->execute()) {
             return true;

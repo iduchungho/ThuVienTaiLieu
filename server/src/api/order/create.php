@@ -32,11 +32,31 @@ $order->quantity = $data->quantity;
 $order->order_status = $data->order_status;
 $order->time_stamp = $data->time_stamp;
 
-if ($order->create()) {
-    http_response_code(201);
-    echo json_encode(array("message" => "Order was created."));
-} else {
-    http_response_code(503);
-    echo json_encode(array("message" => "Unable to create order."));
+try{
+    $order->create();
+    http_response_code(200);
+    $stmt =mysqli_fetch_assoc($order->GetMaxID());
+    echo json_encode([
+        "message" => "order was created successfully",
+        "success" => true,
+        "order_id" => $stmt["LAST_INSERT_ID()"]
+    ]);
+    $db->close();
 }
+catch(Exception $e){
+    echo json_encode([
+        "message" => "order was not created",
+        "success" => false,
+        "error" => $e->getMessage
+    ]);
+    $db->close();
+}
+
+// if ($order->create()) {
+//     http_response_code(201);
+//     echo json_encode(array("message" => "Order was created."));
+// } else {
+//     http_response_code(503);
+//     echo json_encode(array("message" => "Unable to create order."));
+// }
 ?>
