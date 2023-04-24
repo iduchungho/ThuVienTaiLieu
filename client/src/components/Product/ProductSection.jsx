@@ -26,7 +26,7 @@ function ProductSection(props) {
     fetchData();
   }, []);
 
-  const [activeImg, setActiveImage] = useState(images.img1);
+  const [activeImg, setActiveImage] = useState(data.img);
 
   const handleAddToCart = () => {
     const action = addToCart({
