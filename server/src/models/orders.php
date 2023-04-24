@@ -16,9 +16,9 @@ class Orders
         $this->conn = $db;
     }
     public function create() {
-        $query = "INSERT INTO " . $this->table . " (order_id,customer_id, menu_id, quantity, order_status, time_stamp) VALUES (?,?, ?, ?, ?, ?)";
+        $query = "INSERT INTO " . $this->table . " (customer_id, menu_id, quantity, order_status, time_stamp) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("iiiiss",$this->order_id ,$this->customer_id, $this->menu_id, $this->quantity, $this->order_status, $this->time_stamp);
+        $stmt->bind_param("iiiss" ,$this->customer_id, $this->menu_id, $this->quantity, $this->order_status, $this->time_stamp);
 
         if ($stmt->execute()) {
             return true;

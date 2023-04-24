@@ -71,7 +71,7 @@ class Customer {
         $ctmid = $count + 1;
 
         $abc = "INSERT INTO $this->table (customer_id, first_name, last_name, email_id, password, phone_no, city, role, avatar)
-                VALUES ($ctmid , $fn, $ln, $email, $hash, $pn, $ct, $role, $avt);";
+                VALUES ($ct ,$fn, $ln, $email, $hash, $pn, $ct, $role, $avt)";
 
         $query = 'INSERT INTO ' .$this->table
             .'( customer_id, first_name, last_name, email_id, password, phone_no, city, role, avatar)'

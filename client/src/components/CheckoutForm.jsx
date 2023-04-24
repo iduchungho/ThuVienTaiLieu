@@ -14,17 +14,18 @@ const CheckoutForm = () => {
   const dispatch = useDispatch();
   const id = loggedInUser.customer_id;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const input = {
       order_id: '1',
       customer_id: id,
       menu_id: cartItems[0].id,
       quantity: cartItems[0].quantity,
-      oder_status: 'CONFIRMED',
+      order_status: 'CONFIRMED',
       time_stamp: Date.now(),
     };
-    const order = CreateOrder(id, JSON.stringify(input));
+    console.log(JSON.stringify(input));
+    const order = await CreateOrder(id, JSON.stringify(input));
     console.log(order);
 
     // enqueueSnackbar('Order Successfully, We will call you in a minute!', { variant: 'success' });

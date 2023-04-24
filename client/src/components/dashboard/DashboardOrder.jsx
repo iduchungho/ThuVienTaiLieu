@@ -20,6 +20,7 @@ import OrderForm from './OrderForm';
 import EditForm from './EditForm';
 import { useEffect } from 'react';
 import {GetAllOrder} from '../../utils/order';
+import { useSelector } from 'react-redux';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -87,12 +88,12 @@ const DashboardClient = () => {
   const [data, setData] = useState("");
   // const [data, setData] = useState(rows);
   const [openPopup, setOpenPopup] = useState(false);
-
+  const user = useSelector((state) => state.user.current)
   // const data = await Signin(JSON.stringify(input));
   
   useEffect(() => {
     async function fetchData() {
-    const data2 = await GetAllOrder(3);
+    const data2 = await GetAllOrder(user.customer_id);
     const updatedata = data2.map((row)=>{
       row['id'] = row['order_id'];
       delete row['order_id'];
@@ -100,10 +101,10 @@ const DashboardClient = () => {
       return row;
     });
     setData(data2);
-    // console.log(data2);
+    console.log(data2);
   }
   fetchData();
-  }) 
+  },[]) 
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
