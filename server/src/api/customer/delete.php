@@ -13,17 +13,17 @@
     $db = $database->connect();
     $customer = new Customer($db);
 
-    sess::start($param);
-    $valid = Authorization::validation($param);
+    // sess::start($param);
+    // $valid = Authorization::validation($param);
 //    sess::shutdown();
 
-    if (!$valid){
-        echo json_encode([
-            'message' => 'require user',
-            'success' => false
-        ]);
-        return;
-    }
+    // if (!$valid){
+    //     echo json_encode([
+    //         'message' => 'require user',
+    //         'success' => false
+    //     ]);
+    //     return;
+    // }
 
     if ($customer->delete($param)){
         echo json_encode(

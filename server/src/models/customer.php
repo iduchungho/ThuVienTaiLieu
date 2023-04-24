@@ -89,7 +89,6 @@ class Customer {
             .' SET first_name=\''     .$this->first_name .'\','
                 .'last_name=\''      .$this->last_name .'\','
                 .'email_id=\''       .$this->email_id .'\','
-                .'password=\''       .$this->password .'\','
                 .'phone_no=\''       .$this->phone_no .'\','
                 .'city=\''           .$this->city .'\','
                 .'role=\''           .$this->role .'\','
@@ -100,9 +99,8 @@ class Customer {
     }
 
     public function delete($id){
-        $query = 'DELETE FROM ' .$this->table .' WHERE id=' .$id .';';
+        $query = 'DELETE FROM ' .$this->table .' WHERE customer_id=' .$id .';';
         return $this->conn->query($query);
-
     }
 
     public function uploadImage($url){
@@ -114,7 +112,7 @@ class Customer {
     }
 
     public function login($email, $password){
-        $query = "SELECT * FROM $this->table WHERE email_id='$email'";
+        $query = "SELECT * FROM $this->table WHERE email_id='$email';";
         $stmt = $this->conn->query($query);
         if (mysqli_num_rows($stmt) == 0) {
             return -1;
@@ -126,8 +124,11 @@ class Customer {
         return -1;
     }
 
-    public function logout(){
-        return false;
+    public function update_pass(){
+        $hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $this->password = $hash;
+        $query = "UPDATE $this->table SET password = '$this->password' WHERE customer_id = '$this->customer_id';";
+        return $this->conn->query($query);
     }
 
 }
