@@ -13,7 +13,7 @@ function Product(props) {
   const OpenCart = useSelector((state) => state.cart.showMiniCart);
   const isOpenCart = !!OpenCart;
   return (
-    <div className="relative">
+    <div className="relative h-full flex flex-col justify-between">
       <Header />
       <ProductSection id={id} />
       <Footer />
