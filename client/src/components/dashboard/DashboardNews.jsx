@@ -26,6 +26,8 @@ import f5 from '../img/f5.png';
 import f6 from '../img/f6.png';
 import f7 from '../img/f7.png';
 import NewsForm from './NewsForm';
+import CreateNewsForm from './CreateNewsForm';
+import { DeleteNewsByID, GetNews } from '../../utils/news';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -87,16 +89,35 @@ const DashboardClient = () => {
   const [data, setData] = useState(rows);
   const [openPopup, setOpenPopup] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
+  const [pack, setPack] = useState({})
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
 
-  const DeleteCurrentId = () => {
+  React.useEffect(() => {
+    async function fetchData() {
+      const data2 = await GetNews();
+      // console.log(data2)
+      // data2.records.map((row)=>{
+      //   row['id'] = row['menu_id'];
+      //   delete row['menu_id'];
+      //   // console.log(row);
+      // return row
+      // });
+      setData(data2.records);
+      // console.log(data2);
+    }
+    fetchData();
+  },[]) 
+
+  const DeleteCurrentId = async () => {
     setRemove(false);
     console.log(currentIdRemove)
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
-  }
+    const res = await DeleteNewsByID(currentIdRemove)
+    console.log(res);
+  } 
 
   const columns = [
     { field: 'id', headerName: 'Menu ID', width: 100 },
@@ -123,7 +144,11 @@ const DashboardClient = () => {
                 alignItems: "center"
               }}
             >
-              <IconButton onClick={() => setOpenPopup(true)}>
+              <IconButton onClick={() => {
+                setPack(params.row)
+                // console.log(params.row)
+                setOpenPopup(true)
+              }}>
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => {
@@ -181,7 +206,7 @@ const DashboardClient = () => {
       setOpenPopup = {setOpenAdd}
       title = {"ADD NEWS"}
       >
-          <NewsForm/>
+          <CreateNewsForm/>
       </EditForm>
 
       <EditForm
@@ -189,7 +214,7 @@ const DashboardClient = () => {
       setOpenPopup = {setOpenPopup}
       title = {"EDIT ITEM'S INFORMATION"}
       >
-          <NewsForm/>
+          <NewsForm id={pack}/>
       </EditForm>
       <Dialog
         open={remove}

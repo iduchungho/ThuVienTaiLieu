@@ -12,6 +12,7 @@ import { UpdatePaymentByID } from '../../utils/payment';
 const PaymentForm = ({id}) => {
     const [status, setStatus] = useState('');
     const [type, setType] = useState('');
+    const [time, setTime] = useState('');
     const user = useSelector((state) => state.user.current)
     const handleChangeStatus = (event) => {
         setStatus(event.target.value);
@@ -31,11 +32,11 @@ const PaymentForm = ({id}) => {
             id : id,
             payment_type : type,
             payment_status : status,
-            time_stamp : today.toDateString()
+            time_stamp : time
         }
-        // console.log(JSON.stringify(input))
+        console.log(input)
         const res = await UpdatePaymentByID(user.customer_id, JSON.stringify(input))
-        window.location.reload()
+        window.location.reload(false)
         // console.log(res)
     }
   return (
@@ -76,6 +77,7 @@ const PaymentForm = ({id}) => {
             InputLabelProps={{
                 shrink: true,
               }}
+            onChange={(e) => setTime(e.target.value)}
             />
         </div>
         <div className='flex gap-4 justify-end'>

@@ -32,8 +32,8 @@ $payment = new Payment($db);
 //     echo json_encode(array("message" => "Unable to delete payment. Missing payment ID."));
 // }
 
-if (isset($_GET['id'])) {
-    $payment->id = $_GET['id'];
+if (isset($_GET['pid'])) {
+    $payment->id = $_GET['pid'];
 
     if ($payment->deleteById()) {
         http_response_code(200);

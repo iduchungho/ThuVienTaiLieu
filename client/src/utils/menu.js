@@ -21,9 +21,9 @@ export const DeleteAll = async (id) => {
     }
 }
 
-export const DeleteMenuById = async (id, menu_id) => {
+export const DeleteMenuById = async (menu_id) => {
     try {
-        const {data} = await axios.delete(`${url}/menu/deleteById.php?id=${id}&menu_id=${menu_id}`)
+        const {data} = await axios.delete(`${url}/menu/deleteMenubyID.php?menu_id=${menu_id}`)
         return data
     }
     catch(err){

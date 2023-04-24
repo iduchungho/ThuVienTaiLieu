@@ -40,3 +40,13 @@ export const UpdatePaymentByID = async (id, input) => {
         return false
     }
 }
+
+export const DeletePaymentByID = async (id, pid) => {
+    try {
+        const { data } = await axios.delete(`${url}/payment/deletePaymentbyID.php?id=${id}&pid=${pid}`)
+        return data
+    }
+    catch (err) {
+        return false
+    }
+}
