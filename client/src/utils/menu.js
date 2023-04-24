@@ -60,3 +60,13 @@ export const UpdateMenu = async (input) => {
         return false
     }
 }
+
+export const UpdateImgMenu = async (id,input) => {
+    try {
+        const { data } = await axios.post(`${url}/menu/update_img.php?menu_id=${id}`, input)
+        return data
+    }
+    catch (err) {
+        return false
+    }
+}

@@ -47,6 +47,7 @@
     catch (Exception $e){
         echo json_encode([
             'message' => 'email already exist',
+            'error' => $e->getMessage(),
             'success' => false
         ]);
         $db->close();
