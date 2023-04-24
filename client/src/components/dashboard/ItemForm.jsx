@@ -18,11 +18,13 @@ const ItemForm = ({id}) => {
         const input = {
             menu_id: id,
             menu_name : name,
-            menu_price : price,
+            price : price,
             img : "none"
         }
+        console.log(JSON.stringify(input))
         const res = await UpdateMenu(JSON.stringify(input))
-        // console.log(res)
+        console.log(res)
+        const imgres = await 
         // console.log(img)
         // console.log(name)
         // console.log(price)

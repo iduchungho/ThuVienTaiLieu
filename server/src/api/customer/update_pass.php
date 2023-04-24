@@ -18,38 +18,19 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $customer->customer_id = $data->customer_id;
-    $customer->first_name = $data->first_name;
-    $customer->last_name = $data->last_name;
-    $customer->email_id = $data->email_id;
-    $customer->city = $data->city;
-    // $customer->password = $data->password;
-    $customer->phone_no = $data->phone_no;
-    $customer->role = $data->role;
-    $customer->avatar = $data->avatar;
-
-    // sess::start($customer->customer_id);
-    // $valid = Authorization::validation($customer->customer_id);
-//    sess::shutdown();
-
-    // if (!$valid){
-    //     echo json_encode([
-    //         'message' => 'require user',
-    //         'success' => false
-    //     ]);
-    //     return;
-    // }
+    $customer->password = $data->password;
 
     try {
-        $customer->update();
+        $customer->update_pass();
         echo json_encode([
-            'message' => 'customer updated',
+            'message' => 'passsword updated',
             'success' => true
         ]);
         $db->close();
     }
     catch (Exception $e){
         echo json_encode([
-            'message' => 'customer not update',
+            'message' => 'passsword not update',
             'error' => $e->getMessage(),
             'success' => true
         ]);

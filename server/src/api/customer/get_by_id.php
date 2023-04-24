@@ -15,17 +15,17 @@
 
     $param = isset($_GET['id']) ? $_GET['id'] : die();
 
-    sess::start($param);
-    $valid = Authorization::validation($param);
-//    sess::shutdown();
+//     sess::start($param);
+//     $valid = Authorization::validation($param);
+// //    sess::shutdown();
 
-    if (!$valid){
-        echo json_encode([
-            'message' => 'require user',
-            'success' => false
-        ]);
-        return;
-    }
+//     if (!$valid){
+//         echo json_encode([
+//             'message' => 'require user',
+//             'success' => false
+//         ]);
+//         return;
+//     }
 
     $result = $customer->getCustomerByID($param);
     $num = mysqli_num_rows($result);
@@ -38,12 +38,10 @@
             "first_name" => $row['first_name'],
             "last_name" => $row['last_name'],
             "email_id" => $row['email_id'],
-            "password" => $row['password'],
             "phone_no" => $row['phone_no'],
             "city" => $row['city'],
             "role" => $row['role'],
             "avatar" => $row['avatar']
-
         );
         $resultJSON['data'][] = $data;
         echo json_encode($resultJSON);
