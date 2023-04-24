@@ -73,3 +73,12 @@ export const Signin = async (input) => {
     return err;
   }
 };
+
+export const UpdatePass = async (input) => {
+  try {
+    const { data } = await axios.post(`${url}/customer/update_pass.php`, input);
+    return data;
+  } catch (err) {
+    return err;
+  }
+};

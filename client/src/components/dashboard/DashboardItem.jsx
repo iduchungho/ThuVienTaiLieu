@@ -90,6 +90,7 @@ const DashboardClient = () => {
   const [data, setData] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
+   const [id, setId] = useState(-1)
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
@@ -117,7 +118,7 @@ const DashboardClient = () => {
     // console.log(data2);
   }
   fetchData();
-  },[data]) 
+  },[]) 
 
   const columns = [
     { field: 'id', headerName: 'Menu ID', width: 100 },
@@ -142,7 +143,10 @@ const DashboardClient = () => {
                 alignItems: "center"
               }}
             >
-              <IconButton onClick={() => setOpenPopup(true)}>
+              <IconButton onClick={() => {
+                setId(params.id)
+                setOpenPopup(true)
+                }}>
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => {
@@ -208,7 +212,7 @@ const DashboardClient = () => {
       setOpenPopup = {setOpenPopup}
       title = {"EDIT ITEM'S INFORMATION"}
       >
-          <ItemForm/>
+          <ItemForm id={id}/>
       </EditForm>
       <Dialog
         open={remove}

@@ -53,7 +53,7 @@ export const GetMenuById = async (id) => {
 
 export const UpdateMenu = async (input) => {
     try {
-        const { data } = await axios.put(`${url}/menu/updateMenu.php`, input)
+        const { data } = await axios.post(`${url}/menu/updateMenu.php`, input)
         return data
     }
     catch (err) {
