@@ -95,10 +95,10 @@ const Header = () => {
               </HashLink>
             </li>
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
-              About Us
+              <HashLink to={'/about'}>About Us</HashLink>
             </li>
             <li className="text-lg text-textColor  duration-100 transition-all ease-in-out cursor-pointer hover:text-cartNumBg">
-              News
+              <HashLink to={'/news'}>News</HashLink>
             </li>
           </motion.ul>
 
