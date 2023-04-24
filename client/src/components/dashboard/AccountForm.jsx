@@ -32,6 +32,7 @@ const AccountForm = ({id}) => {
         }
         const res2 = await UpdateCustomer(JSON.stringify(input))
         console.log(res2)
+        window.location.reload(false)
     }
 
   return (

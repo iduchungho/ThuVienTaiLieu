@@ -28,6 +28,7 @@ import f4 from '../img/f4.png';
 import f5 from '../img/f5.png';
 import f6 from '../img/f6.png';
 import f7 from '../img/f7.png';
+import ItemFormCreate from './ItemFormCreate';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -202,9 +203,8 @@ const DashboardClient = () => {
       <EditForm
       openPopup = {openAdd}
       setOpenPopup = {setOpenAdd}
-      title = {"ADD ITEM"}
-      >
-          <ItemForm/>
+      title = {"ADD ITEM"}>
+          <ItemFormCreate/>
       </EditForm>
 
       <EditForm

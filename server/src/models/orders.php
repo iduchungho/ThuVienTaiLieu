@@ -69,4 +69,8 @@ class Orders
         }
         return false;
     }
+    public function GetMaxID() {
+        $query = "SELECT LAST_INSERT_ID()";
+        return $this->conn->query($query);
+    }
 }

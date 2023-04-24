@@ -18,6 +18,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import EditForm from './EditForm';
 import PaymentForm from './PaymentForm';
+import { GetAll_payment } from '../../utils/payment';
+import { useSelector } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -79,7 +81,8 @@ const DashboardPayment = () => {
   const [remove, setRemove] = useState(false);
   const [data, setData] = useState(rows);
   const [openPopup, setOpenPopup] = useState(false);
-
+  const [Id, setID] = useState(-1);
+  const user = useSelector((state) => state.user.current)
   const ReturnCurrentPage = () => {
     setRemove(false);
   };
@@ -89,6 +92,20 @@ const DashboardPayment = () => {
     const updatedata = data.filter((row) => row.id !== currentIdRemove);
     setData(updatedata);
   }
+
+  const get_payment = async (id) =>{
+    const res = await GetAll_payment(id);
+    return res
+  }
+
+  React.useEffect(()=>{
+    const get_payment = async (id) =>{
+      const res = await GetAll_payment(id);
+      console.log(res.payments);
+      setData(res.payments)
+    }
+    get_payment(user.customer_id)
+  },[])
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -122,7 +139,10 @@ const DashboardPayment = () => {
                 alignItems: "center"
               }}
             >
-              <IconButton onClick={() => setOpenPopup(true)}>
+              <IconButton onClick={() => {
+                setID(params.id)
+                setOpenPopup(true)
+              }}>
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => {
@@ -180,7 +200,7 @@ const DashboardPayment = () => {
       setOpenPopup = {setOpenPopup}
       title = {"EDIT PAYMENT'S INFORMATION"}
       >
-          <PaymentForm/>
+          <PaymentForm id={Id}/>
       </EditForm>
 
       <Dialog

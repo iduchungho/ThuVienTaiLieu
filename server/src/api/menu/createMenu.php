@@ -1,4 +1,7 @@
 <?php
+    header('Access-Control-Allow-Origin: *');
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Methods: POST');
 include_once '../../config/database.php';
 include_once '../../models/menu.php';
 include_once '../../config/cloudinary.php';
@@ -14,7 +17,7 @@ $img = isset($_FILES['img']) ? $_FILES['img']['tmp_name'] : null;
 $menu_name = isset($_POST['menu_name']) ? $_POST['menu_name'] : null;
 $price = isset($_POST['price']) ? $_POST['price'] : null;
 
-// echo json_encode($menu_name);
+// echo json_encode($img);
 // return;
 
 if ($menu_name && $price && $img) {
@@ -35,7 +38,7 @@ if ($menu_name && $price && $img) {
 
   try {
       $menu->create();
-      http_response_code(201);
+      http_response_code(200);
       echo json_encode([
           "message" => "Menu item was created.",
           "success" => true

@@ -1,13 +1,13 @@
 import axios from "axios";
 import { url } from "./customer";
 
-export const CreateMenu = async (input, id) => {
+export const CreateMenu = async (input) => {
     try {
-        const {data} = await axios.post(`${url}/menu/createMenu.php?id=${id}`, input)
+        const {data} = await axios.post(`${url}/menu/createMenu.php`, input)
         return data;
     }
     catch(err){
-        return false
+        return err
     }
 }
 

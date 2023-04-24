@@ -122,7 +122,7 @@ const DashboardClient = () => {
     { field: 'menu_id', headerName: 'Menu ID', width: 100 },
     { field: 'quantity', headerName: 'Quantity', type: 'number', width: 90 },
     {
-      field: 'oder_status',
+      field: 'order_status',
       headerName: 'Status',
       width: 200,
     },
