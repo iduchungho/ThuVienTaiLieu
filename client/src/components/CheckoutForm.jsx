@@ -4,15 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearCart, hideMiniCart } from '../components/Cart/CartSlice';
 import { CreateOrder } from '../utils/order';
+import { useState } from 'react';
 
 const CheckoutForm = () => {
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const loggedInUser = useSelector((state) => state.user.current);
+  const [method, setMethod] = useState('CASH_ON_DELIVERY');
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const id = loggedInUser.customer_id;
+
+  const handleChange = (e) => {
+    setMethod(e.target.value);
+  };
+  console.log(method);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,7 +102,12 @@ const CheckoutForm = () => {
         <p className="mt-4 text-gray-800 font-medium">Payment information</p>
         <div className="">
           <label className="block text-sm text-gray-600">Payment Method</label>
-          <select className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded">
+          <select
+            value={method}
+            onChange={(e) => handleChange(e)}
+            id="method"
+            className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+          >
             <option value="CASH_ON_DELIVERY">Cash On Delivery</option>
             <option value="ONLINE_PAYMENT">Online Payment</option>
           </select>
