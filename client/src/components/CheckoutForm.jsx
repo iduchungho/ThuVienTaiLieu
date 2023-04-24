@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { clearCart, hideMiniCart } from '../components/Cart/CartSlice';
 import { CreateOrder } from '../utils/order';
 import { useState } from 'react';
+import { create_payment } from './../utils/payment';
 
 const CheckoutForm = () => {
   const cartTotal = useSelector((state) => state.cart.cartTotal);
@@ -19,7 +20,6 @@ const CheckoutForm = () => {
   const handleChange = (e) => {
     setMethod(e.target.value);
   };
-  console.log(method);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,13 +34,21 @@ const CheckoutForm = () => {
     console.log(JSON.stringify(input));
     const order = await CreateOrder(id, JSON.stringify(input));
     console.log(order);
+    const input1 = {
+      order_id: order.order_id,
+      payment_type: method,
+      payment_status: 'CONFIRMED',
+      time_stamp: Date.now(),
+    };
+    const payment = await create_payment(id, JSON.stringify(input1));
+    console.log(payment);
 
-    // enqueueSnackbar('Order Successfully, We will call you in a minute!', { variant: 'success' });
-    // setTimeout(() => {
-    //   navigate('/');
-    // }, 2500);
-    // dispatch(clearCart());
-    // dispatch(hideMiniCart());
+    enqueueSnackbar('Order Successfully, We will call you in a minute!', { variant: 'success' });
+    setTimeout(() => {
+      navigate('/');
+    }, 2500);
+    dispatch(clearCart());
+    dispatch(hideMiniCart());
   };
 
   return (
