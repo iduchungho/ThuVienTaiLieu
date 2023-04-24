@@ -42,30 +42,7 @@ const CheckoutForm = () => {
           Check Out
         </h1>
         <p className="text-gray-800 font-medium">Customer information</p>
-        <div className="">
-          <label className="block text-sm text-gray-00">Name</label>
-          <input
-            className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
-            id="cus_name"
-            name="cus_name"
-            type="text"
-            required=""
-            placeholder="Your Name"
-            aria-label="Name"
-          ></input>
-        </div>
-        <div className="mt-2">
-          <label className="block text-sm text-gray-600">Email</label>
-          <input
-            className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
-            id="cus_email"
-            name="cus_email"
-            type="text"
-            required=""
-            placeholder="Your Email"
-            aria-label="Email"
-          ></input>
-        </div>
+
         <div className="mt-2">
           <label className=" block text-sm text-gray-600">Address</label>
           <input
@@ -115,6 +92,13 @@ const CheckoutForm = () => {
           ></input>
         </div>
         <p className="mt-4 text-gray-800 font-medium">Payment information</p>
+        <div className="">
+          <label className="block text-sm text-gray-600">Payment Method</label>
+          <select className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded">
+            <option value="CASH_ON_DELIVERY">Cash On Delivery</option>
+            <option value="ONLINE_PAYMENT">Online Payment</option>
+          </select>
+        </div>
         <div className="">
           <label className="block text-sm text-gray-600">Card</label>
           <input
