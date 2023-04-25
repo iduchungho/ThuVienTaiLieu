@@ -63,20 +63,13 @@ const AccountForm = ({pack}) => {
             />
             <TextField 
             sx={{m: 3}}
-            label="Age"
-            id="age"
-            type="number"
-            placeholder="Enter the age"
-            />
-        </div>
-        <div>
-            <TextField 
-            sx={{m: 3}}
             label="Phone number"
             id="phone"
             placeholder="Enter the phone number"
             onChange={(e) => setPhone(e.target.value)}
             />
+        </div>
+        <div>
             <TextField 
             sx={{m: 3}}
             label="City"
