@@ -15,7 +15,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FeedIcon from '@mui/icons-material/Feed';
-// import Link from 'react-router-dom';
+import {Link} from 'react-router-dom';
 // import CloseIcon from '@mui/icons-material/Close';
 
 
@@ -44,10 +44,10 @@ const SideBar = () => {
 
   return (
     <div className={`${open ? " w-60" : "w-20"} grid gap-4 grid-cols-1 duration-300 h-screen p-5 pt-4 bg-orange-600 text-white shadow-lg`}>
-      <div className="flex row-span-1 gap-x-4 items-center">
+      <Link to="/" className="flex row-span-1 gap-x-4 items-center">
         <img src={Logo} className="w-8 cursor-pointer duration-500" alt="logo" />
         <h1 className={`${!open && 'hidden'} text-white origin-left font-medium text-xl duration-300`}>BK Food</h1>
-      </div>
+      </Link>
       <ul className="row-span-3 pt-6">
         <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-orange-500" onClick={() => setOpen(!open)}>
         <MenuIcon/>
