@@ -14,6 +14,7 @@ import DashboardPayment from './components/dashboard/DashboardPayment';
 import News from './components/News/News';
 import About from './components/AboutUs/About';
 import NewsPage from './components/News/NewsPage';
+import Order from './components/OrderList/Order';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/news/:id" element={<NewsPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/order" element={<Order />} />
           <Route path="/dashboard/*" element={<Dashboard />}>
             <Route path="client" element={<DashboardClient />} />
             <Route path="item" element={<DashboardItem />} />
