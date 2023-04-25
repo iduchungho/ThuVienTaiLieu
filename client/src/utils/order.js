@@ -60,3 +60,13 @@ export const UpdateOrder = async (id, input) => {
         return false
     }
 }
+
+export const get_order_by_ctmid = async (id) => {
+    try {
+        const { data } = await axios.get(`${url}/order/get_by_ctmid.php?id=${id}`)
+        return data
+    }
+    catch (err) {
+        return false
+    }
+}

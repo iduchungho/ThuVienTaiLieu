@@ -73,4 +73,9 @@ class Orders
         $query = "SELECT LAST_INSERT_ID()";
         return $this->conn->query($query);
     }
+
+    public function GetByCustomerID($id){
+        $query = "SELECT * FROM $this->table WHERE customer_id='$id';";
+        return $this->conn->query($query);
+    }
 }
