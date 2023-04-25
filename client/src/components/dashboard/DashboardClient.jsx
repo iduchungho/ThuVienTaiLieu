@@ -83,6 +83,7 @@ const DashboardClient = () => {
   const [data, setData] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [id, setId] = useState(-1)
+  const [pack, setPack] = useState({});
 
   const ReturnCurrentPage = () => {
     setRemove(false);
@@ -150,6 +151,7 @@ const DashboardClient = () => {
             >
               <IconButton onClick={() => {
                 setId(params.id)
+                setPack(params.row)
                 setOpenPopup(true)
               }}>
                 <EditIcon />
@@ -209,7 +211,7 @@ const DashboardClient = () => {
       setOpenPopup = {setOpenPopup}
       title = {"EDIT ACCOUNT'S INFORMATION"}
       >
-          <AccountForm id={id}/>
+          <AccountForm pack={pack}/>
       </EditForm>
 
       <Dialog
