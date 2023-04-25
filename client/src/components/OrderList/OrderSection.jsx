@@ -12,15 +12,10 @@ function OrderSection(props) {
     const getOrder = async () => {
       const data = await get_order_by_ctmid(loggedInUser.customer_id);
       setOrder(data.data);
-      for (let i = 0; i < data.data.length; i++) {
-        const product1 = await GetMenuById(data.data[i].menu_id);
-        setProducts([...products, product1]);
-      }
     };
     getOrder();
   }, []);
 
-  console.log(products);
   return (
     <div className="bg-gray-50 mt-6">
       <div className="max-w-2xl mx-auto pt-16 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -44,8 +39,11 @@ function OrderSection(props) {
           <h2 className="sr-only">Products purchased</h2>
 
           <div className="space-y-8">
-            {products.map((product) => (
-              <div className="bg-white border-t border-b border-gray-200 shadow-sm sm:border sm:rounded-lg">
+            {order.map((product) => (
+              <div
+                key={product.order_id}
+                className="bg-white border-t border-b border-gray-200 shadow-sm sm:border sm:rounded-lg"
+              >
                 <div className="py-6 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8">
                   <div className="sm:flex lg:col-span-7">
                     <div className="flex-shrink-0 w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-none sm:w-40 sm:h-40">
@@ -74,6 +72,12 @@ function OrderSection(props) {
                         <dt className="font-medium text-gray-900">Order Status</dt>
                         <dd className="mt-3 text-gray-500">
                           <span className="block">Confirmed</span>
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="font-medium text-gray-900">Quantity</dt>
+                        <dd className="mt-3 text-gray-500">
+                          <span className="block">{product.quantity}</span>
                         </dd>
                       </div>
                     </dl>
