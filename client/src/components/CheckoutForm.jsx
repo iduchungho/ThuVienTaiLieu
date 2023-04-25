@@ -61,14 +61,14 @@ const CheckoutForm = () => {
         <p className="text-gray-800 font-medium">Customer information</p>
 
         <div className="mt-2">
-          <label className=" block text-sm text-gray-600">Address</label>
+          <label className=" block text-sm text-gray-600"></label>
           <input
             className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
             id="cus_email"
             name="cus_email"
             type="text"
             required=""
-            placeholder="Street"
+            placeholder="Họ và tên"
             aria-label="Email"
           ></input>
         </div>
@@ -80,7 +80,7 @@ const CheckoutForm = () => {
             name="cus_email"
             type="text"
             required=""
-            placeholder="City"
+            placeholder="Số nhà, tên đường"
             aria-label="Email"
           ></input>
         </div>
@@ -92,7 +92,7 @@ const CheckoutForm = () => {
             name="cus_email"
             type="text"
             required=""
-            placeholder="Country"
+            placeholder="Quận huyện"
             aria-label="Email"
           ></input>
         </div>
@@ -104,7 +104,7 @@ const CheckoutForm = () => {
             name="cus_email"
             type="text"
             required=""
-            placeholder="Zip"
+            placeholder="Tỉnh, thành phố"
             aria-label="Email"
           ></input>
         </div>
