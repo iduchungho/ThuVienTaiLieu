@@ -23,13 +23,14 @@ const CheckoutForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let time = new Date()
     const input = {
       order_id: '1',
       customer_id: id,
       menu_id: cartItems[0].id,
       quantity: cartItems[0].quantity,
       order_status: 'CONFIRMED',
-      time_stamp: Date.now(),
+      time_stamp: time.toISOString().split('T')[0],
     };
     console.log(JSON.stringify(input));
     const order = await CreateOrder(id, JSON.stringify(input));
@@ -38,7 +39,7 @@ const CheckoutForm = () => {
       order_id: order.order_id,
       payment_type: method,
       payment_status: 'CONFIRMED',
-      time_stamp: Date.now(),
+      time_stamp: time.toISOString().split('T')[0],
     };
     const payment = await create_payment(id, JSON.stringify(input1));
     console.log(payment);

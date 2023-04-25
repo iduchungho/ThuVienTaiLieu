@@ -6,12 +6,12 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { GetCustomerByID, UpdateCustomer } from '../../utils/customer';
-const AccountForm = ({id}) => {
-    const [fname, setFname] = useState("")
-    const [lname, setLname] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
-    const [city, setCity] = useState("")
+const AccountForm = ({pack}) => {
+    const [fname, setFname] = useState(pack.first_name)
+    const [lname, setLname] = useState(pack.last_name)
+    const [email, setEmail] = useState(pack.email_id)
+    const [phone, setPhone] = useState(pack.phone_no)
+    const [city, setCity] = useState(pack.city)
 
     const submit = async (e) => {
         e.preventDefault();
@@ -20,7 +20,7 @@ const AccountForm = ({id}) => {
         console.log(email)
         console.log(phone)
         console.log(city)
-        const res = await GetCustomerByID(id)
+        const res = await GetCustomerByID(pack.id)
         console.log(res.data[0])
         const input = {
             ...res.data[0],
