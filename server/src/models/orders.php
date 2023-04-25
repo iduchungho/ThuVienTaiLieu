@@ -75,7 +75,11 @@ class Orders
     }
 
     public function GetByCustomerID($id){
-        $query = "SELECT * FROM $this->table WHERE customer_id='$id';";
+        $query= "SELECT *
+                FROM orders
+                INNER JOIN menu
+                ON orders.menu_id = menu.menu_id
+                WHERE orders.customer_id = '$id';";
         return $this->conn->query($query);
     }
 }
