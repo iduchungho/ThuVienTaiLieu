@@ -59,8 +59,8 @@ function ProductSection(props) {
           tenetur.
         </p>
         <h6 className="text-2xl font-semibold">$ {data.price}</h6>
-        <div className="flex flex-row items-center gap-12">
-          <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center ">
+          <div className="flex flex-col md:flex-row items-center px-3">
             <button
               className="bg-gray-200 py-2 px-5 rounded-lg text-cartNumBg text-3xl"
               onClick={() => setAmount((prev) => prev - 1)}
@@ -76,7 +76,7 @@ function ProductSection(props) {
             </button>
           </div>
           <button
-            className=" bg-cartNumBg text-white font-semibold py-3 px-16 rounded-xl h-full"
+            className=" bg-cartNumBg text-white md: font-semibold py-3 px-16 rounded-xl "
             onClick={handleAddToCart}
           >
             Add to Cart
