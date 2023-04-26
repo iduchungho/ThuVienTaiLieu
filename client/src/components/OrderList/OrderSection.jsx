@@ -48,7 +48,7 @@ function OrderSection(props) {
                   <div className="sm:flex lg:col-span-7">
                     <div className="flex-shrink-0 w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-none sm:w-40 sm:h-40">
                       <img
-                        src={product.imageSrc}
+                        src={product.img}
                         alt="product"
                         className="w-full h-full object-center object-cover sm:w-full sm:h-full"
                       />
@@ -71,7 +71,7 @@ function OrderSection(props) {
                       <div>
                         <dt className="font-medium text-gray-900">Order Status</dt>
                         <dd className="mt-3 text-gray-500">
-                          <span className="block">Confirmed</span>
+                          <span className="block">{product.order_status}</span>
                         </dd>
                       </div>
                       <div>
