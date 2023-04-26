@@ -8,7 +8,7 @@ Order.propTypes = {};
 
 function Order(props) {
   return (
-    <div className="flex flex-col  justify-between">
+    <div className="flex flex-col h-screen justify-between">
       <Header />
       <OrderSection />
       <Footer />

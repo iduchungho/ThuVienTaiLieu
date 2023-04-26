@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { get_order_by_ctmid } from './../../utils/order';
 import { GetMenuById } from './../../utils/menu';
+import {ReactComponent as NotFound} from '../img/NotFound.svg'
 
 OrderSection.propTypes = {};
 function OrderSection(props) {
@@ -19,7 +20,7 @@ function OrderSection(props) {
   return (
     <div className="bg-gray-50 mt-6">
       <div className="max-w-2xl mx-auto pt-16 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="px-4 space-y-2 sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0">
+          {order && (<div className="px-4 space-y-2 sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0">
           <div className="flex sm:items-baseline sm:space-x-4">
             <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">Order #54879</h1>
           </div>
@@ -32,14 +33,18 @@ function OrderSection(props) {
           <a href="/" className="text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:hidden">
             View invoice<span aria-hidden="true"> &rarr;</span>
           </a>
-        </div>
+        </div>)}
+        
 
         {/* Products */}
         <div className="mt-6">
           <h2 className="sr-only">Products purchased</h2>
 
           <div className="space-y-8">
-            {order.map((product) => (
+            {!order && (
+              <NotFound/>
+            )}
+            {order && order.map((product) => (
               <div
                 key={product.order_id}
                 className="bg-white border-t border-b border-gray-200 shadow-sm sm:border sm:rounded-lg"
